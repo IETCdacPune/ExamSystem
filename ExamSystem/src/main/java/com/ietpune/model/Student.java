@@ -25,13 +25,13 @@ public class Student {
 	@NotNull
 	@Size(min = 2, message = "First name must be grater than two charector")
 	@Size(max = 20, message = "First name must be less than twenty charector")
-	@Pattern(regexp = "^[A-Z] {1}[a-z] {7,20}",message = "only charectors are allowed")
+	@Pattern(regexp = "^[A-Z].[a-z]{2,20}",message = "only charectors are allowed")
 	private String firstName;
 
 	@NotNull
 	@Size(min = 2, message = "Last name must be grater than two charector")
 	@Size(max = 20, message = "Last name must be less than twenty charector")
-	@Pattern(regexp = "^[A-Z] {1}[a-z] {7,20}",message = "only charectors are allowed")
+	@Pattern(regexp = "^[A-Z].[a-z ]{2,20}",message = "only charectors are allowed")
 	private String lastName;
 
 	@NotNull
@@ -44,7 +44,7 @@ public class Student {
 	private String prNo;
 
 	@NotNull
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*])(?=.{8,})", message = "Please enter one upper latter, one lower latter, one special symbole and one digit is must in password")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%]).{8,}$", message = "Please enter one upper latter, one lower latter, one !@#% symbole and one digit is must in password")
 	private String password;
 
 	public Student() {
