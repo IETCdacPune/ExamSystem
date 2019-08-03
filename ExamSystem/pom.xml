@@ -47,7 +47,29 @@
 			<artifactId>tomcat-jasper</artifactId>
 			<version>9.0.21</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.webjars/ -->
+		<!-- <dependency> <groupId>org.webjars</groupId> <artifactId>webjars-locator</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-datepicker</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>5.1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
