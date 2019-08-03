@@ -38,7 +38,7 @@ private char correctOption;
 		return queId;
 	}
 	public void setQueId(int queId) {
-		queId = queId;
+		this.queId = queId;
 	}
 	public char getQuestion() {
 		return question;
