@@ -1,6 +1,7 @@
 package com.ietpune.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -8,6 +9,7 @@ import javax.persistence.Table;
 @Table(name="student")
 public class Student {
 	@Id
+	@GeneratedValue
 private int studentId;
 private String studName;
 private String emailId;
@@ -65,6 +67,13 @@ public Student() {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", studName=" + studName + ", emailId=" + emailId + ", prNo=" + prNo
+				+ ", password=" + password + "]";
 	}
 	
 	
