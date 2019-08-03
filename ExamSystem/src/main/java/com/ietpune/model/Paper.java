@@ -1,8 +1,14 @@
 package com.ietpune.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Paper {
@@ -17,6 +23,16 @@ public class Paper {
 	public Paper() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	// this mapping between student and paper
+@ManyToMany(mappedBy = "paperSetObj")
+private Set<Student>studentSetObj;
+// this mapping between paper and question
+
+@OneToMany(mappedBy ="paperObj")
+Set<Question>quesSetObj;
+
 
 	public int getPaperId() {
 		return paperId;
@@ -48,6 +64,28 @@ public class Paper {
 
 	public void setPaperTiming(String paperTiming) {
 		this.paperTiming = paperTiming;
+	}
+
+	
+	
+	
+
+	public Set<Student> getStudentSetObj() {
+		return studentSetObj;
+	}
+
+	public void setStudentSetObj(Set<Student> studentSetObj) {
+		this.studentSetObj = studentSetObj;
+	}
+
+
+
+	public Set<Question> getQuesSetObj() {
+		return quesSetObj;
+	}
+
+	public void setQuesSetObj(Set<Question> quesSetObj) {
+		this.quesSetObj = quesSetObj;
 	}
 
 	@Override
