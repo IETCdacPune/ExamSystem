@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,27 +19,33 @@
 								<i class="fas fa-users"></i>
 							</h1>
 							<hr class="my-4">
-							<form>
-								<div class="form-group">
-									<input type="text" id="inputPRN" class="form-control"
-										placeholder="PRN" required autofocus>
-
+							<form:form method="post" >
+								<div class="form-group row">
+									<%-- <form:label path="prNo" class="col-sm-2 col-form-label">PRN</form:label> 
+									<div class="col-sm-10">--%>
+										<form:input type="text" path="prNo" class="form-control"
+											placeholder="P. R. N." />
+										<form:errors path="prNo" cssClass="text-danger"></form:errors>
+									<!-- </div> -->
 								</div>
 
-								<div class="form-group">
-									<input type="password" id="inputPassword" class="form-control"
-										placeholder="Password" required>
-
+								<div class="form-group row">
+									<%-- <form:label path="password" class="col-sm-2 col-form-label">Password</form:label>
+									<div class="col-sm-10"> --%>
+										<form:input type="password" path="password"
+											class="form-control" placeholder="Password" />
+										<form:errors path="password" cssClass="text-danger"></form:errors>
+									<!-- </div> -->
 								</div>
 
 
 								<button class="btn btn-lg btn-primary btn-block text-uppercase"
 									type="submit">Sign in</button>
 
-							</form>
+							</form:form>
 							<hr class="my-4">
-								<a class="btn btn-lg btn-primary btn-block text-uppercase" href="signup"
-									type="submit">Sign up</a>
+							<a class="btn btn-lg btn-primary btn-block text-uppercase"
+								href="signup" type="submit">Sign up</a>
 						</div>
 					</div>
 				</div>
