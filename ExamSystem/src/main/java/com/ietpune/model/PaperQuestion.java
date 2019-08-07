@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Question {
+public class PaperQuestion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int queId;
@@ -20,7 +20,7 @@ public class Question {
 	private String description;
 	private char correctOption;
 
-	public Question() {
+	public PaperQuestion() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,7 +31,7 @@ public class Question {
 
 	// this Mapping between Questin and opetion
 	@OneToMany(mappedBy = "quesObj")
-	private Set<Option> optionSet;
+	private Set<QuestionOption> optionSet;
 
 	public int getQueId() {
 		return queId;
@@ -65,11 +65,11 @@ public class Question {
 		this.correctOption = correctOption;
 	}
 
-	public Set<Option> getOptionSet() {
+	public Set<QuestionOption> getOptionSet() {
 		return optionSet;
 	}
 
-	public void setOptionSet(Set<Option> optionSet) {
+	public void setOptionSet(Set<QuestionOption> optionSet) {
 		this.optionSet = optionSet;
 	}
 

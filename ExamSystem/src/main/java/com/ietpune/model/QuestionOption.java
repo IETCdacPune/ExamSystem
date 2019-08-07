@@ -9,21 +9,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Option {
+public class QuestionOption {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int optionId;
 	private char optionNo;
 	private String answer;
 
-	public Option() {
+	public QuestionOption() {
 		// TODO Auto-generated constructor stub
 	}
 
 	// this mapping between One Question and Many Paper
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "quesId")
-	private Question quesObj;
+	private PaperQuestion quesObj;
 
 	public int getOptionId() {
 		return optionId;
@@ -49,11 +49,11 @@ public class Option {
 		this.answer = answer;
 	}
 
-	public Question getQuesObj() {
+	public PaperQuestion getQuesObj() {
 		return quesObj;
 	}
 
-	public void setQuesObj(Question quesObj) {
+	public void setQuesObj(PaperQuestion quesObj) {
 		this.quesObj = quesObj;
 	}
 
