@@ -2,25 +2,25 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Subject</title>
+<title>Add Paper</title>
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="../menuBar.jsp" />
+		<jsp:include page="../admin/menuBar.jsp" />
 		<br> <br>
-		
+
 		<div class="card text-center">
 			<div class="card-header bg-primary">
 				<h3>Add Paper</h3>
 			</div>
 			<div class="card-body">
-				<form:form method="post">
+				<form:form method="post" enctype="multipart/form-data">
 					<div class="form-group row">
 						<form:label path="paperCode" class="col-sm-2 col-form-label">Paper Code</form:label>
 						<div class="col-sm-10">
@@ -32,23 +32,38 @@
 					<div class="form-group row">
 						<form:label path="moduleName" class="col-sm-2 col-form-label">Subject Name</form:label>
 						<div class="col-sm-10">
-						<form:select path="moduleName" class="form-control" >
-                      <form:option value="" label="Select Module" />
-                      <form:options items="${sublist}" itemLabel="name"/>
-                       </form:select>
-							
+							<form:select path="moduleName" class="form-control">
+								<form:option value="" label="Select Module" />
+								<form:options items="${sublist}" itemLabel="name" />
+							</form:select>
+
 							<form:errors path="moduleName" cssClass="text-danger"></form:errors>
-						
+
 						</div>
-						
+
 					</div>
 					<div class="form-group row">
-					<form:label path="isEnabled" class="col-sm-2 col-form-label">Paper status</form:label>
-					<form:radiobutton path="isEnabled" class="form-control col-sm-2 col-form-label "></form:radiobutton>
-					<form:radiobutton path="isEnabled" class="form-control col-sm-3 col-form-label "></form:radiobutton>
+						<form:label path="paperTiming" class="col-sm-2 col-form-label">Paper Timing</form:label>
+						<div class="col-sm-10">
+							<form:input type="text" class="form-control" path="paperTiming"
+								placeholder="Enter paper timing in min only" />
+							<form:errors path="paperTiming" cssClass="text-danger"></form:errors>
+						</div>
 					</div>
-					
-					<form:button type="submit" class="btn btn-primary">Add Subject</form:button>
+					<div class="form-group row">
+						<label id="paperFile" class="col-sm-2 col-form-label">Question File</label>
+						<div class="col-sm-10">
+							<input type="File" class="form-control-file" id="paperFile"  accept=".openxmlformats-officedocument.spreadsheetml.sheet" title="select excel file only"/>
+							<%-- <form:errors path="paperTiming" cssClass="text-danger"></form:errors> --%>
+						</div>
+					</div>
+					<%-- <div class="form-group row">
+					<form:label path="enabled" class="col-sm-2 col-form-label">Paper status</form:label>
+					<form:radiobutton path="enabled" class="form-control col-sm-2 col-form-label "></form:radiobutton>
+					</div> --%>
+
+					<form:button type="submit" class="btn btn-primary">Add Paper</form:button>
+					<form:button type="reset" class="btn btn-danger">Reset form</form:button>
 				</form:form>
 			</div>
 		</div>

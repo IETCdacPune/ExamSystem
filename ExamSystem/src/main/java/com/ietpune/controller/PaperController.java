@@ -20,7 +20,7 @@ public class PaperController {
 private SubjectService subjectService;
 
 	
-	@RequestMapping("Admin/openAddPaper")
+	@RequestMapping("Admin/addPaper")
 	public ModelAndView  openPaper(@ModelAttribute("command")Paper p,Model model)
 {
 		

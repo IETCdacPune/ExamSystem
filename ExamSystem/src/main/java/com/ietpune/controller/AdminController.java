@@ -42,6 +42,7 @@ public class AdminController {
 			return "admin/addSubject";
 		}
 		model.addAttribute("msg", "Subject Added successfully...");
+		model.addAttribute("command", new Subject());
 		return "admin/addSubject";
 	}
 
@@ -67,6 +68,7 @@ public class AdminController {
 			return "admin/editSubject";
 		}
 		model.addAttribute("msg", "Subject edited successfully...");
+		model.addAttribute("command", new Subject());
 		return "admin/editSubject";
 	}
 }

@@ -41,6 +41,7 @@
 						</div>
 					</div>
 					<form:button type="submit" class="btn btn-primary">Add Subject</form:button>
+					<form:button type="reset" class="btn btn-danger">Reset form</form:button>
 				</form:form>
 			</div>
 		</div>

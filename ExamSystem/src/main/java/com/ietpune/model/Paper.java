@@ -18,11 +18,8 @@ public class Paper {
 	private int  paperCode;
 	private String moduleName;
 	private String paperTiming;
-private int  isEnabled;
-	public Paper() {
-		// TODO Auto-generated constructor stub
-	}
-
+	private boolean  enabled;
+	
 	// this mapping between student and paper
 	@ManyToMany(mappedBy = "paperSetObj")
 	private Set<Student> studentSetObj;
@@ -30,6 +27,8 @@ private int  isEnabled;
 
 	@OneToMany(mappedBy = "paperObj")
 	Set<PaperQuestion> quesSetObj;
+	
+	public Paper() {}
 
 	public int getPaperId() {
 		return paperId;
@@ -39,7 +38,6 @@ private int  isEnabled;
 		this.paperId = paperId;
 	}
 
-	
 	public int getPaperCode() {
 		return paperCode;
 	}
@@ -52,14 +50,6 @@ private int  isEnabled;
 		return moduleName;
 	}
 
-	public int getIsEnabled() {
-		return isEnabled;
-	}
-
-	public void setIsEnabled(int isEnabled) {
-		this.isEnabled = isEnabled;
-	}
-
 	public void setModuleName(String moduleName) {
 		this.moduleName = moduleName;
 	}
@@ -70,6 +60,14 @@ private int  isEnabled;
 
 	public void setPaperTiming(String paperTiming) {
 		this.paperTiming = paperTiming;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Set<Student> getStudentSetObj() {
@@ -87,11 +85,5 @@ private int  isEnabled;
 	public void setQuesSetObj(Set<PaperQuestion> quesSetObj) {
 		this.quesSetObj = quesSetObj;
 	}
-
-	@Override
-	public String toString() {
-		return "Paper [paperId=" + paperId + ", paperName="  + ", moduleName=" + moduleName
-				+ ", paperTiming=" + paperTiming + "]";
-	}
-
+	
 }

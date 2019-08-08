@@ -20,7 +20,7 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Exam </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="openAddPaper">Add Paper</a> <a
+							<a class="dropdown-item" href="/Admin/addPaper">Add Paper</a> <a
 								class="dropdown-item" href="#">Show All Paper</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">Something else here</a>

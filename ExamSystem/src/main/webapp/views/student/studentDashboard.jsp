@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Student dashboard</title>
  <jsp:include page="./headerLink.jsp"/>
 </head>
 <body>
