@@ -29,7 +29,7 @@ private int  isEnabled;
 // this mapping between paper and question
 
 	@OneToMany(mappedBy = "paperObj")
-	Set<Question> quesSetObj;
+	Set<PaperQuestion> quesSetObj;
 
 	public int getPaperId() {
 		return paperId;
@@ -80,11 +80,11 @@ private int  isEnabled;
 		this.studentSetObj = studentSetObj;
 	}
 
-	public Set<Question> getQuesSetObj() {
+	public Set<PaperQuestion> getQuesSetObj() {
 		return quesSetObj;
 	}
 
-	public void setQuesSetObj(Set<Question> quesSetObj) {
+	public void setQuesSetObj(Set<PaperQuestion> quesSetObj) {
 		this.quesSetObj = quesSetObj;
 	}
 

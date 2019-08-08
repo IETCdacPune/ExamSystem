@@ -17,5 +17,7 @@ public class SubjectService {
 	public List<Subject> getAllSubject(){
 		return subjectDAO.findAll();
 	}
-	
+	public Subject getSubjectById(int id) {
+		return subjectDAO.findById(id).get();
+	}
 }
