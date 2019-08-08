@@ -52,8 +52,6 @@ private int  isEnabled;
 		return moduleName;
 	}
 
-	
-
 	public int getIsEnabled() {
 		return isEnabled;
 	}
