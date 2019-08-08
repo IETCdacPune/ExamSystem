@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -19,7 +20,7 @@ import javax.validation.constraints.Size;
 @Table(name = "student")
 public class Student {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int studentId;
 
 	@NotNull
@@ -31,7 +32,11 @@ public class Student {
 	@NotNull
 	@Size(min = 2, message = "Last name must be grater than two charector")
 	@Size(max = 20, message = "Last name must be less than twenty charector")
-	@Pattern(regexp = "^[A-Z].[a-z ]{2,20}",message = "only charectors are allowed")
+
+	
+
+	@Pattern(regexp = "^[A-Z] {1}[a-z] {7,20}", message = "only charectors are allowed")
+
 	private String lastName;
 
 	@NotNull
@@ -72,7 +77,7 @@ public class Student {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
+ 
 	public String getLastName() {
 		return lastName;
 	}

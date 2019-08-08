@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -12,25 +13,23 @@ import javax.persistence.OneToMany;
 public class Paper {
 
 	@Id
-	@GeneratedValue
-	private int  paperId;
-	private String paperName;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int paperId;
+	private int  paperCode;
 	private String moduleName;
 	private String paperTiming;
-	
+private int  isEnabled;
 	public Paper() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	// this mapping between student and paper
-@ManyToMany(mappedBy = "paperSetObj")
-private Set<Student>studentSetObj;
+	@ManyToMany(mappedBy = "paperSetObj")
+	private Set<Student> studentSetObj;
 // this mapping between paper and question
 
-@OneToMany(mappedBy ="paperObj")
-Set<Question>quesSetObj;
-
+	@OneToMany(mappedBy = "paperObj")
+	Set<Question> quesSetObj;
 
 	public int getPaperId() {
 		return paperId;
@@ -40,16 +39,27 @@ Set<Question>quesSetObj;
 		this.paperId = paperId;
 	}
 
-	public String getPaperName() {
-		return paperName;
+	
+	public int getPaperCode() {
+		return paperCode;
 	}
 
-	public void setPaperName(String paperName) {
-		this.paperName = paperName;
+	public void setPaperCode(int paperCode) {
+		this.paperCode = paperCode;
 	}
 
 	public String getModuleName() {
 		return moduleName;
+	}
+
+	
+
+	public int getIsEnabled() {
+		return isEnabled;
+	}
+
+	public void setIsEnabled(int isEnabled) {
+		this.isEnabled = isEnabled;
 	}
 
 	public void setModuleName(String moduleName) {
@@ -64,10 +74,6 @@ Set<Question>quesSetObj;
 		this.paperTiming = paperTiming;
 	}
 
-	
-	
-	
-
 	public Set<Student> getStudentSetObj() {
 		return studentSetObj;
 	}
@@ -75,8 +81,6 @@ Set<Question>quesSetObj;
 	public void setStudentSetObj(Set<Student> studentSetObj) {
 		this.studentSetObj = studentSetObj;
 	}
-
-
 
 	public Set<Question> getQuesSetObj() {
 		return quesSetObj;
@@ -88,7 +92,7 @@ Set<Question>quesSetObj;
 
 	@Override
 	public String toString() {
-		return "Paper [paperId=" + paperId + ", paperName=" + paperName + ", moduleName=" + moduleName
+		return "Paper [paperId=" + paperId + ", paperName="  + ", moduleName=" + moduleName
 				+ ", paperTiming=" + paperTiming + "]";
 	}
 
