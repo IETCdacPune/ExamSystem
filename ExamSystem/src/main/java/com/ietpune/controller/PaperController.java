@@ -25,30 +25,35 @@ public class PaperController {
 	private SubjectService subjectService;
 
 	@Autowired
-	private PaperService paperService; 
+	private PaperService paperService;
 	@Autowired
 	private FileService fileService;
+
 	@RequestMapping("Admin/addPaper")
 	public String forAddPaperGet(@ModelAttribute("command") Paper p, Model model) {
 		List<Subject> sublist = subjectService.getAllSubject();
 		model.addAttribute("sublist", sublist);
-		model.addAttribute( "command", new Paper());
+		model.addAttribute("command", new Paper());
 		return "paper/addPaper";
 	}
+
 	@PostMapping("Admin/addPaper")
-	public String forAddPaperPost(Model model,@ModelAttribute("command") Paper p,@RequestParam("file") MultipartFile file) {
+	public String forAddPaperPost(Model model, @ModelAttribute("command") Paper p,
+			@RequestParam("file") MultipartFile file) {
 		try {
-		List<PaperQuestion> questions = fileService.fileToList(file);
-		System.out.println("QuestionList:"+questions);
-		//p.setQuesSetObj(questions);
-		}catch(IOException e) {
-			System.out.println("File uploadr IOException:"+e.getMessage());
+			if (file != null) {
+				List<PaperQuestion> questions = fileService.fileToList(file);
+				p.setQuesSetObj(questions);
+				
+				
+			} else {
+				System.out.println("file not get");
+			}
+			// p.setQuesSetObj(questions);
+		} catch (IOException e) {
+			System.out.println("File uploadr IOException:" + e.getMessage());
 		}
-		/*
-		 * paperService.addPaper(p); List<Subject> sublist =
-		 * subjectService.getAllSubject(); model.addAttribute("sublist", sublist);
-		 * return new ModelAndView("paper/addPaper", "command", new Paper());
-		 */
+		
 		return "paper/addPaper";
 	}
 }

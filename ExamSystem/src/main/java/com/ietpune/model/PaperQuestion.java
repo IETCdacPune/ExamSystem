@@ -31,7 +31,7 @@ public class PaperQuestion {
 
 	// this Mapping between Questin and opetion
 	@OneToMany(mappedBy = "quesObj")
-	private List<QuestionOption> optionSet;
+	private List<QuestionOption> optionList;
 
 	public int getQueId() {
 		return queId;
@@ -65,12 +65,12 @@ public class PaperQuestion {
 		this.correctOption = correctOption;
 	}
 
-	public List<QuestionOption> getOptionSet() {
-		return optionSet;
+	public List<QuestionOption> getOptionList() {
+		return optionList;
 	}
 
-	public void setOptionSet(List<QuestionOption> options) {
-		this.optionSet = options;
+	public void setOptionList(List<QuestionOption> options) {
+		this.optionList = options;
 	}
 
 	public Paper getPaperObj() {
@@ -83,8 +83,9 @@ public class PaperQuestion {
 
 	@Override
 	public String toString() {
-		return "Question [QueId=" + queId + ", question=" + question + ", description=" + description
-				+ ", correctOption=" + correctOption + "]";
+		return "\nPaperQuestion [queId=" + queId + ", question=" + question + ", description=" + description
+				+ ", correctOption=" + correctOption + ", optionList=" + optionList + "]";
 	}
+
 
 }

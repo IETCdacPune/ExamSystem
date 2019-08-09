@@ -1,5 +1,6 @@
 package com.ietpune.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -22,11 +23,11 @@ public class Paper {
 	
 	// this mapping between student and paper
 	@ManyToMany(mappedBy = "paperSetObj")
-	private Set<Student> studentSetObj;
+	private List<Student> studentSetObj;
 // this mapping between paper and question
 
 	@OneToMany(mappedBy = "paperObj")
-	Set<PaperQuestion> quesSetObj;
+	private List<PaperQuestion> quesSetObj;
 	
 	public Paper() {}
 
@@ -70,20 +71,28 @@ public class Paper {
 		this.enabled = enabled;
 	}
 
-	public Set<Student> getStudentSetObj() {
+	public List<Student> getStudentSetObj() {
 		return studentSetObj;
 	}
 
-	public void setStudentSetObj(Set<Student> studentSetObj) {
+	public void setStudentSetObj(List<Student> studentSetObj) {
 		this.studentSetObj = studentSetObj;
 	}
 
-	public Set<PaperQuestion> getQuesSetObj() {
+	public List<PaperQuestion> getQuesSetObj() {
 		return quesSetObj;
 	}
 
-	public void setQuesSetObj(Set<PaperQuestion> quesSetObj) {
+	public void setQuesSetObj(List<PaperQuestion> quesSetObj) {
 		this.quesSetObj = quesSetObj;
 	}
+
+	@Override
+	public String toString() {
+		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", moduleName=" + moduleName
+				+ ", paperTiming=" + paperTiming + ", enabled=" + enabled + ", studentSetObj=" + studentSetObj
+				+ ", quesSetObj=" + quesSetObj + "]";
+	}
+
 	
 }

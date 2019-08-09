@@ -59,8 +59,8 @@ public class QuestionOption {
 
 	@Override
 	public String toString() {
-		return "Option [optionId=" + optionId + ", optionNo=" + option + ", answer=" + answer + ", quesObj=" + quesObj
-				+ "]";
+		return "QuestionOption [optionId=" + optionId + ", option=" + option + ", answer=" + answer + "]";
 	}
+	
 
 }

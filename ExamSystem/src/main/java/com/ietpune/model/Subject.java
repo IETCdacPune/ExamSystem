@@ -18,6 +18,8 @@ public class Subject {
 	@NotNull
 	@Size(min=2,max=30,message = "subject lenght must in between 2 to 30 char...")
 	private String name;
+	
+	
 	public Subject() {
 		super();
 	}

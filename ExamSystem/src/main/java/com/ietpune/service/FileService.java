@@ -49,16 +49,20 @@ public class FileService {
 				question.setDescription(row.getCell(2).getStringCellValue());
 			}
 			List<QuestionOption> options=new ArrayList<>();
-			for(int i=3;row.getCell(i).getCellType()==Cell.CELL_TYPE_STRING;i++) {
+			for(int i=3;row.getCell(i)!=null && row.getCell(i).getCellType()==Cell.CELL_TYPE_STRING;i++) {
 				QuestionOption option=new QuestionOption();
-				option.setAnswer(row.getCell(i).getStringCellValue());
-				option.setOption((char)(65+i));
+				
+					option.setAnswer(row.getCell(i).getStringCellValue());
+				
+				option.setOption((char)(65+i-3));
+				
 				options.add(option);
 			}
-			question.setOptionSet(options);
+			System.out.println("\noptions:"+options);
+			question.setOptionList(options);
 			questions.add(question);
-			
 		}
+		
 		return questions; 
 	}
 
