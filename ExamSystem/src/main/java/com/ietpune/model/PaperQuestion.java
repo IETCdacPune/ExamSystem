@@ -1,6 +1,6 @@
 package com.ietpune.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +16,7 @@ public class PaperQuestion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int queId;
-	private char question;
+	private String question;
 	private String description;
 	private char correctOption;
 
@@ -31,7 +31,7 @@ public class PaperQuestion {
 
 	// this Mapping between Questin and opetion
 	@OneToMany(mappedBy = "quesObj")
-	private Set<QuestionOption> optionSet;
+	private List<QuestionOption> optionSet;
 
 	public int getQueId() {
 		return queId;
@@ -41,11 +41,11 @@ public class PaperQuestion {
 		this.queId = queId;
 	}
 
-	public char getQuestion() {
+	public String getQuestion() {
 		return question;
 	}
 
-	public void setQuestion(char question) {
+	public void setQuestion(String question) {
 		this.question = question;
 	}
 
@@ -65,12 +65,12 @@ public class PaperQuestion {
 		this.correctOption = correctOption;
 	}
 
-	public Set<QuestionOption> getOptionSet() {
+	public List<QuestionOption> getOptionSet() {
 		return optionSet;
 	}
 
-	public void setOptionSet(Set<QuestionOption> optionSet) {
-		this.optionSet = optionSet;
+	public void setOptionSet(List<QuestionOption> options) {
+		this.optionSet = options;
 	}
 
 	public Paper getPaperObj() {

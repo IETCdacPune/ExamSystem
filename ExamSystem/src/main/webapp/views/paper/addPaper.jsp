@@ -53,7 +53,7 @@
 					<div class="form-group row">
 						<label id="paperFile" class="col-sm-2 col-form-label">Question File</label>
 						<div class="col-sm-10">
-							<input type="File" class="form-control-file" id="paperFile"  accept=".openxmlformats-officedocument.spreadsheetml.sheet" title="select excel file only"/>
+							<input type="File" class="form-control-file" name="file" id="paperFile"  accept=".openxmlformats-officedocument.spreadsheetml.sheet" />
 							<%-- <form:errors path="paperTiming" cssClass="text-danger"></form:errors> --%>
 						</div>
 					</div>

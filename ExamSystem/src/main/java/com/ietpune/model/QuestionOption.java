@@ -13,7 +13,7 @@ public class QuestionOption {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int optionId;
-	private char optionNo;
+	private char option;
 	private String answer;
 
 	public QuestionOption() {
@@ -33,12 +33,12 @@ public class QuestionOption {
 		this.optionId = optionId;
 	}
 
-	public char getOptionNo() {
-		return optionNo;
+	public char getOption() {
+		return option;
 	}
 
-	public void setOptionNo(char optionNo) {
-		this.optionNo = optionNo;
+	public void setOption(char optionNo) {
+		this.option = optionNo;
 	}
 
 	public String getAnswer() {
@@ -59,7 +59,7 @@ public class QuestionOption {
 
 	@Override
 	public String toString() {
-		return "Option [optionId=" + optionId + ", optionNo=" + optionNo + ", answer=" + answer + ", quesObj=" + quesObj
+		return "Option [optionId=" + optionId + ", optionNo=" + option + ", answer=" + answer + ", quesObj=" + quesObj
 				+ "]";
 	}
 
