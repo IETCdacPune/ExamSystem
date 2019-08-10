@@ -2,6 +2,7 @@ package com.ietpune.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class PaperQuestion {
+public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int queId;
@@ -20,18 +21,16 @@ public class PaperQuestion {
 	private String description;
 	private char correctOption;
 
-	public PaperQuestion() {
+	@ManyToOne
+	@JoinColumn
+	private Paper paper;
+
+	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<Option> optionList;
+	
+	public Question() {
 		// TODO Auto-generated constructor stub
 	}
-
-	// this mapping between paper and question
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "paperId")
-	private Paper paperObj;
-
-	// this Mapping between Questin and opetion
-	@OneToMany(mappedBy = "quesObj")
-	private List<QuestionOption> optionList;
 
 	public int getQueId() {
 		return queId;
@@ -65,27 +64,30 @@ public class PaperQuestion {
 		this.correctOption = correctOption;
 	}
 
-	public List<QuestionOption> getOptionList() {
+	public Paper getPaper() {
+		return paper;
+	}
+
+	public void setPaper(Paper paper) {
+		this.paper = paper;
+	}
+
+	public List<Option> getOptionList() {
 		return optionList;
 	}
 
-	public void setOptionList(List<QuestionOption> options) {
-		this.optionList = options;
-	}
-
-	public Paper getPaperObj() {
-		return paperObj;
-	}
-
-	public void setPaperObj(Paper paperObj) {
-		this.paperObj = paperObj;
+	public void setOptionList(List<Option> optionList) {
+		this.optionList = optionList;
 	}
 
 	@Override
 	public String toString() {
-		return "\nPaperQuestion [queId=" + queId + ", question=" + question + ", description=" + description
-				+ ", correctOption=" + correctOption + ", optionList=" + optionList + "]";
+		return "Question [queId=" + queId + ", question=" + question + ", description=" + description
+				+ ", correctOption=" + correctOption + "]";
 	}
-
-
+	
+	
+	
+	
+	
 }

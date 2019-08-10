@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ietpune.exception.ExcelFileException;
 import com.ietpune.model.Paper;
-import com.ietpune.model.PaperQuestion;
+import com.ietpune.model.Question;
 import com.ietpune.model.Subject;
 import com.ietpune.service.FileService;
 import com.ietpune.service.PaperService;
@@ -28,6 +29,7 @@ public class PaperController {
 	private PaperService paperService;
 	@Autowired
 	private FileService fileService;
+	
 
 	@RequestMapping("Admin/addPaper")
 	public String forAddPaperGet(@ModelAttribute("command") Paper p, Model model) {
@@ -41,16 +43,14 @@ public class PaperController {
 	public String forAddPaperPost(Model model, @ModelAttribute("command") Paper p,
 			@RequestParam("file") MultipartFile file) {
 		try {
-			if (file != null) {
-				List<PaperQuestion> questions = fileService.fileToList(file);
-				p.setQuesSetObj(questions);
-				
-				
-			} else {
-				System.out.println("file not get");
-			}
-			// p.setQuesSetObj(questions);
-		} catch (IOException e) {
+				List<Question> questions = fileService.fileToList(file,p);
+				p.setQuestionList(questions);
+				p=paperService.addPaper(p);		
+		}catch(ExcelFileException e) {
+			model.addAttribute("errmsg", e.getMessage());
+			return "paper/addPaper";
+		}
+		catch (IOException e) {
 			System.out.println("File uploadr IOException:" + e.getMessage());
 		}
 		

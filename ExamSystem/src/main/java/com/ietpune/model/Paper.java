@@ -1,13 +1,16 @@
 package com.ietpune.model;
 
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -16,21 +19,22 @@ public class Paper {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int paperId;
-	private int  paperCode;
+	private int paperCode;
 	private String moduleName;
 	private String paperTiming;
-	private boolean  enabled;
+	private boolean enabled;
+	@ManyToOne
+	@JoinColumn
+	private Subject subject;
 	
-	// this mapping between student and paper
-	@ManyToMany(mappedBy = "paperSetObj")
-	private List<Student> studentSetObj;
-// this mapping between paper and question
+	@OneToMany(mappedBy = "paper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Question> questionList;
 
-	@OneToMany(mappedBy = "paperObj")
-	private List<PaperQuestion> quesSetObj;
-	
-	public Paper() {}
+	@ManyToMany(mappedBy = "paperList")
+	private List<Student> studentList;
 
+	public Paper() {
+	}
 	public int getPaperId() {
 		return paperId;
 	}
@@ -71,28 +75,38 @@ public class Paper {
 		this.enabled = enabled;
 	}
 
-	public List<Student> getStudentSetObj() {
-		return studentSetObj;
+	public Subject getSubject() {
+		return subject;
 	}
 
-	public void setStudentSetObj(List<Student> studentSetObj) {
-		this.studentSetObj = studentSetObj;
+	public void setSubject(Subject subject) {
+		this.subject = subject;
 	}
 
-	public List<PaperQuestion> getQuesSetObj() {
-		return quesSetObj;
+	public List<Question> getQuestionList() {
+		return questionList;
 	}
 
-	public void setQuesSetObj(List<PaperQuestion> quesSetObj) {
-		this.quesSetObj = quesSetObj;
+	public void setQuestionList(List<Question> questionList) {
+		this.questionList = questionList;
 	}
 
+	public List<Student> getStudentList() {
+		return studentList;
+	}
+
+	public void setStudentList(List<Student> studentList) {
+		this.studentList = studentList;
+	}
 	@Override
 	public String toString() {
 		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", moduleName=" + moduleName
-				+ ", paperTiming=" + paperTiming + ", enabled=" + enabled + ", studentSetObj=" + studentSetObj
-				+ ", quesSetObj=" + quesSetObj + "]";
+				+ ", paperTiming=" + paperTiming + ", enabled=" + enabled + "]";
 	}
 
+	
+	
+	
+	
 	
 }

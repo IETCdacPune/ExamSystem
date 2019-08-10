@@ -14,7 +14,12 @@
 	<div class="container">
 		<jsp:include page="../admin/menuBar.jsp" />
 		<br> <br>
-
+		<c:if test="${not empty errmsg}">
+		<div class="alert alert-danger alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Error!</strong> ${errmsg }
+		</div>
+		</c:if>
 		<div class="card text-center">
 			<div class="card-header bg-primary">
 				<h3>Add Paper</h3>

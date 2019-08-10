@@ -1,6 +1,6 @@
 package com.ietpune.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,14 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "student")
 public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,10 +55,12 @@ public class Student {
 	}
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "StudentPaper", joinColumns = {
-			@JoinColumn(referencedColumnName = "studentId", name = "studentId") }, inverseJoinColumns = {
+	@JoinTable(name = "StudentPaper", 
+	joinColumns = {
+			@JoinColumn(referencedColumnName = "studentId", name = "studentId") }, 
+	inverseJoinColumns = {
 					@JoinColumn(referencedColumnName = "paperId", name = "paperId") })
-	private Set<Paper> paperSetObj;
+	private List<Paper> paperList;
 
 	public int getStudentId() {
 		return studentId;
@@ -110,18 +110,10 @@ public class Student {
 		this.password = password;
 	}
 
-	public Set<Paper> getPaperSetObj() {
-		return paperSetObj;
-	}
-
-	public void setPaperSetObj(Set<Paper> paperSetObj) {
-		this.paperSetObj = paperSetObj;
-	}
-
 	@Override
 	public String toString() {
 		return "Student [studentId=" + studentId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId="
-				+ emailId + ", prNo=" + prNo + ", password=" + password + ", paperSetObj=" + paperSetObj + "]";
+				+ emailId + ", prNo=" + prNo + ", password=" + password + "]";
 	}
 
 }

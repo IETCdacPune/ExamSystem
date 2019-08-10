@@ -8,11 +8,13 @@ import com.ietpune.model.Paper;
 
 @Service
 public class PaperService {
-@Autowired
-PaperDAO paperDAO;
+ 
+	@Autowired
+	private PaperDAO paperDAO;
 	public Paper addPaper(Paper p) {
 		// TODO Auto-generated method stub
 		return paperDAO.save(p);
 	}
+
 
 }
