@@ -2,9 +2,9 @@ package com.ietpune.service;
 
 import org.springframework.stereotype.Service;
 @Service
-public class QuestionPaperService {
+public class QuestionService {
 
-	public QuestionPaperService() {
+	public QuestionService() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -2,17 +2,36 @@ package com.ietpune.service;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ietpune.dao.StudentDAO;
 import com.ietpune.model.Student;
-
 @Service
-public interface StudentService {
+public class StudentService{
+@Autowired
+StudentDAO studentDAO;
 
 
+	public StudentDAO getStudentDAO() {
+		return studentDAO;
+	}
 
-	Student save(@Valid Student student);
+	public void setStudentDAO(StudentDAO studentDAO) {
+		this.studentDAO = studentDAO;
+	}
 
-
+	public Student save(@Valid Student student) {
+		// TODO Auto-generated method stub
+		student=studentDAO.save(student);
+		if(student==null)
+		{
+			
+			
+			return null;
+		}
+		
+		return student;
+	}
 
 }
