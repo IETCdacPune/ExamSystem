@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,13 +18,21 @@ public class User {
 	private int userId;
 	private String prn;
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	@OneToMany(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+        })
+	@JoinTable(name = "user_roles",
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 
 	public User() {
 	}
-
+	public User(String prn,String password) {
+		this.prn = prn;
+		this.password = password;
+	}
 	public User(User user) {
 		this.userId = user.userId;
 		this.prn = user.prn;

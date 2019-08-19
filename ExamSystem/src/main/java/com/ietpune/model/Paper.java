@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,9 +28,9 @@ public class Paper {
 	
 	@OneToMany(mappedBy = "paper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Question> questionList;
-
-	@ManyToMany(mappedBy = "paperList")
-	private List<Student> studentList;
+	/*
+	 * @ManyToMany(mappedBy = "paperList") private List<Student> studentList;
+	 */
 
 	public Paper() {
 	}
@@ -91,13 +90,12 @@ public class Paper {
 		this.questionList = questionList;
 	}
 
-	public List<Student> getStudentList() {
-		return studentList;
-	}
-
-	public void setStudentList(List<Student> studentList) {
-		this.studentList = studentList;
-	}
+	/*
+	 * public List<Student> getStudentList() { return studentList; }
+	 * 
+	 * public void setStudentList(List<Student> studentList) { this.studentList =
+	 * studentList; }
+	 */
 	@Override
 	public String toString() {
 		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", moduleName=" + moduleName

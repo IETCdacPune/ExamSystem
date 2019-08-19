@@ -1,6 +1,8 @@
 package com.ietpune.model;
 import javax.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
+
 @Entity
 public class Role {
 
@@ -9,8 +11,10 @@ public class Role {
     @Column(name = "role_id")
     private int roleId;
 
-    @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 25)
+    private RoleName role;
 
     public Role() {
     }
@@ -23,11 +27,17 @@ public class Role {
         this.roleId = roleId;
     }
 
-    public String getRole() {
+    public RoleName getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleName role) {
         this.role = role;
     }
+
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", role=" + role + "]";
+	}
+    
 }
