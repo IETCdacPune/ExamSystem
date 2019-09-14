@@ -14,6 +14,12 @@
 	<div class="container">
 		<jsp:include page="../admin/menuBar.jsp" />
 		<br> <br>
+		<c:if test="${not empty msg}">
+		<div class="alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Success!</strong> ${msg }
+		</div>
+		</c:if>
 		<c:if test="${not empty errmsg}">
 		<div class="alert alert-danger alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -35,14 +41,14 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<form:label path="moduleName" class="col-sm-2 col-form-label">Subject Name</form:label>
+						<form:label path="subject" class="col-sm-2 col-form-label">Subject Name</form:label>
 						<div class="col-sm-10">
-							<form:select path="moduleName" class="form-control">
+							<form:select path="subject" class="form-control">
 								<form:option value="" label="Select Module" />
 								<form:options items="${sublist}" itemLabel="name" />
 							</form:select>
 
-							<form:errors path="moduleName" cssClass="text-danger"></form:errors>
+							<form:errors path="subject" cssClass="text-danger"></form:errors>
 
 						</div>
 

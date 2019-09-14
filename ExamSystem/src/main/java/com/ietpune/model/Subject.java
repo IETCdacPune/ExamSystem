@@ -33,7 +33,8 @@ public class Subject {
 	
 	
 
-	@OneToMany(mappedBy = "subject",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "subject",cascade = {CascadeType.MERGE,
+            CascadeType.REFRESH})
 	private List<Paper> paperList;
 	public Subject() {
 		super();

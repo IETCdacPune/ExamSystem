@@ -24,7 +24,7 @@
 							<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
 							<p class="card-text">Some quick example text to build on the
 								card title and make up the bulk of the card's content.</p> -->
-							<a href="/Admin/allPapers/${subject.name}" class="text-white">All
+							<a href="/Admin/allPapers/${subject.id}" class="text-white">All
 								Papers of this subject</a>
 						</div>
 					</div>

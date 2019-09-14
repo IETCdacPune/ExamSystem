@@ -19,7 +19,6 @@ public class Paper {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int paperId;
 	private int paperCode;
-	private String moduleName;
 	private String paperTiming;
 	private boolean enabled;
 	@ManyToOne
@@ -48,14 +47,6 @@ public class Paper {
 
 	public void setPaperCode(int paperCode) {
 		this.paperCode = paperCode;
-	}
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
 	}
 
 	public String getPaperTiming() {
@@ -89,22 +80,12 @@ public class Paper {
 	public void setQuestionList(List<Question> questionList) {
 		this.questionList = questionList;
 	}
-
-	/*
-	 * public List<Student> getStudentList() { return studentList; }
-	 * 
-	 * public void setStudentList(List<Student> studentList) { this.studentList =
-	 * studentList; }
-	 */
 	@Override
 	public String toString() {
-		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", moduleName=" + moduleName
-				+ ", paperTiming=" + paperTiming + ", enabled=" + enabled + "]";
+		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", paperTiming=" + paperTiming 
+				+ ", enabled=" + enabled + ", subject=" + subject + ", questionList="
+				+ questionList + "]";
 	}
-
-	
-	
-	
 	
 	
 }
