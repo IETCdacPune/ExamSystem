@@ -22,9 +22,9 @@
 							<div class="form-group row">
 								<%-- <form:label path="prNo" class="col-sm-2 col-form-label">PRN</form:label> 
 									<div class="col-sm-10">--%>
-								<form:input type="text" path="prNo" class="form-control"
+								<form:input type="text" path="prn" class="form-control"
 									placeholder="P. R. N." />
-								<form:errors path="prNo" cssClass="text-danger"></form:errors>
+								<form:errors path="prn" cssClass="text-danger"></form:errors>
 								<!-- </div> -->
 							</div>
 
