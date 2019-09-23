@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>All Paper of Subject</title>
+<title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body>

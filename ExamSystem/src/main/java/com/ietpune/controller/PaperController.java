@@ -3,9 +3,12 @@ package com.ietpune.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,5 +92,31 @@ public class PaperController {
 			model.addAttribute("errmsg","Please select valid paper");
 		}
 		return "paper/allQuestion";
+	}
+	
+	@RequestMapping("/Admin/questionEdit/{id}")
+	public String forQuestionEdit(@PathVariable int id, Model model) {
+		Question question=questionService.getQuestionById(id);
+		if(question!=null) {
+			model.addAttribute("command", question);
+			return "paper/questionEdit";
+		}else {
+			model.addAttribute("errmsg","Please select valid question");
+		}
+		return "paper/allQuestion";
+	}
+	@PostMapping("/Admin/questionEdit/{id}")
+	public String forQuestionEditPost(@PathVariable int id, Model model,@Valid @ModelAttribute("command") Question question, BindingResult result) {
+		if (result.hasErrors()) {
+			return "paper/questionEdit";
+		}
+		question=questionService.editQuestion(question);
+		if(question==null) {
+			model.addAttribute("errmsg", "Thier is an error in edittig question...");
+			return "paper/questionEdit";
+		}
+		model.addAttribute("msg", "Subject Added successfully...");
+		model.addAttribute("command", question);
+		return "paper/questionEdit";
 	}
 }
