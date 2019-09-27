@@ -1,5 +1,11 @@
 package com.ietpune.model;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -15,25 +21,32 @@ public class Role {
     @NaturalId
     @Column(length = 25)
     private RoleName role;
+    
+	public Role() {
+		super();
+	}
 
-    public Role() {
-    }
+	public Role(int roleId, RoleName role) {
+		super();
+		this.roleId = roleId;
+		this.role = role;
+	}
 
-    public int getRoleId() {
-        return roleId;
-    }
+	public int getRoleId() {
+		return roleId;
+	}
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
 
-    public RoleName getRole() {
-        return role;
-    }
+	public RoleName getRole() {
+		return role;
+	}
 
-    public void setRole(RoleName role) {
-        this.role = role;
-    }
+	public void setRole(RoleName role) {
+		this.role = role;
+	}
 
 	@Override
 	public String toString() {

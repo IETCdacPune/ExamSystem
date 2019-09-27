@@ -18,38 +18,53 @@ public class Option {
 	@ManyToOne
 	@JoinColumn
 	private Question question;
-	public Option() {}
+	
+	public Option() {
+		super();
+	}
+
+	public Option(int optionId, char option, String answer, Question question) {
+		super();
+		this.optionId = optionId;
+		this.option = option;
+		this.answer = answer;
+		this.question = question;
+	}
+
 	public int getOptionId() {
 		return optionId;
 	}
+
 	public void setOptionId(int optionId) {
 		this.optionId = optionId;
 	}
+
 	public char getOption() {
 		return option;
 	}
+
 	public void setOption(char option) {
 		this.option = option;
 	}
+
 	public String getAnswer() {
 		return answer;
 	}
+
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
 	public Question getQuestion() {
 		return question;
 	}
+
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
+
 	@Override
 	public String toString() {
-		return "Option [optionId=" + optionId + ", option=" + option + "]";
+		return "Option [optionId=" + optionId + ", option=" + option + ", answer=" + answer + "]";
 	}
-	
-	
-	
-	
-
 }

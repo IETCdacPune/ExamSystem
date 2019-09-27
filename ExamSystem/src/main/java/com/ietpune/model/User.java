@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,24 +20,35 @@ public class User {
 	private String prn;
 	private String password;
 	@OneToMany(cascade = {
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-        })
+			CascadeType.MERGE,
+            CascadeType.REFRESH},fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles",
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-
+	
 	public User() {
-	}
-	public User(String prn,String password) {
-		this.prn = prn;
-		this.password = password;
+		super();
 	}
 	public User(User user) {
+		super();
 		this.userId = user.userId;
 		this.prn = user.prn;
 		this.password = user.password;
+		this.roles = user.roles;
+	}
+	public User( String prn, String password, Set<Role> roles) {
+		super();
+		this.prn = prn;
+		this.password = password;
+		this.roles = roles;
+	}
+	public User(int userId, String prn, String password, Set<Role> roles) {
+		super();
+		this.userId = userId;
+		this.prn = prn;
+		this.password = password;
+		this.roles = roles;
 	}
 
 	public int getUserId() {
@@ -62,6 +74,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -69,4 +82,10 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", prn=" + prn + ", password=" + password + "]";
+	}
+	
 }

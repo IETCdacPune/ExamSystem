@@ -27,12 +27,22 @@ public class Paper {
 	
 	@OneToMany(mappedBy = "paper", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Question> questionList;
-	/*
-	 * @ManyToMany(mappedBy = "paperList") private List<Student> studentList;
-	 */
-
+	
 	public Paper() {
+		super();
 	}
+
+	public Paper(int paperId, int paperCode, String paperTiming, boolean enabled, Subject subject,
+			List<Question> questionList) {
+		super();
+		this.paperId = paperId;
+		this.paperCode = paperCode;
+		this.paperTiming = paperTiming;
+		this.enabled = enabled;
+		this.subject = subject;
+		this.questionList = questionList;
+	}
+	
 	public int getPaperId() {
 		return paperId;
 	}
@@ -80,12 +90,10 @@ public class Paper {
 	public void setQuestionList(List<Question> questionList) {
 		this.questionList = questionList;
 	}
+
 	@Override
 	public String toString() {
-		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", paperTiming=" + paperTiming 
-				+ ", enabled=" + enabled + ", subject=" + subject + ", questionList="
-				+ questionList + "]";
-	}
-	
-	
+		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", paperTiming=" + paperTiming + ", enabled="
+				+ enabled + "]";
+	}	
 }

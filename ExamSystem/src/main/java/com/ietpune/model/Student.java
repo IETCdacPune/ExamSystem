@@ -24,21 +24,22 @@ public class Student extends User {
 	@NotNull
 	@Email(message = "Please enter valid email")
 	private String emailId;
-
-	public Student() {
-		// TODO Auto-generated constructor stub
+	public Student(){
+		super();
 	}
-	/*
-	 * @ManyToMany(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinTable(name = "StudentPaper", joinColumns = {
-	 * 
-	 * @JoinColumn(referencedColumnName = "studentId", name = "studentId") },
-	 * inverseJoinColumns = {
-	 * 
-	 * @JoinColumn(referencedColumnName = "paperId", name = "paperId") }) private
-	 * List<Paper> paperList;
-	 */
+	public Student(User user) {
+		super(user);
+	}
+
+	public Student(User user,
+			@NotNull @Size(min = 2, message = "First name must be grater than two charector") @Size(max = 20, message = "First name must be less than twenty charector") @Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only charectors are allowed") String firstName,
+			@NotNull @Size(min = 2, message = "Last name must be grater than two charector") @Size(max = 20, message = "Last name must be less than twenty charector") @Pattern(regexp = "^[A-Z].[a-z] {2,20}", message = "only charectors are allowed") String lastName,
+			@NotNull @Email(message = "Please enter valid email") String emailId) {
+		super(user);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -47,7 +48,7 @@ public class Student extends User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
- 
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -64,4 +65,18 @@ public class Student extends User {
 		this.emailId = emailId;
 	}
 
+	/*
+	 * @ManyToMany(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinTable(name = "StudentPaper", joinColumns = {
+	 * 
+	 * @JoinColumn(referencedColumnName = "studentId", name = "studentId") },
+	 * inverseJoinColumns = {
+	 * 
+	 * @JoinColumn(referencedColumnName = "paperId", name = "paperId") }) private
+	 * List<Paper> paperList;
+	 */
+
+
+	
 }

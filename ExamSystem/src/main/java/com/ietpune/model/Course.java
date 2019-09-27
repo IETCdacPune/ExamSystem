@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Course {
 	@Id
@@ -15,11 +16,18 @@ public class Course {
 	private int courseId;
 	private String name;
 //Mapping between subject and Course
-	@OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
 	private List<Subject> subjectList;
-	
+
 	public Course() {
-		
+		super();
+	}
+
+	public Course(int courseId, String name, List<Subject> subjectList) {
+		super();
+		this.courseId = courseId;
+		this.name = name;
+		this.subjectList = subjectList;
 	}
 
 	public int getCourseId() {
@@ -48,7 +56,6 @@ public class Course {
 
 	@Override
 	public String toString() {
-		return "Course [courseId=" + courseId + ", name=" + name + " ]";
+		return "Course [courseId=" + courseId + ", name=" + name + "]";
 	}
-	
 }

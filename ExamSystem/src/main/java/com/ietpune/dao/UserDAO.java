@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.ietpune.model.User;
 @Repository
 public interface UserDAO extends JpaRepository<User, Integer> {
-
 	Optional<User> findByPrn(String username);
 
 }

@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.ietpune.dao.RoleDAO;
 import com.ietpune.dao.UserDAO;
@@ -21,6 +23,13 @@ import com.ietpune.model.User;
 public class ExamSystemApplication implements CommandLineRunner{
 	@Autowired RoleDAO roleDAO;
 	@Autowired UserDAO userDAO;
+	@Autowired BCryptPasswordEncoder passwordEcoder;
+	
+	@Value("${admin.username}")
+    private String adminName;
+	@Value("${admin.password}")
+    private String adminPass;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(ExamSystemApplication.class, args);
 	}
@@ -51,15 +60,15 @@ public class ExamSystemApplication implements CommandLineRunner{
 		
 		User user;
 		try {
-			user=userDAO.findByPrn("admin").get();
+			user=userDAO.findByPrn(adminName).get();
 		}catch(Exception e) {
-			user=new User("admin","admin");
+			passwordEcoder.encode(adminName);
 			Set<Role> roles= new HashSet<>();
 			role=roleDAO.findByRole(RoleName.ROLE_ADMIN).get();
 			roles.add(role);
 			role=roleDAO.findByRole(RoleName.ROLE_STUDENT).get();
 			roles.add(role);
-			user.setRoles(roles);
+			user=new User(adminName,passwordEcoder.encode(adminName),roles);
 			userDAO.save(user);
 		}
 	}
