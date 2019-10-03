@@ -9,12 +9,8 @@
 </head>
 <body>
 <div class="container">
+ 	<jsp:include page="../menuBar.jsp" />
  
- <a href="/login" class="btn btn-primary"><span class="fas fa-users"></span> SignIn</a>
-        <a href="/logout" class="btn btn-danger">Logout <span class="fa fa-sign-out"></span> </a>
-         <a href="/facebook" class="btn btn-primary">Facebook <span class="fa fa-facebook"></span> </a>       
-        <a href="/google" class="btn btn-danger"> Google <span class="fa fa-google-plus"></span> </a> 
-        <a href="/linkedin" class="btn btn-primary">LinkedIn <span class="fa fa-linkedin"></span> </a> 
     <jsp:include page="../footerLink.jsp"/>
  </div>
 </body>

@@ -19,12 +19,11 @@ import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 import com.ietpune.model.User;
 
-@SpringBootApplication()
+@SpringBootApplication
 public class ExamSystemApplication implements CommandLineRunner{
 	@Autowired RoleDAO roleDAO;
 	@Autowired UserDAO userDAO;
 	@Autowired BCryptPasswordEncoder passwordEcoder;
-	
 	@Value("${admin.username}")
     private String adminName;
 	@Value("${admin.password}")
@@ -44,17 +43,17 @@ public class ExamSystemApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		Role role;
 		try {
-			role=roleDAO.findByRole(RoleName.ROLE_ADMIN).get();
+			role=roleDAO.findByRole(RoleName.ADMIN).get();
 		}catch(Exception e) {
 			role=new Role();
-			role.setRole(RoleName.ROLE_ADMIN);
+			role.setRole(RoleName.ADMIN);
 			roleDAO.save(role);
 		}
 		try {
-			role=roleDAO.findByRole(RoleName.ROLE_STUDENT).get();
+			role=roleDAO.findByRole(RoleName.STUDENT).get();
 		}catch(Exception e) {
 			role=new Role();
-			role.setRole(RoleName.ROLE_STUDENT);
+			role.setRole(RoleName.STUDENT);
 			roleDAO.save(role);
 		}
 		
@@ -62,13 +61,13 @@ public class ExamSystemApplication implements CommandLineRunner{
 		try {
 			user=userDAO.findByPrn(adminName).get();
 		}catch(Exception e) {
-			passwordEcoder.encode(adminName);
 			Set<Role> roles= new HashSet<>();
-			role=roleDAO.findByRole(RoleName.ROLE_ADMIN).get();
+			role=roleDAO.findByRole(RoleName.ADMIN).get();
 			roles.add(role);
-			role=roleDAO.findByRole(RoleName.ROLE_STUDENT).get();
+			role=roleDAO.findByRole(RoleName.STUDENT).get();
 			roles.add(role);
-			user=new User(adminName,passwordEcoder.encode(adminName),roles);
+			user=new User(adminName,passwordEcoder.encode(adminPass),roles);
+			//user=new User(adminName,adminPass,roles);
 			userDAO.save(user);
 		}
 	}

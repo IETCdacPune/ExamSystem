@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="../admin/menuBar.jsp" />
+		<jsp:include page="../menuBar.jsp" />
 		<br> <br>
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">

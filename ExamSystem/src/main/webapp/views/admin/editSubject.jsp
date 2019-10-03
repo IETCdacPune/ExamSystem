@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="./menuBar.jsp" />
+		<jsp:include page="../menuBar.jsp" />
 		<br> <br>
 		<c:if test="${not empty msg}">
 		<div class="alert alert-success alert-dismissible">

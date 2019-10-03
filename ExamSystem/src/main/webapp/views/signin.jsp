@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,37 +12,39 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+			<div class="col-sm-9 col-md-8 col-lg-7 mx-auto">
 				<div class="card card-signin my-5">
 					<div class="card-body">
 						<h1 class="card-title text-primary text-center display-1">
 							<i class="fas fa-users"></i>
 						</h1>
 						<hr class="my-4">
-						<form:form method="post">
+						<c:if test="${not empty errorMessge}">
+							<div class="alert alert-danger alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${errorMessge}
+							</div>
+						</c:if>
+						<form name='login' method='POST'>
 							<div class="form-group row">
-								<%-- <form:label path="prNo" class="col-sm-2 col-form-label">PRN</form:label> 
-									<div class="col-sm-10">--%>
-								<form:input type="text" path="prn" class="form-control"
-									placeholder="P. R. N." />
-								<form:errors path="prn" cssClass="text-danger"></form:errors>
-								<!-- </div> -->
+								<input type='text' name='username' class="form-control" value=''
+									placeholder="P. R. N.">
 							</div>
 
 							<div class="form-group row">
-								<%-- <form:label path="password" class="col-sm-2 col-form-label">Password</form:label>
-									<div class="col-sm-10"> --%>
-								<form:input type="password" path="password" class="form-control"
-									placeholder="Password" />
-								<form:errors path="password" cssClass="text-danger"></form:errors>
-								<!-- </div> -->
+								<input type='password' name='password' class="form-control" placeholder="Password" />
 							</div>
-
 
 							<button class="btn btn-lg btn-primary btn-block text-uppercase"
 								type="submit">Sign in</button>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 
-						</form:form>
+						</form>
 						<hr class="my-4">
 						<a class="btn btn-lg btn-primary btn-block text-uppercase"
 							href="signup" type="submit">Sign up</a>

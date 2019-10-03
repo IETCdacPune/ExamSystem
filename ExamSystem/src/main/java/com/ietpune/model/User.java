@@ -19,9 +19,7 @@ public class User {
 	private int userId;
 	private String prn;
 	private String password;
-	@OneToMany(cascade = {
-			CascadeType.MERGE,
-            CascadeType.REFRESH},fetch = FetchType.EAGER)
+	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles",
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))

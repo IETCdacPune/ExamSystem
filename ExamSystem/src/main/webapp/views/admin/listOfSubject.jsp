@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="./menuBar.jsp" />
+		<jsp:include page="../menuBar.jsp" />
 		<br>
 		<div class="row">
 		<c:if test="${not empty list}">

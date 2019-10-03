@@ -14,16 +14,10 @@ public class CustomUserDetails extends User implements UserDetails {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7938599877428519697L;
+
 	public CustomUserDetails(final User user) {
 		super(user);
-	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return getRoles()
-				.stream()
-				.map(role->(GrantedAuthority)new SimpleGrantedAuthority(""+role.getRole()))
-				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -54,6 +48,12 @@ public class CustomUserDetails extends User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+				.collect(Collectors.toList());
 	}
 
 }

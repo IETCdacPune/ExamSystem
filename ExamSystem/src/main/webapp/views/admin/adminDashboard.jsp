@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="./menuBar.jsp" />
+		<jsp:include page="../menuBar.jsp" />
 	</div>
 	<jsp:include page="../footerLink.jsp" />
 </body>
