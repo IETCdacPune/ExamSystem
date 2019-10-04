@@ -1,8 +1,9 @@
 package com.ietpune.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,20 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
+	@Column(unique=true)
 	private String prn;
 	private String password;
-	@OneToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.MERGE,fetch = FetchType.EAGER)
+	//@OneToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles",
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	private List<Role> roles;
 	
 	public User() {
 		super();
@@ -35,13 +38,13 @@ public class User {
 		this.password = user.password;
 		this.roles = user.roles;
 	}
-	public User( String prn, String password, Set<Role> roles) {
+	public User( String prn, String password, List<Role> roles) {
 		super();
 		this.prn = prn;
 		this.password = password;
 		this.roles = roles;
 	}
-	public User(int userId, String prn, String password, Set<Role> roles) {
+	public User(int userId, String prn, String password, List<Role> roles) {
 		super();
 		this.userId = userId;
 		this.prn = prn;
@@ -73,11 +76,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Set<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 

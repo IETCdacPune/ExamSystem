@@ -21,7 +21,8 @@ import com.ietpune.service.StudentService;
 
 @Controller
 public class UnauthenticatedController {
-	@Autowired StudentService studetservice;
+	@Autowired
+	StudentService studetservice;
 
 	@RequestMapping(value = "/signout")
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
@@ -61,15 +62,25 @@ public class UnauthenticatedController {
 	}
 
 	@PostMapping("/signup")
-	public String forSingupPost(Model model, @Valid @ModelAttribute("command") Student student, BindingResult result) {
+	public String forSingupPost(Model model, @Valid @ModelAttribute("command") Student student,
+			@ModelAttribute("conformPass") String conformPass, BindingResult result) {
 		if (result.hasErrors()) {
-			System.out.println("Student:- " + student);
 			return "signup";
 		}
-		Student r = studetservice.save(student);
-		if (r == null)
-			return "signup";
 
-		return "/Admin/";
+		if (!conformPass.equals(student.getPassword())) {
+			model.addAttribute("errmsg", "Password and conform password not same...");
+			return "signup";
+		}
+
+		Student r = studetservice.save(student);
+		if (r == null) {
+			model.addAttribute("errmsg", "Thier is an some error in registration...");
+			return "signup?error";
+		}
+		model.addAttribute("msg", "You are register successfully...");
+		model.addAttribute("command", new Student());
+		return "signup";
+
 	}
 }

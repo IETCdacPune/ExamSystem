@@ -18,7 +18,7 @@ public class Student extends User {
 	@NotNull
 	@Size(min = 2, message = "Last name must be grater than two charector")
 	@Size(max = 20, message = "Last name must be less than twenty charector")
-	@Pattern(regexp = "^[A-Z].[a-z] {2,20}", message = "only charectors are allowed")
+	@Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only charectors are allowed")
 	private String lastName;
 
 	@NotNull

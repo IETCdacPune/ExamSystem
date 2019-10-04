@@ -1,9 +1,9 @@
 package com.ietpune;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,13 +21,11 @@ import com.ietpune.model.User;
 
 @SpringBootApplication
 public class ExamSystemApplication implements CommandLineRunner{
-	@Autowired RoleDAO roleDAO;
-	@Autowired UserDAO userDAO;
-	@Autowired BCryptPasswordEncoder passwordEcoder;
-	@Value("${admin.username}")
-    private String adminName;
-	@Value("${admin.password}")
-    private String adminPass;
+	@Autowired private RoleDAO roleDAO;
+	@Autowired private UserDAO userDAO;
+	@Autowired private BCryptPasswordEncoder passwordEcoder;
+	@Value("${admin.username}") private String adminName;
+	@Value("${admin.password}") private String adminPass;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ExamSystemApplication.class, args);
@@ -61,13 +59,12 @@ public class ExamSystemApplication implements CommandLineRunner{
 		try {
 			user=userDAO.findByPrn(adminName).get();
 		}catch(Exception e) {
-			Set<Role> roles= new HashSet<>();
+			List<Role> roles= new LinkedList<>();
 			role=roleDAO.findByRole(RoleName.ADMIN).get();
 			roles.add(role);
 			role=roleDAO.findByRole(RoleName.STUDENT).get();
 			roles.add(role);
 			user=new User(adminName,passwordEcoder.encode(adminPass),roles);
-			//user=new User(adminName,adminPass,roles);
 			userDAO.save(user);
 		}
 	}

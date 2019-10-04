@@ -11,6 +11,7 @@
 </head>
 <body>
 	<div class="container">
+	<jsp:include page="./menuBar.jsp" />
 		<div class="row">
 			<div class="col-sm-9 col-md-8 col-lg-7 mx-auto">
 				<div class="card card-signin my-5">
