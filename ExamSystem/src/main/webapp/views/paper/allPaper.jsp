@@ -31,7 +31,7 @@
 							<c:if test="${!paper.enabled}">disabled</c:if> </p>
 							<!-- <p class="card-text">Some quick example text to build on the
 								card title and make up the bulk of the card's content.</p> -->
-							<a href="/Admin/allQuestion/${paper.paperId}" class="text-white">List All Questions</a>
+							<a href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}" class="text-white">List All Questions</a>
 						</div>
 					</div>
 				</div>

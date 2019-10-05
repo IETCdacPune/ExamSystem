@@ -38,8 +38,7 @@ public class PaperController {
 
 	@RequestMapping("Admin/addPaper")
 	public String forAddPaperGet(@ModelAttribute("command") Paper p, Model model) {
-		List<Subject> sublist = subjectService.getAllSubject();
-		model.addAttribute("sublist", sublist);
+		model.addAttribute("sublist", subjectService.getAllSubject());
 		model.addAttribute("command", new Paper());
 		return "paper/addPaper";
 	}
@@ -71,12 +70,11 @@ public class PaperController {
 		}
 	}
 	
-	@RequestMapping("/Admin/allPapers/{id}")
+	@RequestMapping("/Admin/allPapers")
 	public String forAllPaperGet(@PathVariable int id, Model model) {
-		Subject sub=subjectService.getSubjectById(id);
-		if(sub!=null) {
-			List<Paper> subPaper = paperService.getAllPaperOfSubject(sub);
-			model.addAttribute("list", subPaper);
+		List<Subject> allSub=subjectService.getAllSubject();
+		if(allSub!=null) {
+			model.addAttribute("list", allSub);
 		}else {
 			model.addAttribute("errmsg","Please select valid subject");
 		}

@@ -46,9 +46,9 @@
 								value="${_csrf.token}" />
 
 						</form>
-						<hr class="my-4">
+						<!-- <hr class="my-4">
 						<a class="btn btn-lg btn-primary btn-block text-uppercase"
-							href="signup" type="submit">Sign up</a>
+							href="signup" type="submit">Sign up</a>-->
 					</div>
 				</div>
 			</div>

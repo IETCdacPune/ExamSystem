@@ -23,9 +23,9 @@
 							<h5 class="card-title">${loop.index +1 } ${subject.name}<a class="close text-rigth" href="/Admin/subjectEdit/${subject.id}"><i class="far fa-edit"></i></a></h5>
 							<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
 							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p> -->
+								card title and make up the bulk of the card's content.</p> 
 							<a href="/Admin/allPapers/${subject.id}" class="text-white">All
-								Papers of this subject</a>
+								Papers of this subject</a>-->
 						</div>
 					</div>
 				</div>
@@ -34,9 +34,16 @@
 			
 		</div>
 		<c:if test="${empty list }">
-				<div class="jumbotron text-center"><h2>There is not single subject entry in system.<br><a class="btn btn-primary" href="/Admin/addSubject">Add Subject</a></h2><br>
-				</div>
-			</c:if>
+			<div class="jumbotron text-center">
+				<h2>
+					There is not single subject entry in system.<br>
+					<a class="btn btn-primary"
+						href="${pageContext.request.contextPath}/Admin/addSubject">Add
+						Subject</a>
+				</h2>
+				<br>
+			</div>
+		</c:if>
 	</div>
 	<jsp:include page="../footerLink.jsp" />
 </body>
