@@ -36,10 +36,8 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Exam </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Admin/addPaper">Add
-								Paper</a> <a class="dropdown-item"
-								href="${pageContext.request.contextPath}/">Show All Paper</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/addPaper">Add Paper</a> 
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/allPaper">Show All Paper</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">Something else here</a>
 						</div></li>

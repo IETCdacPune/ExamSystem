@@ -15,14 +15,15 @@
 		<jsp:include page="../menuBar.jsp" />
 		<br> <br>
 		<c:if test="${not empty errmsg}">
-		<div class="alert alert-danger alert-dismissible">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>Error!</strong> ${errmsg }
-		</div>
+			<div class="alert alert-danger alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Error!</strong> ${errmsg }
+			</div>
 		</c:if>
 		<c:if test="${not empty list}">
-			<c:forEach items="${list}" var="paper" varStatus="loop">
-				<div class="col-md-4 mt-1">
+			<div id="accordion">
+				<c:forEach items="${list}" var="subject" varStatus="loop">
+					<!--  <div class="col-md-4 mt-1">
 					<div class="card bg-info">
 						<div class="card-body">
 							<h5 class="card-title">${loop.index +1 }) Paper Code:- ${paper.paperCode}<br>Subject:-${paper.subject.name}</h5>
@@ -30,14 +31,51 @@
 							<p>Status:-<c:if test="${paper.enabled}">Enabled</c:if>
 							<c:if test="${!paper.enabled}">disabled</c:if> </p>
 							<!-- <p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p> -->
+								card title and make up the bulk of the card's content.</p> --
 							<a href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}" class="text-white">List All Questions</a>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-			</c:if>
-		</div>
+				</div>-->
+
+
+					<div class="card">
+						<div class="card-header">
+							<a class="card-link" data-toggle="collapse" href="#collapseOne">Subject:-${subject.name}
+							</a>
+						</div>
+						<div id="collapseOne" class="collapse show"
+							data-parent="#accordion">
+							<div class="card-body">
+							
+								<div class="col-md-4 mt-1">
+									<div class="card bg-info">
+										<div class="card-body">
+											<h5 class="card-title">${loop.index +1 })
+												Paper Code:- ${paper.paperCode}<br>Subject:-${paper.subject.name}
+											</h5>
+											<h6 class="card-subtitle mb-2">Paper
+												Timing:-${paper.paperTiming}</h6>
+											<p>
+												Status:-
+												<c:if test="${paper.enabled}">Enabled</c:if>
+												<c:if test="${!paper.enabled}">disabled</c:if>
+											</p>
+											<!-- <p class="card-text">Some quick example text to build on the
+								card title and make up the bulk of the card's content.</p> -->
+											<a
+												href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}"
+												class="text-white">List All Questions</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</c:forEach>
+			</div>
+		</c:if>
+	</div>
 	<jsp:include page="../footerLink.jsp" />
 </body>
 </html>

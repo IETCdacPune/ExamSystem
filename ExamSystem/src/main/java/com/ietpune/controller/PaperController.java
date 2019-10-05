@@ -47,7 +47,6 @@ public class PaperController {
 	public String forAddPaperPost(Model model, @ModelAttribute("command") Paper p,
 			@RequestParam("file") MultipartFile file) {
 		try {
-				System.out.println(p);
 				List<Question> questions = fileService.fileToList(file,p);
 				p.setQuestionList(questions);
 				p=paperService.addPaper(p);	
