@@ -25,7 +25,7 @@ public class Question {
 	@JoinColumn
 	private Paper paper;
 
-	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Option> optionList;
 	
 	public Question() {

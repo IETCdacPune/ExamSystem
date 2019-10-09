@@ -13,7 +13,6 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br>
 		<c:if test="${not empty msg}">
 			<div class="alert alert-success alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -65,7 +64,7 @@
 							<div class="col-sm-10">
 								<input type="File" class="form-control-file" name="file"
 									id="paperFile"
-									accept=".openxmlformats-officedocument.spreadsheetml.sheet" />
+									accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
 								<%-- <form:errors path="paperTiming" cssClass="text-danger"></form:errors> --%>
 							</div>
 						</div>

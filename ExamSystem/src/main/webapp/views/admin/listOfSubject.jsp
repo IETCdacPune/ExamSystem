@@ -13,7 +13,6 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
-		<br>
 		<div class="row">
 		<c:if test="${not empty list}">
 			<c:forEach items="${list}" var="subject" varStatus="loop">
@@ -21,11 +20,6 @@
 					<div class="card bg-info">
 						<div class="card-body">
 							<h5 class="card-title">${loop.index +1 } ${subject.name}<a class="close text-rigth" href="/Admin/subjectEdit/${subject.id}"><i class="far fa-edit"></i></a></h5>
-							<!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-							<p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p> 
-							<a href="/Admin/allPapers/${subject.id}" class="text-white">All
-								Papers of this subject</a>-->
 						</div>
 					</div>
 				</div>

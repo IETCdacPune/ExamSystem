@@ -48,6 +48,10 @@ public class PaperController {
 			@RequestParam("file") MultipartFile file) {
 		try {
 				List<Question> questions = fileService.fileToList(file,p);
+				if(questions==null || questions.isEmpty()) {
+					model.addAttribute("errmsg", "Thier is an error in reading File...");
+					return "paper/addPaper";
+				}
 				p.setQuestionList(questions);
 				p=paperService.addPaper(p);	
 				if(p==null) {
@@ -70,12 +74,10 @@ public class PaperController {
 	}
 	
 	@RequestMapping("/Admin/allPapers")
-	public String forAllPaperGet(@PathVariable int id, Model model) {
+	public String forAllPaperGet(Model model) {
 		List<Subject> allSub=subjectService.getAllSubject();
-		if(allSub!=null) {
+		if(!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
-		}else {
-			model.addAttribute("errmsg","Please select valid subject");
 		}
 		return "paper/allPaper";
 	}

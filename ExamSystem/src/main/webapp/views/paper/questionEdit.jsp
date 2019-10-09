@@ -48,6 +48,21 @@
 						</div>
 
 					</div>
+					<c:if test="${empty optionList}">
+						option list is empty
+					</c:if>
+					<c:forEach items="${optionList}" var="option" varStatus="loop">
+						<div class="form-group row">
+							<form:label path="optionList[${loop.index}].answer" class="col-sm-2 col-form-label">${option.option}</form:label>
+							<div class="col-sm-10">
+								<form:input type="text" class="form-control" path="optionList[${loop.index}].answer" />
+								<form:errors path="optionList[${loop.index}].answer" cssClass="text-danger"></form:errors>
+								<form:hidden path="optionList[${loop.index}].option"/>
+								<form:hidden path="optionList[${loop.index}].optionId"/>
+								<form:hidden path="optionList[${loop.index}].question"/>
+							</div>
+						</div>
+					</c:forEach>
 					<form:hidden path="paper"/>
 					<div class="form-group row">
 						<form:label path="description" class="col-sm-2 col-form-label">Description</form:label>

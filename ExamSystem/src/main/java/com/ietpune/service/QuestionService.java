@@ -14,6 +14,7 @@ import com.ietpune.model.Question;
 public class QuestionService {
 	@Autowired QuestionDAO questionDAO;
 	public List<Question> getAllQuestionOfPaper(Paper paper) {
+		//questionDAO.ge
 		return questionDAO.findByPaper(paper);
 	}
 	public Question getQuestionById(int id) {

@@ -13,7 +13,6 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br>
 		<c:if test="${not empty msg}">
 		<div class="alert alert-success alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>

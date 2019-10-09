@@ -3,6 +3,7 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,45 +14,39 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br>
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<strong>Error!</strong> ${errmsg }
 			</div>
 		</c:if>
+		<c:if test="${empty list}">
+			<div class="jumbotron text-center">
+				<h2>
+					There is not single subject entry in system.<br>
+					<a class="btn btn-primary"
+						href="${pageContext.request.contextPath}/Admin/addSubject">Add
+						Subject</a>
+				</h2>
+			</div>
+		</c:if>
 		<c:if test="${not empty list}">
-			<div id="accordion">
 				<c:forEach items="${list}" var="subject" varStatus="loop">
-					<!--  <div class="col-md-4 mt-1">
-					<div class="card bg-info">
-						<div class="card-body">
-							<h5 class="card-title">${loop.index +1 }) Paper Code:- ${paper.paperCode}<br>Subject:-${paper.subject.name}</h5>
-							<h6 class="card-subtitle mb-2">Paper Timing:-${paper.paperTiming}</h6>
-							<p>Status:-<c:if test="${paper.enabled}">Enabled</c:if>
-							<c:if test="${!paper.enabled}">disabled</c:if> </p>
-							<!-- <p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p> --
-							<a href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}" class="text-white">List All Questions</a>
-						</div>
-					</div>
-				</div>-->
-
-
-					<div class="card">
+					<div class="card mt-2">
 						<div class="card-header">
-							<a class="card-link" data-toggle="collapse" href="#collapseOne">Subject:-${subject.name}
+							<a class="card-link" data-toggle="collapse" href="#collapse${loop.index +1 }">Subject:-${subject.name} have ${fn:length(subject.paperList)} papers.
 							</a>
 						</div>
-						<div id="collapseOne" class="collapse show"
-							data-parent="#accordion">
+						<div id="collapse${loop.index +1}" class="collapse">
 							<div class="card-body">
-							
+								<c:if test="${not empty subject.paperList}">
+								<div class="row">
+								<c:forEach items="${subject.paperList}" var="paper" varStatus="loop">						
 								<div class="col-md-4 mt-1">
 									<div class="card bg-info">
 										<div class="card-body">
 											<h5 class="card-title">${loop.index +1 })
-												Paper Code:- ${paper.paperCode}<br>Subject:-${paper.subject.name}
+												Paper Code:- ${paper.paperCode}<br>Subject:-${subject.name}
 											</h5>
 											<h6 class="card-subtitle mb-2">Paper
 												Timing:-${paper.paperTiming}</h6>
@@ -60,20 +55,30 @@
 												<c:if test="${paper.enabled}">Enabled</c:if>
 												<c:if test="${!paper.enabled}">disabled</c:if>
 											</p>
-											<!-- <p class="card-text">Some quick example text to build on the
-								card title and make up the bulk of the card's content.</p> -->
 											<a
 												href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}"
 												class="text-white">List All Questions</a>
 										</div>
 									</div>
 								</div>
+								</c:forEach>
+								</div>
+								</c:if>
+								<c:if test="${empty subject.paperList}">
+									<div class="jumbotron text-center">
+										<h2>
+											There is not single paper entry in ${subject.name} subject.<br> <a
+												class="btn btn-primary"
+												href="${pageContext.request.contextPath}/Admin/addPaper">Add
+												Paper</a>
+										</h2>
+									</div>
+								</c:if>
 							</div>
 						</div>
 					</div>
 
 				</c:forEach>
-			</div>
 		</c:if>
 	</div>
 	<jsp:include page="../footerLink.jsp" />
