@@ -116,11 +116,6 @@
 										type="submit">Sign up</button>
 								</div>
 							</form:form>
-							<%-- <hr class="my-4">
-							<div class="col-md-8 offset-md-2">
-								<a class="btn btn-lg btn-primary btn-block text-uppercase"
-									href="signin" type="submit">Sign in</a>
-							</div> --%>
 						</div>
 					</div>
 				</div>

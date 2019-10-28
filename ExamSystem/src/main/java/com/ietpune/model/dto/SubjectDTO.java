@@ -9,7 +9,7 @@ import com.ietpune.model.Course;
 public class SubjectDTO {
 	private int id;
 	@Size(min=2,max=30,message = "subject lenght must in between 2 to 30 char...")
-	@Pattern(regexp = "[a-zA-z -_]{2,15}" , message = "Please Enter Valide Name...")
+	@Pattern(regexp = "[a-zA-z -_]{2,30}" , message = "Please Enter Valide Name...")
 	private String name;
 	private Course course;
 	

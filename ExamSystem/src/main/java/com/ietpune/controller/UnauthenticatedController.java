@@ -85,7 +85,8 @@ public class UnauthenticatedController {
 		student.setPassword(studentDTO.getPassword());
 		student.setPrn(studentDTO.getPrn());
 		student.setCourse(optCourse.get());
-	
+		student.setSecurityQeustion(studentDTO.getSecurityQeustion());
+		student.setSecurityAnswer(studentDTO.getSecurityAnswer());
 		student = studetService.save(student);
 		if (student == null) {
 			model.addAttribute(ERRMSG, "Thier is an some error in registration...");
