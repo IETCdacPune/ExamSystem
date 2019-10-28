@@ -12,7 +12,7 @@ public class Option {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int optionId;
-	private char option;
+	private char opt;
 	private String answer;
 
 	@ManyToOne
@@ -26,7 +26,7 @@ public class Option {
 	public Option(int optionId, char option, String answer, Question question) {
 		super();
 		this.optionId = optionId;
-		this.option = option;
+		this.opt = option;
 		this.answer = answer;
 		this.question = question;
 	}
@@ -39,12 +39,12 @@ public class Option {
 		this.optionId = optionId;
 	}
 
-	public char getOption() {
-		return option;
+	public char getOpt() {
+		return opt;
 	}
 
-	public void setOption(char option) {
-		this.option = option;
+	public void setOpt(char option) {
+		this.opt = option;
 	}
 
 	public String getAnswer() {
@@ -65,6 +65,6 @@ public class Option {
 
 	@Override
 	public String toString() {
-		return "Option [optionId=" + optionId + ", option=" + option + ", answer=" + answer + "]";
+		return "Option [optionId=" + optionId + ", option=" + opt + ", answer=" + answer + "]";
 	}
 }

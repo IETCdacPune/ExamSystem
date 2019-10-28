@@ -24,19 +24,17 @@ public class StudentService{
 	public Student save(@Valid Student student) {
 		student.setPassword(passwordEcoder.encode(student.getPassword()));
 		List<Role> roles= new LinkedList<>();
-		roles.add(roleDAO.findByRole(RoleName.STUDENT).get());
+		Optional<Role> optRole=roleDAO.findByRoleName(RoleName.STUDENT);
+		if(optRole.isPresent())
+			roles.add(optRole.get());
 		student.setRoles(roles);
 		student=studentDAO.save(student);
-		if(student==null)
-			return null;
 		return student;
 	}
 
 	public boolean findPrn(String prn) {
 		Optional<Student> opt = studentDAO.findByPrn(prn);
-		if(opt.isPresent())
-			return true;
-		return false;
+		return opt.isPresent();
 	}
 
 }

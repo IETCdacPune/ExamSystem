@@ -3,7 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
@@ -17,7 +17,7 @@
 				<div class="card card-signin my-5">
 					<div class="card-body">
 						<h1 class="card-title text-primary text-center display-1">
-							<i class="fas fa-users"></i>
+							<em class="fas fa-users"></em>
 						</h1>
 						<hr class="my-4">
 						<c:if test="${not empty errorMessge}">
@@ -46,9 +46,9 @@
 								value="${_csrf.token}" />
 
 						</form>
-						<!-- <hr class="my-4">
+						<%-- <hr class="my-4">
 						<a class="btn btn-lg btn-primary btn-block text-uppercase"
-							href="signup" type="submit">Sign up</a>-->
+							href="signup" type="submit">Sign up</a>--%>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 package com.ietpune.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -11,20 +13,27 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ietpune.model.Course;
 import com.ietpune.model.Student;
+import com.ietpune.model.dto.StudentDTO;
+import com.ietpune.service.CourseService;
+import com.ietpune.service.QuestionService;
 import com.ietpune.service.StudentService;
 
 @Controller
 public class UnauthenticatedController {
-	@Autowired
-	StudentService studetservice;
+	private static final String ERRMSG = "errmsg";
+	private static final String SIGNUP = "signup";
+	@Autowired	StudentService studetService;
+	@Autowired	QuestionService questionService;
+	@Autowired CourseService courseService;
 
-	@RequestMapping(value = "/signout")
+	@GetMapping(value = "/signout")
 	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -33,7 +42,7 @@ public class UnauthenticatedController {
 		return "redirect:/signin?logout=true";
 	}
 
-	@RequestMapping("/signin")
+	@GetMapping("/signin")
 	public String forLogin(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, Model model) {
 		String errorMessge = null;
@@ -47,40 +56,44 @@ public class UnauthenticatedController {
 		return "signin";
 	}
 
-	@PostMapping("/signin")
-	public String forLoginPost(Model model, @Valid @ModelAttribute("command") Student student, BindingResult result) {
-		if (result.hasErrors()) {
-			return "signin";
-		}
-		return "/Admin/";
-	}
-
-	@RequestMapping("/signup")
+	@GetMapping("/signup")
 	public String forRegistration(Model model) {
-		model.addAttribute("command", new Student());
-		return "signup";
+		model.addAttribute("qList", questionService.getAllSecurityQuestion());
+		model.addAttribute("command", new StudentDTO());
+		return SIGNUP;
 	}
 
 	@PostMapping("/signup")
-	public String forSingupPost(Model model, @Valid @ModelAttribute("command") Student student,
-			@ModelAttribute("conformPass") String conformPass, BindingResult result) {
+	public String forSingupPost(Model model, @Valid @ModelAttribute("command") StudentDTO studentDTO, BindingResult result) {
 		if (result.hasErrors()) {
-			return "signup";
+			return SIGNUP;
 		}
-
-		if (!conformPass.equals(student.getPassword())) {
-			model.addAttribute("errmsg", "Password and conform password not same...");
-			return "signup";
+		
+		if (!studentDTO.getPassword().equals(studentDTO.getConformPass())) {
+			model.addAttribute(ERRMSG, "Password and conform password not same...");
+			return SIGNUP;
 		}
-
-		Student r = studetservice.save(student);
-		if (r == null) {
-			model.addAttribute("errmsg", "Thier is an some error in registration...");
+		Optional<Course> optCourse = courseService.getCourseByCode(studentDTO.getCourseCode());
+		if(!optCourse.isPresent()){
+			model.addAttribute(ERRMSG, "Wrong course code not same...");
+			return SIGNUP;
+		}
+		Student student=new Student();
+		student.setFirstName(studentDTO.getFirstName());
+		student.setLastName(studentDTO.getLastName());
+		student.setEmailId(studentDTO.getEmailId());
+		student.setPassword(studentDTO.getPassword());
+		student.setPrn(studentDTO.getPrn());
+		student.setCourse(optCourse.get());
+	
+		student = studetService.save(student);
+		if (student == null) {
+			model.addAttribute(ERRMSG, "Thier is an some error in registration...");
 			return "signup?error";
 		}
 		model.addAttribute("msg", "You are register successfully...");
-		model.addAttribute("command", new Student());
-		return "signup";
+		model.addAttribute("command", new StudentDTO());
+		return SIGNUP;
 
 	}
 }

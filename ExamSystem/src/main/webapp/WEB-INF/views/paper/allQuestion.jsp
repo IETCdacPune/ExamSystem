@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
@@ -25,8 +24,8 @@
 				<div class="col-12 mt-1">
 					<div class="card border-info pl-3">
 						<div class="card-head">
-							<a class="close text-rigth" href="/Admin/questionEdit/${question.queId}"><i class="far fa-edit"></i></a>
-							<pre>${loop.index +1 }) ${question.question}</pre>
+							<a class="close text-rigth" href="/Admin/questionEdit/${question.queId}"><em class="far fa-edit"></em></a>
+							<pre>${loop.index +1 }) ${question.fullQuestion}</pre>
 						</div>
 						<div class="card-body">
 							<c:forEach items="${question.optionList}" var="option"

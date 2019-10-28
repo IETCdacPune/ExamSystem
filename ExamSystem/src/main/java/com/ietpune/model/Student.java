@@ -1,32 +1,35 @@
 package com.ietpune.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Student extends User {
-	
-	@NotNull
-	@Size(min = 2, message = "First name must be grater than two charector")
-	@Size(max = 20, message = "First name must be less than twenty charector")
-	@Pattern(regexp = "^[A-Z].[a-z]{2,20}",message = "only charectors are allowed")
+
 	private String firstName;
-
-	@NotNull
-	@Size(min = 2, message = "Last name must be grater than two charector")
-	@Size(max = 20, message = "Last name must be less than twenty charector")
-	@Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only charectors are allowed")
 	private String lastName;
-
-	@NotNull
-	@Email(message = "Please enter valid email")
 	private String emailId;
-	public Student(){
+	@ManyToOne
+	@JoinColumn
+	@JsonIgnore
+	private Course course;
+	@ManyToOne
+	@JoinColumn
+	private SecurityQuestion securityQeustion;
+	private String securityAnswer;
+
+	public Student() {
 		super();
+
 	}
+
 	public Student(User user) {
 		super(user);
 	}
@@ -65,18 +68,28 @@ public class Student extends User {
 		this.emailId = emailId;
 	}
 
-	/*
-	 * @ManyToMany(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinTable(name = "StudentPaper", joinColumns = {
-	 * 
-	 * @JoinColumn(referencedColumnName = "studentId", name = "studentId") },
-	 * inverseJoinColumns = {
-	 * 
-	 * @JoinColumn(referencedColumnName = "paperId", name = "paperId") }) private
-	 * List<Paper> paperList;
-	 */
+	public Course getCourse() {
+		return course;
+	}
 
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
-	
+	public SecurityQuestion getSecurityQeustion() {
+		return securityQeustion;
+	}
+
+	public void setSecurityQeustion(SecurityQuestion securityQeustion) {
+		this.securityQeustion = securityQeustion;
+	}
+
+	public String getSecurityAnswer() {
+		return securityAnswer;
+	}
+
+	public void setSecurityAnswer(String securityAnswer) {
+		this.securityAnswer = securityAnswer;
+	}
+
 }

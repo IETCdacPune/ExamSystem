@@ -4,11 +4,32 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#course').change(
+		function() {
+			$.getJSON('/Admin/subjectByCourse', {
+				course : $(this).val(),
+				ajax : 'true'
+			}, function(data) {
+				var html = '<option value="">Select Subject</option>';
+				var len = data.length;
+				for ( var i = 0; i < len; i++) {
+					html += '<option value="' + data[i].id + '">'
+							+ data[i].name + '</option>';
+				}
+				html += '</option>';
+ 
+				$('#subject').html(html);
+			});
+		});
+});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -25,7 +46,7 @@
 				<strong>Error!</strong> ${errmsg }
 			</div>
 		</c:if>
-		<c:if test="${not empty sublist }">
+		<c:if test="${not empty courseList }">
 			<div class="card text-center">
 				<div class="card-header bg-primary">
 					<h3>Add Paper</h3>
@@ -41,11 +62,21 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<form:label path="subject" class="col-sm-2 col-form-label">Subject Name</form:label>
+							<form:label path="course" class="col-sm-2 col-form-label">Course Name</form:label>
 							<div class="col-sm-10">
-								<form:select path="subject" class="form-control">
+								<form:select id="course" path="course" class="form-control">
 									<form:option value="" label="Select Module" />
-									<form:options items="${sublist}" itemLabel="name" />
+									<form:options items="${courseList}" itemLabel="name" />
+								</form:select>
+								<form:errors path="course" cssClass="text-danger"></form:errors>
+							</div>
+						</div>
+						<div class="form-group row">
+							<form:label  path="subject" class="col-sm-2 col-form-label">Subject Name</form:label>
+							<div class="col-sm-10">
+								<form:select id="subject" path="subject" class="form-control">
+									<form:option value="" label="Select Module" />
+									<%--<form:options items="${subList}" itemLabel="name" />${course.name} : ${name} </form:options>--%>
 								</form:select>
 								<form:errors path="subject" cssClass="text-danger"></form:errors>
 							</div>
@@ -78,13 +109,13 @@
 				</div>
 			</div>
 		</c:if>
-		<c:if test="${empty sublist }">
+		<c:if test="${empty courseList }">
 			<div class="jumbotron text-center">
 				<h2>
-					There is not single subject entry in system.<br> <a
+					There is not single course entry in system.<br> <a
 						class="btn btn-primary"
-						href="${pageContext.request.contextPath}/Admin/addSubject">Add
-						Subject</a>
+						href="${pageContext.request.contextPath}/Admin/addCourse">Add
+						Course</a>
 				</h2>
 				<br>
 			</div>

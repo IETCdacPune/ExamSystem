@@ -21,11 +21,6 @@ public class CustomUserDetails extends User implements UserDetails {
 	}
 
 	@Override
-	public String getPassword() {
-		return super.getPassword();
-	}
-
-	@Override
 	public String getUsername() {
 		return super.getPrn();
 	}
@@ -52,7 +47,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+		return getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
 				.collect(Collectors.toList());
 	}
 

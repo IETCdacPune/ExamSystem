@@ -23,7 +23,7 @@ public class Role {
     @Enumerated(EnumType.STRING)
     @NaturalId
     @Column(length = 25)
-    private RoleName role;
+    private RoleName roleName;
     @ManyToMany(mappedBy = "roles")
     private List < User > users;
 	public Role() {
@@ -33,7 +33,11 @@ public class Role {
 	public Role(int roleId, RoleName role) {
 		super();
 		this.roleId = roleId;
-		this.role = role;
+		this.roleName = role;
+	}
+
+	public Role(RoleName role) {
+		this.roleName=role;
 	}
 
 	public int getRoleId() {
@@ -44,12 +48,12 @@ public class Role {
 		this.roleId = roleId;
 	}
 
-	public RoleName getRole() {
-		return role;
+	public RoleName getRoleName() {
+		return roleName;
 	}
 
-	public void setRole(RoleName role) {
-		this.role = role;
+	public void setRoleName(RoleName roleName) {
+		this.roleName = roleName;
 	}
 
 	public List<User> getUsers() {
@@ -62,7 +66,7 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", role=" + role + "]";
+		return "Role [roleId=" + roleId + ", role=" + roleName + "]";
 	}
     
 }

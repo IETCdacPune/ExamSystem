@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +20,9 @@ import com.ietpune.exception.ExcelFileException;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
 import com.ietpune.model.Subject;
+import com.ietpune.model.dto.PaperDTO;
+import com.ietpune.model.dto.QuestionDTO;
+import com.ietpune.service.CourseService;
 import com.ietpune.service.FileService;
 import com.ietpune.service.PaperService;
 import com.ietpune.service.QuestionService;
@@ -27,95 +30,119 @@ import com.ietpune.service.SubjectService;
 
 @Controller
 public class PaperController {
+	private static final String COURSE_LIST = "courseList";
+	private static final String PAPER_QUESTION_EDIT = "paper/questionEdit";
+	private static final String PAPER_ADD_PAPER = "paper/addPaper";
+	private static final String ERRMSG = "errmsg";
+	private static final String COMMAND = "command";
 	@Autowired
 	private SubjectService subjectService;
-	@Autowired private QuestionService questionService;
+	@Autowired
+	private CourseService courseService;
+	@Autowired
+	private QuestionService questionService;
 	@Autowired
 	private PaperService paperService;
 	@Autowired
 	private FileService fileService;
-	
 
-	@RequestMapping("Admin/addPaper")
-	public String forAddPaperGet(@ModelAttribute("command") Paper p, Model model) {
-		model.addAttribute("sublist", subjectService.getAllSubject());
-		model.addAttribute("command", new Paper());
-		return "paper/addPaper";
+	@GetMapping("Admin/addPaper")
+	public String forAddPaperGet(Model model) {
+		model.addAttribute(COURSE_LIST, courseService.getAllCourses());
+		model.addAttribute(COMMAND, new PaperDTO());
+		return PAPER_ADD_PAPER;
 	}
 
 	@PostMapping("Admin/addPaper")
-	public String forAddPaperPost(Model model, @ModelAttribute("command") Paper p,
-			@RequestParam("file") MultipartFile file) {
-		try {
-				List<Question> questions = fileService.fileToList(file,p);
-				if(questions==null || questions.isEmpty()) {
-					model.addAttribute("errmsg", "Thier is an error in reading File...");
-					return "paper/addPaper";
-				}
-				p.setQuestionList(questions);
-				p=paperService.addPaper(p);	
-				if(p==null) {
-					model.addAttribute("errmsg", "Thier is an error in adding paper...");
-					return "paper/addPaper";
-				}
-				model.addAttribute("msg", "Paper Added successfully...");
-				List<Subject> sublist = subjectService.getAllSubject();
-				model.addAttribute("sublist", sublist);
-				model.addAttribute("command", new Paper());
-				return "paper/addPaper";
-		}catch(ExcelFileException e) {
-			model.addAttribute("errmsg", e.getMessage());
-			return "paper/addPaper";
+	public String forAddPaperPost(Model model, @ModelAttribute(COMMAND) PaperDTO paperDTO,
+			@RequestParam("file") MultipartFile file, BindingResult result) {
+		if (result.hasErrors()) {
+			model.addAttribute(COURSE_LIST, courseService.getAllCourses());
+			model.addAttribute(COMMAND, new PaperDTO());
+			return PAPER_ADD_PAPER;
 		}
-		catch (IOException e) {
-			System.out.println("File uploadr IOException:" + e.getMessage());
-			return "paper/addPaper";
+		try {
+			Paper paper = new Paper();
+			paper.setPaperCode(paperDTO.getPaperCode());
+			paper.setPaperTiming(paperDTO.getPaperTiming());
+			paper.setSubject(subjectService.getSubjectById(Integer.parseInt(paperDTO.getSubject())));
+			paper.setEnabled(false);
+			List<Question> questions = fileService.fileToList(file, paper);
+			if (questions == null || questions.isEmpty()) {
+				model.addAttribute(ERRMSG, "Thier is an error in reading File...");
+				return PAPER_ADD_PAPER;
+			}
+			paper.setQuestionList(questions);
+			paper = paperService.addPaper(paper);
+			if (paper == null) {
+				model.addAttribute(ERRMSG, "Thier is an error in adding paper...");
+				return PAPER_ADD_PAPER;
+			}
+			model.addAttribute("msg", "Paper Added successfully...");
+			model.addAttribute(COURSE_LIST, courseService.getAllCourses());
+			model.addAttribute(COMMAND, new PaperDTO());
+			return PAPER_ADD_PAPER;
+		} catch (ExcelFileException e) {
+			model.addAttribute(ERRMSG, e.getMessage());
+			return PAPER_ADD_PAPER;
+		} catch (IOException e) {
+			return PAPER_ADD_PAPER;
 		}
 	}
-	
-	@RequestMapping("/Admin/allPapers")
+
+	@GetMapping("/Admin/allPapers")
 	public String forAllPaperGet(Model model) {
-		List<Subject> allSub=subjectService.getAllSubject();
-		if(!allSub.isEmpty()) {
+		List<Subject> allSub = subjectService.getAllSubject();
+		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
 		}
 		return "paper/allPaper";
 	}
-	@RequestMapping("/Admin/allQuestion/{id}")
+
+	@GetMapping("/Admin/allQuestion/{id}")
 	public String forAllQuestionGet(@PathVariable int id, Model model) {
-		Paper paper=paperService.getPaperById(id);
-		if(paper!=null) {
+		Paper paper = paperService.getPaperById(id);
+		if (paper != null) {
 			List<Question> allQue = questionService.getAllQuestionOfPaper(paper);
 			model.addAttribute("list", allQue);
-		}else {
-			model.addAttribute("errmsg","Please select valid paper");
+		} else {
+			model.addAttribute(ERRMSG, "Please select valid paper");
 		}
 		return "paper/allQuestion";
 	}
-	
-	@RequestMapping("/Admin/questionEdit/{id}")
+
+	@GetMapping("/Admin/questionEdit/{id}")
 	public String forQuestionEdit(@PathVariable int id, Model model) {
-		Question question=questionService.getQuestionById(id);
-		if(question!=null) {
-			model.addAttribute("command", question);
-			return "paper/questionEdit";
-		}else {
-			model.addAttribute("errmsg","Please select valid question");
+		Question question = questionService.getQuestionById(id);
+		if (question != null) {
+			question.setOptionList(questionService.getAllOptions(question));
+			model.addAttribute(COMMAND, question);
+			return PAPER_QUESTION_EDIT;
+		} else {
+			model.addAttribute(ERRMSG, "Please select valid question");
 		}
 		return "paper/allQuestion";
 	}
+
 	@PostMapping("/Admin/questionEdit/{id}")
-	public String forQuestionEditPost(@PathVariable int id, Model model,@Valid @ModelAttribute("command") Question question, BindingResult result) {
+	public String forQuestionEditPost(@PathVariable int id, Model model,
+			@Valid @ModelAttribute(COMMAND) QuestionDTO questionDTO, BindingResult result) {
 		if (result.hasErrors()) {
-			return "paper/questionEdit";
+			return PAPER_QUESTION_EDIT;
 		}
-		question=questionService.editQuestion(question);
-		if(question==null) {
-			model.addAttribute("errmsg", "Thier is an error in edittig question...");
-			return "paper/questionEdit";
+		Question question = new Question();
+		question.setQueId(questionDTO.getQueId());
+		question.setFullQuestion(questionDTO.getFullQuestion());
+		question.setDescription(questionDTO.getDescription());
+		question.setCorrectOption(questionDTO.getCorrectOption());
+		question.setPaper(questionDTO.getPaper());
+		question = questionService.editQuestion(question);
+		if (question == null) {
+			model.addAttribute(ERRMSG, "Thier is an error in edittig question...");
+			return PAPER_QUESTION_EDIT;
 		}
 		model.addAttribute("msg", "Subject Added successfully...");
-		model.addAttribute("command", question);
-		return "paper/questionEdit";
+		model.addAttribute(COMMAND, question);
+		return PAPER_QUESTION_EDIT;
 	}
 }

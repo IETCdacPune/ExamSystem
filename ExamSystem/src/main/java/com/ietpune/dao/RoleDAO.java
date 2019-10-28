@@ -9,5 +9,5 @@ import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 @Repository
 public interface RoleDAO extends JpaRepository<Role, Integer> {
-	Optional<Role> findByRole(RoleName roleName);
+	Optional<Role> findByRoleName(RoleName roleName);
 }

@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
@@ -13,7 +13,6 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br>
 		<c:if test="${not empty msg}">
 		<div class="alert alert-success alert-dismissible">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -33,6 +32,7 @@
 			<div class="card-body">
 				<form:form method="post">
 				<form:hidden path="id"/>
+				<form:hidden path="course"/>
 					<div class="form-group row">
 						<form:label path="name" class="col-sm-2 col-form-label">Subject Name</form:label>
 						<div class="col-sm-10">

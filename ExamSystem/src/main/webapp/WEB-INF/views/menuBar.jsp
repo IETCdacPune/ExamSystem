@@ -56,12 +56,30 @@
 								href="${pageContext.request.contextPath}/Admin"
 								onclick="return confirm('Are you sure?')">Remove Subject</a>
 						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Course </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Admin/addCourse">Add
+								Course</a> <a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Admin/listOfCourses">Show
+								All Course</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Admin"
+								onclick="return confirm('Are you sure?')">Remove Course</a>
+						</div></li>
 				</ul>
 			</sec:authorize>
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/STUDENT">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Online Exam</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Result</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Online Exam</a></li>
 				</ul>
 			</sec:authorize>
 			<ul class="navbar-nav ml-auto">

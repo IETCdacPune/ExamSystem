@@ -1,80 +1,52 @@
-package com.ietpune.model;
+package com.ietpune.model.dto;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import com.ietpune.model.Option;
+import com.ietpune.model.Paper;
 
-@Entity
-public class Question {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class QuestionDTO {
 	private int queId;
-	@Column(length = 1000)
 	private String fullQuestion;
-	@Column(length = 1000)
 	private String description;
 	private char correctOption;
-
-	@ManyToOne
-	@JoinColumn
 	private Paper paper;
-
-	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
 	private List<Option> optionList;
-
 	public int getQueId() {
 		return queId;
 	}
-
 	public void setQueId(int queId) {
 		this.queId = queId;
 	}
-
 	public String getFullQuestion() {
 		return fullQuestion;
 	}
-
 	public void setFullQuestion(String fullQuestion) {
 		this.fullQuestion = fullQuestion;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 	public char getCorrectOption() {
 		return correctOption;
 	}
-
 	public void setCorrectOption(char correctOption) {
 		this.correctOption = correctOption;
 	}
-
 	public Paper getPaper() {
 		return paper;
 	}
-
 	public void setPaper(Paper paper) {
 		this.paper = paper;
 	}
-
 	public List<Option> getOptionList() {
 		return optionList;
 	}
-
 	public void setOptionList(List<Option> optionList) {
 		this.optionList = optionList;
-	}	
+	}
+	
 }

@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
@@ -27,19 +27,19 @@
 		</c:if>
 		<div class="card text-center">
 			<div class="card-header bg-primary">
-				<h3>Add Subject</h3>
+				<h3>Add Course Name</h3>
 			</div>
 			<div class="card-body">
 				<form:form method="post">
 					<div class="form-group row">
-						<form:label path="name" class="col-sm-2 col-form-label">Subject Name</form:label>
+						<form:label path="name" class="col-sm-2 col-form-label">Course Name</form:label>
 						<div class="col-sm-10">
 							<form:input type="text" class="form-control" path="name"
-								placeholder="Enter subject name" />
+								placeholder="Enter course name" />
 							<form:errors path="name" cssClass="text-danger"></form:errors>
 						</div>
 					</div>
-					<form:button type="submit" class="btn btn-primary">Add Subject</form:button>
+					<form:button type="submit" class="btn btn-primary">Add Course Name</form:button>
 					<form:button type="reset" class="btn btn-danger">Reset form</form:button>
 				</form:form>
 			</div>

@@ -4,37 +4,33 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"name" })})
 public class Subject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@NotNull
-	@Size(min=2,max=30,message = "subject lenght must in between 2 to 30 char...")
 	private String name;
-	
-	@ManyToOne()
+
+	@ManyToOne
 	@JoinColumn
+	@JsonIgnore
 	private Course course;
 
-	@OneToMany(mappedBy = "subject",cascade = {CascadeType.MERGE,
-            CascadeType.REFRESH})
+	@OneToMany(mappedBy = "subject", cascade = { CascadeType.MERGE, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	private List<Paper> paperList;
-	
+
 	public Subject() {
 		super();
 	}
@@ -85,5 +81,5 @@ public class Subject {
 	public String toString() {
 		return "Subject [id=" + id + ", name=" + name + "]";
 	}
-	
+
 }
