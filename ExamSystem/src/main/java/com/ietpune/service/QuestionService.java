@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ietpune.dao.OptionDAO;
 import com.ietpune.dao.QuestionDAO;
 import com.ietpune.dao.SecurityQuestionDAO;
-import com.ietpune.model.Option;
+import com.ietpune.model.Options;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
 import com.ietpune.model.SecurityQuestion;
@@ -37,7 +37,7 @@ public class QuestionService {
 		return questionDAO.save(question);
 	}
 
-	public List<Option> getAllOptions(Question question) {
+	public List<Options> getAllOptions(Question question) {
 		return optionDAO.findByQuestion(question);
 	}
 	public List<SecurityQuestion> getAllSecurityQuestion(){

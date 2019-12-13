@@ -6,9 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Option {
+@Table
+public class Options {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int optionId;
@@ -16,14 +18,14 @@ public class Option {
 	private String answer;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "queId")
 	private Question question;
 	
-	public Option() {
+	public Options() {
 		super();
 	}
 
-	public Option(int optionId, char option, String answer, Question question) {
+	public Options(int optionId, char option, String answer, Question question) {
 		super();
 		this.optionId = optionId;
 		this.opt = option;

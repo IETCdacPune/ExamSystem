@@ -2,7 +2,7 @@ package com.ietpune.model.dto;
 
 import java.util.List;
 
-import com.ietpune.model.Option;
+import com.ietpune.model.Options;
 import com.ietpune.model.Paper;
 
 public class QuestionDTO {
@@ -11,7 +11,7 @@ public class QuestionDTO {
 	private String description;
 	private char correctOption;
 	private Paper paper;
-	private List<Option> optionList;
+	private List<Options> optionList;
 	public int getQueId() {
 		return queId;
 	}
@@ -42,10 +42,10 @@ public class QuestionDTO {
 	public void setPaper(Paper paper) {
 		this.paper = paper;
 	}
-	public List<Option> getOptionList() {
+	public List<Options> getOptionList() {
 		return optionList;
 	}
-	public void setOptionList(List<Option> optionList) {
+	public void setOptionList(List<Options> optionList) {
 		this.optionList = optionList;
 	}
 	

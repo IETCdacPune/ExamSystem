@@ -1,5 +1,6 @@
 package com.ietpune.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,8 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.ietpune.model.Options;;
 
 @Entity
+@Table
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +29,11 @@ public class Question {
 	private char correctOption;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "paperId")
 	private Paper paper;
 
 	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
-	private List<Option> optionList;
+	private List<Options> optionList=new ArrayList<>();
 
 	public int getQueId() {
 		return queId;
@@ -70,11 +75,11 @@ public class Question {
 		this.paper = paper;
 	}
 
-	public List<Option> getOptionList() {
+	public List<Options> getOptionList() {
 		return optionList;
 	}
 
-	public void setOptionList(List<Option> optionList) {
+	public void setOptionList(List<Options> optionList) {
 		this.optionList = optionList;
 	}	
 }

@@ -1,10 +1,13 @@
 package com.ietpune.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -64,7 +67,7 @@ public class UnauthenticatedController {
 	}
 
 	@PostMapping("/signup")
-	public String forSingupPost(Model model, @Valid @ModelAttribute("command") StudentDTO studentDTO, BindingResult result) {
+	public String forSingupPost(Model model, @Valid @ModelAttribute("command") StudentDTO studentDTO, BindingResult result,HttpSession hs,HttpServletRequest request) {
 		if (result.hasErrors()) {
 			return SIGNUP;
 		}
@@ -94,6 +97,11 @@ public class UnauthenticatedController {
 		}
 		model.addAttribute("msg", "You are register successfully...");
 		model.addAttribute("command", new StudentDTO());
+	
+	request.getSession().setAttribute("course", student.getCourse().getCourseId());
+	@SuppressWarnings("unchecked")
+	String coursesession=(String)request.getSession().getAttribute("course");
+		
 		return SIGNUP;
 
 	}

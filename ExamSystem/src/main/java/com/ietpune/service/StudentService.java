@@ -15,6 +15,7 @@ import com.ietpune.dao.StudentDAO;
 import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 import com.ietpune.model.Student;
+import com.ietpune.model.Subject;
 @Service
 public class StudentService{
 @Autowired private StudentDAO studentDAO;
@@ -36,5 +37,11 @@ public class StudentService{
 		Optional<Student> opt = studentDAO.findByPrn(prn);
 		return opt.isPresent();
 	}
+
+	/*
+	 * public List<Subject> getAllSubjectByCourse(String coursesession) { // TODO
+	 * Auto-generated method stub return studentDAO.findByName(coursesession) ; }
+	 */
+
 
 }
