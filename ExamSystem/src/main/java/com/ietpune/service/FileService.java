@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ietpune.exception.ExcelFileException;
-import com.ietpune.model.Option;
+import com.ietpune.model.Options;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
 
@@ -73,9 +73,9 @@ public class FileService {
 		} else {
 			question.setDescription("None.");
 		}
-		List<Option> options = new ArrayList<>();
+		List<Options> options = new ArrayList<>();
 		for (int i = 3; row.getCell(i) != null; i++) {
-			Option option = createOption(row, question, i);
+			Options option = createOption(row, question, i);
 			options.add(option);
 		}
 		question.setOptionList(options);
@@ -83,8 +83,8 @@ public class FileService {
 		return question;
 	}
 
-	private Option createOption(Row row, Question question, int i) {
-		Option option = new Option();
+	private Options createOption(Row row, Question question, int i) {
+		Options option = new Options();
 		if (row.getCell(i).getCellType() != Cell.CELL_TYPE_STRING)
 			row.getCell(i).setCellType(Cell.CELL_TYPE_STRING);
 		option.setAnswer(row.getCell(i).getStringCellValue());

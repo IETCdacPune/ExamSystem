@@ -73,13 +73,43 @@
 						</div></li>
 				</ul>
 			</sec:authorize>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/STUDENT">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Online Exam</a></li>
+					
 					<li class="nav-item"><a class="nav-link" href="#">Result</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Online Exam</a></li>
+					
+					
+					
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Exam </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							 <a class="dropdown-item"
+								href="${pageContext.request.contextPath}/student/allPapers">Show
+								All Papers</a>
+						
+						</div></li>
 				</ul>
 			</sec:authorize>
 			<ul class="navbar-nav ml-auto">
