@@ -38,7 +38,11 @@ public class SubjectService {
 		
 		return subjectDAO.findByCourse(course);
 	}
-
+	public List<Subject> getAllSubjectByCourse(int courseId) {
+		// TODO Auto-generated method stub
+		System.out.println("courseid............."+courseId);
+		return subjectDAO.findByCourse(courseId);
+	}
 
 
 }

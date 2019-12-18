@@ -23,6 +23,7 @@ public class StudentController {
 	private SubjectService subjectService;
 	@GetMapping("")
 	public String forStudentDashboardGet(){
+		
 		return "student/studentDashboard";
 	}
 	
@@ -32,10 +33,13 @@ public class StudentController {
 	@GetMapping("student/allPapers")
 	public String forAllPaperGet(Model model,HttpServletRequest request,HttpSession hs) {
 		List<Subject> allSub=subjectService.getAllSubject();
+		
 		String coursesession=(String)request.getSession().getAttribute("course");
-		//List<Subject> allSub = studentService.getAllSubjectByCourse(coursesession);
-		//System.out.println("student hhhhhhhhhhhh course..............."+allSub);
-		System.out.println("in my...............");
+	//int courseId=	Integer.parseInt(coursesession);
+	System.out.println("..............."+coursesession);
+		//List<Subject> allSub =subjectService.getAllSubjectByCourse(courseId);
+		
+		
 		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
 		}

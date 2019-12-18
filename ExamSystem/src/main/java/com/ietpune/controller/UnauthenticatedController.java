@@ -55,6 +55,8 @@ public class UnauthenticatedController {
 		if (logout != null) {
 			errorMessge = "You have been successfully logged out !!";
 		}
+		
+		
 		model.addAttribute("errorMessge", errorMessge);
 		return "signin";
 	}
@@ -98,10 +100,10 @@ public class UnauthenticatedController {
 		model.addAttribute("msg", "You are register successfully...");
 		model.addAttribute("command", new StudentDTO());
 	
-	request.getSession().setAttribute("course", student.getCourse().getCourseId());
+	request.getSession().setAttribute("course", student.getCourse());
 	@SuppressWarnings("unchecked")
-	String coursesession=(String)request.getSession().getAttribute("course");
-		
+	List<String> coursesession=(List<String>)request.getSession().getAttribute("course");
+		System.out.println("........................"+coursesession);
 		return SIGNUP;
 
 	}
