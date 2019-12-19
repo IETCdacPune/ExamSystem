@@ -38,15 +38,17 @@ public class StudentService{
 		return opt.isPresent();
 	}
 
+	public List<Subject> getAllSubjectList(String prn) {
+		// TODO Auto-generated method stub
+		return studentDAO.findSubjectByPrn(prn);
+	}
+
 	
 
 
 
 
-	/*
-	 * public List<Subject> getAllSubjectByCourse(String coursesession) { // TODO
-	 * Auto-generated method stub return studentDAO.findByName(coursesession) ; }
-	 */
+
 
 
 }

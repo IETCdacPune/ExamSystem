@@ -5,7 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +23,10 @@ import com.ietpune.service.SubjectService;
 
 public class StudentController {
 	@Autowired
-	private SubjectService subjectService;
+	private StudentService studentService;
+	
+	private static final Logger log = LoggerFactory.getLogger(StudentController.class);
+
 	@GetMapping("")
 	public String forStudentDashboardGet(){
 		
@@ -31,14 +37,12 @@ public class StudentController {
 
 
 	@GetMapping("student/allPapers")
-	public String forAllPaperGet(Model model,HttpServletRequest request,HttpSession hs) {
-		List<Subject> allSub=subjectService.getAllSubject();
-		
-		String coursesession=(String)request.getSession().getAttribute("course");
-	//int courseId=	Integer.parseInt(coursesession);
-	System.out.println("..............."+coursesession);
-		//List<Subject> allSub =subjectService.getAllSubjectByCourse(courseId);
-		
+	public String forAllPaperGet(Model model,Authentication authentication){
+		//List<Subject> allSub=subjectService.getAllSubject();
+		String prn=authentication.getName();
+		List<Subject> allSub=studentService.getAllSubjectList(prn);
+	
+	log.debug("list.............."+allSub);
 		
 		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);

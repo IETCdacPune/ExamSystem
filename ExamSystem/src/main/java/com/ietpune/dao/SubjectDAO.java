@@ -13,5 +13,4 @@ public interface SubjectDAO extends JpaRepository<Subject, Integer> {
 	List<Subject> findByCourse(Course course);
 	Optional<Subject> findByNameAndCourse(String name, Course course);
 	
-List<Subject> findByCourse(int courseId);
 }
