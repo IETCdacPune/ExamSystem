@@ -33,22 +33,33 @@ public class StudentController {
 		return "student/studentDashboard";
 	}
 	
-	
-
-
-	@GetMapping("student/allPapers")
-	public String forAllPaperGet(Model model,Authentication authentication){
+@GetMapping("student/newPapers")
+	public String forNewPaperGet(Model model,Authentication authentication){
 		//List<Subject> allSub=subjectService.getAllSubject();
 		String prn=authentication.getName();
 		List<Subject> allSub=studentService.getAllSubjectList(prn);
 	
-	log.debug("list.............."+allSub);
-		
+		log.debug("list.............."+allSub);
 		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
 		}
 		return "student/allPaper";
 	}
+
+
+@GetMapping("student/oldPapers")
+public String forOldPaperGet(Model model,Authentication authentication){
+	//List<Subject> allSub=subjectService.getAllSubject();
+	String prn=authentication.getName();
+	List<Subject> allSub=studentService.getAllSubjectList(prn);
+
+	log.debug("list.............."+allSub);
+	if (!allSub.isEmpty()) {
+		model.addAttribute("list", allSub);
+	}
+	return "student/allPaper";
+}
+
 @GetMapping("/student/startExam")
 public String forStartExam(@ModelAttribute("command")Paper p)
 {

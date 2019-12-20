@@ -1,8 +1,11 @@
 package com.ietpune.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,6 +27,8 @@ public class Student extends User {
 	@JoinColumn
 	private SecurityQuestion securityQeustion;
 	private String securityAnswer;
+	@OneToMany
+	private List<Student_Paper> student_Paperslist; 
 
 	public Student() {
 		super();
@@ -90,6 +95,21 @@ public class Student extends User {
 
 	public void setSecurityAnswer(String securityAnswer) {
 		this.securityAnswer = securityAnswer;
+	}
+
+	public List<Student_Paper> getStudent_Paperslist() {
+		return student_Paperslist;
+	}
+
+	public void setStudent_Paperslist(List<Student_Paper> student_Paperslist) {
+		this.student_Paperslist = student_Paperslist;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId + ", course="
+				+ course + ", securityQeustion=" + securityQeustion + ", securityAnswer=" + securityAnswer
+				+ ", student_Paperslist=" + student_Paperslist + "]";
 	}
 
 }

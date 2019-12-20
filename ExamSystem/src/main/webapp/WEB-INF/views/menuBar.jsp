@@ -106,8 +106,11 @@
 						aria-expanded="false"> Exam </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							 <a class="dropdown-item"
-								href="${pageContext.request.contextPath}/student/allPapers">Show
-								All Papers</a>
+								href="${pageContext.request.contextPath}/student/newPapers">Show
+								new Papers</a>
+								<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/student/oldPapers">Show
+								old Papers</a>
 						
 						</div></li>
 				</ul>
