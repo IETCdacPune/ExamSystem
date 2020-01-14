@@ -30,7 +30,8 @@ public class ExamSystemApplication implements CommandLineRunner {
 	private UserDAO userDAO;
 	@Autowired
 	private BCryptPasswordEncoder passwordEcoder;
-	@Autowired SecurityQuestionDAO securityQuestionDAO;
+	@Autowired
+	SecurityQuestionDAO securityQuestionDAO;
 	@Value("${admin.username}")
 	private String adminName;
 	@Value("${admin.password}")
@@ -50,13 +51,13 @@ public class ExamSystemApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		if(!roleDAO.findByRoleName(RoleName.ADMIN).isPresent()) {
+		if (!roleDAO.findByRoleName(RoleName.ADMIN).isPresent()) {
 			roleDAO.save(new Role(RoleName.ADMIN));
 		}
-		if(!roleDAO.findByRoleName(RoleName.STUDENT).isPresent()) {
+		if (!roleDAO.findByRoleName(RoleName.STUDENT).isPresent()) {
 			roleDAO.save(new Role(RoleName.STUDENT));
 		}
-		if(!userDAO.findByPrn(adminName).isPresent()) {
+		if (!userDAO.findByPrn(adminName).isPresent()) {
 			List<Role> roles = new LinkedList<>();
 			Optional<Role> optRole = roleDAO.findByRoleName(RoleName.ADMIN);
 			if (optRole.isPresent()) {
@@ -64,10 +65,12 @@ public class ExamSystemApplication implements CommandLineRunner {
 			}
 			userDAO.save(new User(adminName, passwordEcoder.encode(adminPass), roles));
 		}
-		securityQuestionDAO.save(new SecurityQuestion("What is your nick name?"));
-		securityQuestionDAO.save(new SecurityQuestion("Where you mate your Lover?"));
-		securityQuestionDAO.save(new SecurityQuestion("What is your childhood favorite movie?"));
-		securityQuestionDAO.save(new SecurityQuestion("What was your favorite sport in high school?"));
+		if (securityQuestionDAO.findAll().isEmpty()) {
+			securityQuestionDAO.save(new SecurityQuestion("What is your nick name?"));
+			securityQuestionDAO.save(new SecurityQuestion("Where you mate your Lover?")); 
+			securityQuestionDAO.save(new SecurityQuestion("What is your childhood favorite movie?")); 
+			securityQuestionDAO.save(new SecurityQuestion("What was your favorite sport in high school?"));
+		}
 	}
 
 }
