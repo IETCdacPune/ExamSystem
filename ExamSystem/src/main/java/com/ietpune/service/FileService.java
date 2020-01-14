@@ -66,7 +66,7 @@ public class FileService {
 		} else {
 			throw new ExcelFileException("Question Correct Option not be empty.");
 		}
-		if (row.getCell(0) != null) {
+		if (row.getCell(2) != null) {
 			if (row.getCell(2).getCellType() == Cell.CELL_TYPE_STRING) {
 				question.setDescription(row.getCell(2).getStringCellValue());
 			}
