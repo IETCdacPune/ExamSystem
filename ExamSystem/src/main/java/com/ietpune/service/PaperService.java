@@ -31,4 +31,9 @@ public class PaperService {
 		return null;
 	}
 
+	public Paper getPaper(Integer id) {
+		return paperDAO.findById(id).get();// optional return but we want paper so 
+		
+	}
+
 }

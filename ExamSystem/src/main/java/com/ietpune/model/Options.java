@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Options {
@@ -16,7 +18,7 @@ public class Options {
 	private int optionId;
 	private char opt;
 	private String answer;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "queId")
 	private Question question;

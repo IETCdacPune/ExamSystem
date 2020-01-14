@@ -19,7 +19,6 @@ import com.ietpune.dao.SecurityQuestionDAO;
 import com.ietpune.dao.UserDAO;
 import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
-import com.ietpune.model.SecurityQuestion;
 import com.ietpune.model.User;
 
 @SpringBootApplication
@@ -64,10 +63,14 @@ public class ExamSystemApplication implements CommandLineRunner {
 			}
 			userDAO.save(new User(adminName, passwordEcoder.encode(adminPass), roles));
 		}
-		securityQuestionDAO.save(new SecurityQuestion("What is your nick name?"));
-		securityQuestionDAO.save(new SecurityQuestion("Where you mate your Lover?"));
-		securityQuestionDAO.save(new SecurityQuestion("What is your childhood favorite movie?"));
-		securityQuestionDAO.save(new SecurityQuestion("What was your favorite sport in high school?"));
+		/*
+		 * securityQuestionDAO.save(new SecurityQuestion("What is your nick name?"));
+		 * securityQuestionDAO.save(new SecurityQuestion("Where you mate your Lover?"));
+		 * securityQuestionDAO.save(new
+		 * SecurityQuestion("What is your childhood favorite movie?"));
+		 * securityQuestionDAO.save(new
+		 * SecurityQuestion("What was your favorite sport in high school?"));
+		 */
 	}
 
 }

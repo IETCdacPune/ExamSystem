@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ietpune.model.Paper;
 import com.ietpune.model.Subject;
@@ -20,6 +21,8 @@ import com.ietpune.service.StudentService;
 import com.ietpune.service.SubjectService;
 
 @Controller
+
+
 
 public class StudentController {
 	@Autowired

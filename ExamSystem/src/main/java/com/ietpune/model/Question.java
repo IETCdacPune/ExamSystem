@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ietpune.model.Options;;
 
 @Entity
@@ -27,7 +28,7 @@ public class Question {
 	@Column(length = 1000)
 	private String description;
 	private char correctOption;
-
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "paperId")
 	private Paper paper;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ietpune.exception.ExcelFileException;
@@ -46,7 +47,7 @@ public class PaperController {
 	@Autowired
 	private FileService fileService;
 
-	@GetMapping("Admin/addPaper")
+	@GetMapping(value = "Admin/addPaper" )
 	public String forAddPaperGet(Model model) {
 		model.addAttribute(COURSE_LIST, courseService.getAllCourses());
 		model.addAttribute(COMMAND, new PaperDTO());
