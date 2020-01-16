@@ -36,6 +36,7 @@ public class StudentController {
 		return "student/studentDashboard";
 	}
 	
+	
 @GetMapping("student/newPapers")
 	public String forNewPaperGet(Model model,Authentication authentication){
 		//List<Subject> allSub=subjectService.getAllSubject();

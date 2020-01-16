@@ -43,6 +43,11 @@ public class StudentService{
 		return studentDAO.findSubjectByPrn(prn);
 	}
 
+	public List<Student> getAllStudentList() {
+		// TODO Auto-generated method stub
+		return studentDAO.findAll();
+	}
+
 	
 
 
