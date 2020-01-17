@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ietpune.exception.ExcelFileException;
+import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
 import com.ietpune.model.Subject;
@@ -46,7 +48,7 @@ public class PaperController {
 	private PaperService paperService;
 	@Autowired
 	private FileService fileService;
-
+	private Logger log=Logger.getLogger(PaperController.class);
 	@GetMapping(value = "Admin/addPaper" )
 	public String forAddPaperGet(Model model) {
 		model.addAttribute(COURSE_LIST, courseService.getAllCourses());
@@ -57,12 +59,34 @@ public class PaperController {
 	@PostMapping("Admin/addPaper")
 	public String forAddPaperPost(Model model, @ModelAttribute(COMMAND) PaperDTO paperDTO,
 			@RequestParam("file") MultipartFile file, BindingResult result) {
+		
+	
+	
+	boolean paperCode=paperService.forExsits(paperDTO.getPaperCode());
+		
+
+		
 		if (result.hasErrors()) {
 			model.addAttribute(COURSE_LIST, courseService.getAllCourses());
 			model.addAttribute(COMMAND, new PaperDTO());
 			return PAPER_ADD_PAPER;
 		}
+		
+		
 		try {
+			
+			if(paperCode)
+			{
+				
+				model.addAttribute(ERRMSG, "This paper code is already present");
+				model.addAttribute(COURSE_LIST, courseService.getAllCourses());
+				model.addAttribute(COMMAND, new PaperDTO());
+				return PAPER_ADD_PAPER;
+				
+			}
+			else
+			{
+			
 			Paper paper = new Paper();
 			paper.setPaperCode(paperDTO.getPaperCode());
 			paper.setPaperTiming(paperDTO.getPaperTiming());
@@ -79,9 +103,11 @@ public class PaperController {
 				model.addAttribute(ERRMSG, "Thier is an error in adding paper...");
 				return PAPER_ADD_PAPER;
 			}
+			
 			model.addAttribute("msg", "Paper Added successfully...");
 			model.addAttribute(COURSE_LIST, courseService.getAllCourses());
 			model.addAttribute(COMMAND, new PaperDTO());
+			}
 			return PAPER_ADD_PAPER;
 		} catch (ExcelFileException e) {
 			model.addAttribute(ERRMSG, e.getMessage());
@@ -89,13 +115,21 @@ public class PaperController {
 		} catch (IOException e) {
 			return PAPER_ADD_PAPER;
 		}
+		
 	}
 
 	@GetMapping("/Admin/allPapers")
 	public String forAllPaperGet(Model model) {
-		List<Subject> allSub = subjectService.getAllSubject();
-		if (!allSub.isEmpty()) {
-			model.addAttribute("list", allSub);
+		List<Course> allCourse=courseService.getAllCourses();
+		allCourse.forEach(
+				(course)->{
+					course.setSubjectList(subjectService.getAllSubjectByCourse(course));});
+		
+		//System.out.println("list............"+allCourse+"subject"+allCourse.get(0).getSubjectList());
+		
+		//log.info("....................."+allCourse);
+		if (!allCourse.isEmpty()) {
+			model.addAttribute("courseList",allCourse);
 		}
 		return "paper/allPaper";
 	}

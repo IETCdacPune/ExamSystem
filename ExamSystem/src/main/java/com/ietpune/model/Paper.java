@@ -23,6 +23,8 @@ public class Paper {
 	private int paperCode;
 	private String paperTiming;
 	private boolean enabled;
+	
+	
 	@ManyToOne
 	@JoinColumn
 	private Subject subject;

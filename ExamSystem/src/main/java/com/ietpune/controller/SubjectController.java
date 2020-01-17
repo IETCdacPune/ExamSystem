@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class SubjectController {
 	SubjectService subjectService;
 	@Autowired
 	CourseService courseService;
-
+private Logger log =Logger.getLogger(SubjectController.class);
 	@GetMapping("/addSubject")
 	public String forAddSubjectGet(Model model) {
 		model.addAttribute("courseList", courseService.getAllCourses());
@@ -60,7 +61,13 @@ public class SubjectController {
 				.isPresent()) {
 			Subject subject = new Subject();
 			subject.setName(subjectDTO.getName().toUpperCase());
+			
+			
+			
+			
 			subject.setCourse(subjectDTO.getCourse());
+			log.info("nnnnnnnnnn......................"+subject.getCourse());
+			//System.out.println("courese..........."+subject.getCourse());
 			subject = subjectService.addSubject(subject);
 			if (subject == null) {
 				model.addAttribute(ERRMSG, "Thier is an error in adding subject...");

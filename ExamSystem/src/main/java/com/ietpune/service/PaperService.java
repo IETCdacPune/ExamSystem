@@ -36,4 +36,10 @@ public class PaperService {
 		
 	}
 
+	public boolean forExsits(int paperCode) {
+		// TODO Auto-generated method stub
+		
+		return paperDAO.existsBypaperCode(paperCode);
+	}
+
 }
