@@ -12,4 +12,6 @@ public interface PaperDAO extends JpaRepository<Paper, Integer> {
 	List<Paper> findBySubject(Subject sub);
 
 	boolean existsBypaperCode(int paperCode);
+
+	
 }

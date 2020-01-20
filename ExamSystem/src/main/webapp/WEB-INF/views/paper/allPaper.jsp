@@ -99,76 +99,8 @@
 				</div>
 			</c:forEach>
 		</c:if>
-		<%-- <c:if test="${not empty list}">
-				<c:forEach items="${list}" var="subject" varStatus="loop">
-					<div class="card mt-2">
-						<div class="card-header">
-							<a class="card-link" data-toggle="collapse" href="#collapse${loop.index +1 }">Subject:-${subject.name} have ${fn:length(subject.paperList)} papers.
-							</a>
-						</div>
-						<div id="collapse${loop.index +1}" class="collapse">
-							<div class="card-body">
-								<c:if test="${not empty subject.paperList}">
-								<div class="row">
-								<c:forEach items="${subject.paperList}" var="paper" varStatus="loop">						
-								<div class="col-md-4 mt-1">
-									<div class="card bg-info">
-										<div class="card-body">
-											<h5 class="card-title">${loop.index +1 })
-												Paper Code:- ${paper.paperCode}<br>Subject:-${subject.name}
-											</h5>
-											<h6 class="card-subtitle mb-2">Paper
-												Timing:-${paper.paperTiming}</h6>
-											<p>
-												Status:-
-												<c:if test="${paper.enabled}">Enabled</c:if>
-												<c:if test="${!paper.enabled}">disabled</c:if>
-											</p>
-											<a
-												href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}"
-												class="text-white">List All Questions</a>
-										</div>
-									</div>
-								</div>
-								</c:forEach>
-								</div>
-								</c:if>
-								<c:if test="${empty subject.paperList}">
-									<div class="jumbotron text-center">
-										<h2>
-											There is not single paper entry in ${subject.name} subject.<br> <a
-												class="btn btn-primary"
-												href="${pageContext.request.contextPath}/Admin/addPaper">Add
-												Paper</a>
-										</h2>
-									</div>
-								</c:if>
-							</div>
-						</div>
-					</div>
-
-				</c:forEach>
-		</c:if>
- --%>
-		<%--<div class="card mt-2">
-						<div class="card-header">
-							<a class="card-link" data-toggle="collapse" href="#collapse${loop.index +1 }">${course.name}   ${fn:length(course.subjectList)} papers.
-							</a>
-							<c:if test="${not empty course.subjectList}">
-				<c:forEach items="${course.subjectList}" var="subject" varStatus="loop">
-					<div id="collapse${loop.index +1}" class="collapse">
-							<div class="card-body">
-							<a class="card-link" data-toggle="collapse" href="#collapse${loop.index +1 }">Subject:-${subject.name} have ${fn:length(subject.paperList)} papers.
-							</a>
-						</div>
-						</div>
-						</c:forEach>
-						</c:if>
-						
-							
-							
-						</div>
-						</div> --%>
+		
+		
 	</div>
 	<jsp:include page="../footerLink.jsp" />
 </body>

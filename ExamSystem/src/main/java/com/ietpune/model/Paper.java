@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 @Entity
 @Table
 public class Paper {
@@ -24,6 +26,7 @@ public class Paper {
 	private String paperTiming;
 	private boolean enabled;
 	
+	private boolean newPaper=true;
 	
 	@ManyToOne
 	@JoinColumn
@@ -37,17 +40,31 @@ public class Paper {
 	public Paper() {
 		super();
 	}
-	public Paper(int paperId, int paperCode, String paperTiming, boolean enabled, Subject subject,
-			List<Question> questionList, List<Student_Paper> student_Papers) {
+	public Paper(int paperId, int paperCode, String paperTiming, boolean enabled, boolean newPaper, Subject subject,
+			List<Question> questionList, List<Student_Paper> paper_studentlist) {
 		super();
 		this.paperId = paperId;
 		this.paperCode = paperCode;
 		this.paperTiming = paperTiming;
 		this.enabled = enabled;
+		this.newPaper = newPaper;
 		this.subject = subject;
 		this.questionList = questionList;
-		this.paper_studentlist = student_Papers;
+		this.paper_studentlist = paper_studentlist;
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public int getPaperId() {
 		return paperId;
 	}
@@ -72,6 +89,12 @@ public class Paper {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	public boolean isNewPaper() {
+		return newPaper;
+	}
+	public void setNewPaper(boolean newPaper) {
+		this.newPaper = newPaper;
+	}
 	public Subject getSubject() {
 		return subject;
 	}
@@ -93,10 +116,9 @@ public class Paper {
 	@Override
 	public String toString() {
 		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", paperTiming=" + paperTiming + ", enabled="
-				+ enabled + ", subject=" + subject + ", questionList=" + questionList + ", paper_studentlist="
-				+ paper_studentlist + "]";
+				+ enabled + ", newPaper=" + newPaper + ", subject=" + subject + "]";
 	}
 	
-
+	
 	
 }

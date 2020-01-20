@@ -4,7 +4,3 @@
 <link rel="stylesheet" href="/webjars/font-awesome/5.1.0/css/all.css"></link>
 <script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.searchable-1.0.0.min.js"></script>
-<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.searchable-1.1.0.min.js"></script>
-<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.searchable-ie-1.1.0.min.js"></script>
-<script src="/webjars/jquery/3.3.1/jquery.searchable.js"></script>

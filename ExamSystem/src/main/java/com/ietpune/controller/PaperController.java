@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -124,10 +125,7 @@ public class PaperController {
 		allCourse.forEach(
 				(course)->{
 					course.setSubjectList(subjectService.getAllSubjectByCourse(course));});
-		
-		//System.out.println("list............"+allCourse+"subject"+allCourse.get(0).getSubjectList());
-		
-		//log.info("....................."+allCourse);
+
 		if (!allCourse.isEmpty()) {
 			model.addAttribute("courseList",allCourse);
 		}
@@ -137,11 +135,15 @@ public class PaperController {
 	@GetMapping("/Admin/allQuestion/{id}")
 	public String forAllQuestionGet(@PathVariable int id, Model model) {
 		Paper paper = paperService.getPaperById(id);
+		
 		if (paper != null) {
 			List<Question> allQue = questionService.getAllQuestionOfPaper(paper);
+			model.addAttribute("paperId",id);
+			model.addAttribute("enableStatus",paper.isEnabled());
 			model.addAttribute("list", allQue);
 		} else {
 			model.addAttribute(ERRMSG, "Please select valid paper");
+			
 		}
 		return "paper/allQuestion";
 	}
@@ -159,9 +161,18 @@ public class PaperController {
 		return "paper/allQuestion";
 	}
 
-	@PostMapping("/Admin/questionEdit/{id}")
+	
+	
+	
+	
+	
+	@PostMapping(value = "/Admin/questionEdit/{id}")
 	public String forQuestionEditPost(@PathVariable int id, Model model,
 			@Valid @ModelAttribute(COMMAND) QuestionDTO questionDTO, BindingResult result) {
+		
+		
+		System.out.println(".............................");
+		
 		if (result.hasErrors()) {
 			return PAPER_QUESTION_EDIT;
 		}
@@ -180,4 +191,30 @@ public class PaperController {
 		model.addAttribute(COMMAND, question);
 		return PAPER_QUESTION_EDIT;
 	}
+	
+
+	@RequestMapping("Admin/Paper/enable/{paperId}")
+	public String forEnableStatusChange(@PathVariable("paperId")int paperId)
+	{
+		Paper paper=paperService.getPaper(paperId);
+		paper.setEnabled(true);
+		
+		paperService.addPaper(paper);
+		
+		
+		return "redirect:/Admin/allPapers";
+	}
+	
+	@RequestMapping("Admin/Paper/disable/{paperId}")
+	public String forDisableStatusChange(@PathVariable("paperId")int paperId)
+	{
+		Paper paper=paperService.getPaper(paperId);
+		paper.setEnabled(false);
+		paper.setNewPaper(false);
+		paperService.addPaper(paper);
+		
+		
+		return "redirect:/Admin/allPapers";
+	}
+	
 }

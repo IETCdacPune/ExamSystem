@@ -66,8 +66,7 @@ private Logger log =Logger.getLogger(SubjectController.class);
 			
 			
 			subject.setCourse(subjectDTO.getCourse());
-			log.info("nnnnnnnnnn......................"+subject.getCourse());
-			//System.out.println("courese..........."+subject.getCourse());
+			
 			subject = subjectService.addSubject(subject);
 			if (subject == null) {
 				model.addAttribute(ERRMSG, "Thier is an error in adding subject...");
