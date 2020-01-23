@@ -37,7 +37,7 @@ public class StudentController {
 		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
 		}
-		return "student/allPaper";
+		return "student/showPaper";
 	}
 
 	@GetMapping("student/oldPapers")
@@ -48,7 +48,7 @@ public class StudentController {
 		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
 		}
-		return "student/allPaper";
+		return "student/showPaper";
 	}
 
 }

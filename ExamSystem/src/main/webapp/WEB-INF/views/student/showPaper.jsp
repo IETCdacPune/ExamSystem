@@ -50,7 +50,7 @@
 												Timing:-${paper.paperTiming}</h6>
 											
 											<a
-												href="${pageContext.request.contextPath}/student/startExam/"
+												href="${pageContext.request.contextPath}/student/startExam/${paper.paperId}"
 												class="text-white">Start Exam</a>
 										</div>
 									</div>
