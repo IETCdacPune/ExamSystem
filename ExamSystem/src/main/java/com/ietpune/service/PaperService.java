@@ -15,7 +15,7 @@ public class PaperService {
 
 	@Autowired
 	private PaperDAO paperDAO;
-
+	@Autowired private QuestionService questionService; 
 	public Paper addPaper(Paper p) {
 		return paperDAO.save(p);
 	}
@@ -30,5 +30,30 @@ public class PaperService {
 			return optPaper.get();
 		return null;
 	}
+
+	public Paper getPaper(Integer id) {
+		return paperDAO.findById(id).get();// optional return but we want paper so 
+		
+	}
+
+	public boolean forExsits(int paperCode) {
+		// TODO Auto-generated method stub
+		
+		return paperDAO.existsBypaperCode(paperCode);
+	}
+
+	public Paper getPaperWithQuestions(int paperId) {
+		Optional<Paper> optPaper=paperDAO.findById(paperId);
+		if(optPaper.isPresent()) {
+			Paper p=optPaper.get();
+			p.setQuestionList(questionService.getAllQuestionOfPaper(p));
+			return p;
+		}
+		return null;
+	}
+
+	
+
+
 
 }

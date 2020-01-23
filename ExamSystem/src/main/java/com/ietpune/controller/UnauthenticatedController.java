@@ -104,7 +104,6 @@ public class UnauthenticatedController {
 		model.addAttribute("msg", "You are register successfully...");
 		model.addAttribute("command", new StudentDTO());
 	
-		request.getSession().setAttribute("course", student.getCourse());
 		return SIGNUP;
 
 	}

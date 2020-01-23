@@ -27,7 +27,7 @@ public class Subject {
 	@JoinColumn
 	@JsonIgnore
 	private Course course;
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "subject", cascade = { CascadeType.MERGE, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	private List<Paper> paperList;
 

@@ -37,13 +37,13 @@ $(document).ready(function() {
 		<c:if test="${not empty msg}">
 			<div class="alert alert-success alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>Success!</strong> ${msg }
+				<strong>Success!</strong> ${msg}
 			</div>
 		</c:if>
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>Error!</strong> ${errmsg }
+				<strong>Error!</strong> ${errmsg}
 			</div>
 		</c:if>
 		<c:if test="${not empty courseList }">

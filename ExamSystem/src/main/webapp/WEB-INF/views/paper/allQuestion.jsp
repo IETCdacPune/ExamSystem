@@ -5,20 +5,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	 alert("kkk");
+   /* $('#en').click(function() {
+       alert(",,,,,,,");
+        this.value = 'Changed';
+    }); */
+});
+</script>
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body>
 	<div class="container">
+	
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br>
+		<br> <br><div>
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<strong>Error!</strong> ${errmsg }
 			</div>
 		</c:if>
+		<div class="row"><div class="col-2"></div>
+		<div class="col-6">
+<a href="/Admin/Paper/addMoreQuestion/${paperId}" class="btn btn-block  btn-info">Add More Question</a></div>
+</div>
 		<c:if test="${not empty list}">
 			<c:forEach items="${list}" var="question" varStatus="loop">
 				<div class="col-12 mt-1">
@@ -35,6 +55,7 @@
 								</c:if>
 								<c:if test="${option.opt != question.correctOption}">
 									<div class="alert alert-secondary"><pre>${option.opt}. ${option.answer}</pre></div>
+
 								</c:if>
 							</c:forEach>
 							<button class="btn btn-light" data-toggle="collapse"
@@ -47,7 +68,21 @@
 				</div>
 			</c:forEach>
 		</c:if>
-	</div>
+
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<c:if test="${!enableStatus}">
+				<a href="/Admin/Paper/enable/${paperId}" class="btn btn-block   btn-primary">Enable</a>
+				</c:if>
+				<c:if test="${enableStatus}">
+				<a href="/Admin/Paper/disable/${paperId}" class="btn btn-block btn-danger">Disable</a>
+				</c:if>
+			</div>
+		</div>
+
+		</div>
+	
 	<jsp:include page="../footerLink.jsp" />
 </body>
 </html>

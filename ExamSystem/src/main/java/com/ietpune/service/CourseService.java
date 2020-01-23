@@ -42,7 +42,9 @@ public class CourseService {
 	}
 
 	public List<Course> getAllCourses() {
-		return courseDAO.findAll();
+		List<Course> list =courseDAO.findAll();
+		
+		return list;
 	}
 
 	public List<Course> getAllCoursesWithSubject() {

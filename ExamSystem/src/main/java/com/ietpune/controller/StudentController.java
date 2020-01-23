@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.ietpune.model.Paper;
 import com.ietpune.model.Subject;
 import com.ietpune.service.StudentService;
 
@@ -30,7 +31,7 @@ public class StudentController {
 	public String forNewPaperGet(Model model, Authentication authentication) {
 		// List<Subject> allSub=subjectService.getAllSubject();
 		String prn = authentication.getName();
-		List<Subject> allSub = studentService.getAllSubjectList(prn);
+		List<Paper> allSub = studentService.getAllSubjectList(prn);
 
 		log.debug("list.............." + allSub);
 		if (!allSub.isEmpty()) {
@@ -43,7 +44,7 @@ public class StudentController {
 	public String forOldPaperGet(Model model, Authentication authentication) {
 		// List<Subject> allSub=subjectService.getAllSubject();
 		String prn = authentication.getName();
-		List<Subject> allSub = studentService.getAllSubjectList(prn);
+		List<Paper> allSub = studentService.getAllSubjectList(prn);
 		if (!allSub.isEmpty()) {
 			model.addAttribute("list", allSub);
 		}
