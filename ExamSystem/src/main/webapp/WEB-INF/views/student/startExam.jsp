@@ -10,45 +10,46 @@
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
 </head>
-<body>
+<body >
 	<div class="container">
-		<jsp:include page="../menuBar.jsp" />
-		<c:if test="${not empty msg}">
-			<div class="alert alert-success alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>Success!</strong> ${msg }
-			</div>
-		</c:if>
-		<c:if test="${not empty errmsg}">
-			<div class="alert alert-danger alert-dismissible">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>Error!</strong> ${errmsg }
-			</div>
-		</c:if>
-		
-		
-
-			<div class="card text-center">
-				<div class="card-header bg-primary">
-					<h3>Paper</h3>
-				</div>
-				<div class="card-body">
-					<form:form method="post">
-						<div class="form-group row">
-							<form:label path="paperCode" class="col-sm-2 col-form-label">Enter Paper Code</form:label>
-							<div class="col-sm-10">
-								<form:input type="text" class="form-control" path="paperCode"
-									placeholder="Enter Paper Code" />
-								<form:errors path="paperCode" cssClass="text-danger"></form:errors>
-							</div>
-						</div>
-						<form:button type="submit" class="btn btn-primary">show paper</form:button>
-						<form:button type="reset" class="btn btn-danger">Reset</form:button>
-					</form:form>
+		<%-- <jsp:include page="../menuBar.jsp" /> --%>
+		<br>
+		<div class="row justify-content-md-center">
+			<div class="col-sm-6">
+				<div class="card text-center">
+					<div class="card-header bg-primary">
+						<h3>Paper Code</h3>
+					</div>
+					<div class="card-body">
+						<form method="post">
+							<input type="hidden" name="paperId" value="${paperId}"> <input
+								type="hidden" name="paperCode" value="${paperCode}"> <input
+								type="text" class="form-control" name="code"
+								placeholder="Enter paper code" /> <br>
+							<button type="submit" class="btn btn-primary">Start Exam</button>
+							<button type="reset" class="btn btn-danger">Reset form</button>
+						</form>
+					</div>
 				</div>
 			</div>
-	
+		</div>
 	</div>
-	<jsp:include page="../footerLink.jsp" />
+	<script type="text/javascript">   
+    function requestFullScreen(el) {
+        // Supports most browsers and their versions.
+        var requestMethod = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullScreen;
+
+        if (requestMethod) { // Native full screen.
+            requestMethod.call(el);
+        } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+        return false;
+    } 
+   // $(document).ready(requestFullScreen(document.body));
+	</script>
 </body>
 </html>

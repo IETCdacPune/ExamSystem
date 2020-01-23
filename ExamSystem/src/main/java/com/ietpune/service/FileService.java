@@ -42,8 +42,12 @@ public class FileService {
 			List<Question> questions = new ArrayList<>();
 			while (rows.hasNext()) {
 				Row row = rows.next();
+				try {
 				Question question = createQuetion(paper, row);
 				questions.add(question);
+				}catch(ExcelFileException ex) {
+					break;
+				}
 			}
 			return questions;
 		}

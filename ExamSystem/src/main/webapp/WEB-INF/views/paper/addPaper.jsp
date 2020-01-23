@@ -52,7 +52,7 @@ $(document).ready(function() {
 					<h3>Add Paper</h3>
 				</div>
 				<div class="card-body">
-					<form:form method="post" enctype="multipart/form-data">
+					<form:form method="post" enctype="multipart/form-data" autocomplete="off">
 						<div class="form-group row">
 							<form:label path="paperCode" class="col-sm-2 col-form-label">Paper Code</form:label>
 							<div class="col-sm-10">

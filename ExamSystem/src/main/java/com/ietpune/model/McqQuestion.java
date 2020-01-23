@@ -17,25 +17,18 @@ import javax.persistence.Table;
 
 import com.ietpune.model.Options;;
 
-@Entity
-@Table
-public class Question {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class McqQuestion {
 	private int queId;
-	@Column(length = 1000)
 	private String fullQuestion;
-	@Column(length = 1000)
-	private String description;
-	private char correctOption;
-
-	@ManyToOne
-	@JoinColumn(name = "paperId")
+	private boolean read;
+	private boolean markedReview;
+	private char ans;
 	private Paper paper;
-
-	@OneToMany(mappedBy = "question",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Options> optionList=new ArrayList<>();
-
+	public McqQuestion(){
+		read=markedReview=false;
+		
+	}
 	public int getQueId() {
 		return queId;
 	}
@@ -51,23 +44,25 @@ public class Question {
 	public void setFullQuestion(String fullQuestion) {
 		this.fullQuestion = fullQuestion;
 	}
-
-	public String getDescription() {
-		return description;
+	
+	public boolean isRead() {
+		return read;
 	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRead(boolean read) {
+		this.read = read;
 	}
-
-	public char getCorrectOption() {
-		return correctOption;
+	public boolean isMarkedReview() {
+		return markedReview;
 	}
-
-	public void setCorrectOption(char correctOption) {
-		this.correctOption = correctOption;
+	public void setMarkedReview(boolean markedReview) {
+		this.markedReview = markedReview;
 	}
-
+	public char getAns() {
+		return ans;
+	}
+	public void setAns(char ans) {
+		this.ans = ans;
+	}
 	public Paper getPaper() {
 		return paper;
 	}
@@ -82,5 +77,11 @@ public class Question {
 
 	public void setOptionList(List<Options> optionList) {
 		this.optionList = optionList;
+	}
+	@Override
+	public String toString() {
+		return "McqQuestion [queId=" + queId + ", fullQuestion=" + fullQuestion + ", read=" + read + ", markedReview="
+				+ markedReview + ", ans=" + ans + ", paper=" + paper + ", optionList=" + optionList + "]";
 	}	
+	
 }

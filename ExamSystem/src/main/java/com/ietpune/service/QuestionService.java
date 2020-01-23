@@ -2,6 +2,7 @@ package com.ietpune.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ietpune.dao.OptionDAO;
 import com.ietpune.dao.QuestionDAO;
 import com.ietpune.dao.SecurityQuestionDAO;
+import com.ietpune.model.McqQuestion;
 import com.ietpune.model.Options;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
@@ -22,7 +24,6 @@ public class QuestionService {
 	@Autowired OptionDAO optionDAO;
 	@Autowired SecurityQuestionDAO securityQuestionDAO;
 	public List<Question> getAllQuestionOfPaper(Paper paper) {
-		// questionDAO.ge
 		return questionDAO.findByPaper(paper);
 	}
 
@@ -42,5 +43,17 @@ public class QuestionService {
 	}
 	public List<SecurityQuestion> getAllSecurityQuestion(){
 		return securityQuestionDAO.findAll();
+	}
+
+	public List<McqQuestion> getMcqQuestion(Paper paper) {
+		List<Question> list = questionDAO.findByPaper(paper);
+		List<McqQuestion> qlist = list.stream().map((question)->{
+			McqQuestion mQuestion = new McqQuestion();
+			mQuestion.setQueId(question.getQueId());
+			mQuestion.setFullQuestion(question.getFullQuestion());
+			mQuestion.setOptionList(question.getOptionList());
+			return mQuestion;
+		}).collect(Collectors.toList());
+		return qlist;
 	}
 }

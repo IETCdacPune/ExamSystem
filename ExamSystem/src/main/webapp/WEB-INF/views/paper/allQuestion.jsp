@@ -30,13 +30,11 @@
 						<div class="card-body">
 							<c:forEach items="${question.optionList}" var="option"
 								varStatus="loop">
-								<c:if test="${option.option == question.correctOption}">
-									<div class="alert alert-success">${option.option}
-										${option.answer}</div>
+								<c:if test="${option.opt == question.correctOption}">
+									<div class="alert alert-success"><pre>${option.opt}. ${option.answer}</pre></div>
 								</c:if>
-								<c:if test="${option.option != question.correctOption}">
-									<div class="alert alert-secondary">${option.option}
-										${option.answer}</div>
+								<c:if test="${option.opt != question.correctOption}">
+									<div class="alert alert-secondary"><pre>${option.opt}. ${option.answer}</pre></div>
 								</c:if>
 							</c:forEach>
 							<button class="btn btn-light" data-toggle="collapse"

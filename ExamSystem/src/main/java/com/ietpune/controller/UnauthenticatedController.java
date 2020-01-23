@@ -83,6 +83,10 @@ public class UnauthenticatedController {
 			model.addAttribute(ERRMSG, "Wrong course code not same...");
 			return SIGNUP;
 		}
+		if(studetService.findPrn(studentDTO.getPrn())) {
+			model.addAttribute(ERRMSG, "This PRN already register...");
+			return SIGNUP;
+		}
 		Student student=new Student();
 		student.setFirstName(studentDTO.getFirstName());
 		student.setLastName(studentDTO.getLastName());
@@ -100,10 +104,7 @@ public class UnauthenticatedController {
 		model.addAttribute("msg", "You are register successfully...");
 		model.addAttribute("command", new StudentDTO());
 	
-	request.getSession().setAttribute("course", student.getCourse());
-	@SuppressWarnings("unchecked")
-	List<String> coursesession=(List<String>)request.getSession().getAttribute("course");
-		System.out.println("........................"+coursesession);
+		request.getSession().setAttribute("course", student.getCourse());
 		return SIGNUP;
 
 	}

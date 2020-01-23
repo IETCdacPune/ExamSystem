@@ -28,7 +28,7 @@ public class Student extends User {
 	private SecurityQuestion securityQeustion;
 	private String securityAnswer;
 	@OneToMany
-	private List<Student_Paper> student_Paperslist; 
+	private List<StudentPaper> studentPaperslist; 
 
 	public Student() {
 		super();
@@ -97,19 +97,19 @@ public class Student extends User {
 		this.securityAnswer = securityAnswer;
 	}
 
-	public List<Student_Paper> getStudent_Paperslist() {
-		return student_Paperslist;
+	public List<StudentPaper> getStudentPaperslist() {
+		return studentPaperslist;
 	}
 
-	public void setStudent_Paperslist(List<Student_Paper> student_Paperslist) {
-		this.student_Paperslist = student_Paperslist;
+	public void setStudentPaperslist(List<StudentPaper> student_Paperslist) {
+		this.studentPaperslist = student_Paperslist;
 	}
 
 	@Override
 	public String toString() {
 		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId + ", course="
 				+ course + ", securityQeustion=" + securityQeustion + ", securityAnswer=" + securityAnswer
-				+ ", student_Paperslist=" + student_Paperslist + "]";
+				+ ", student_Paperslist=" + studentPaperslist + "]";
 	}
 
 }

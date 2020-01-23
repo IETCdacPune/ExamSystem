@@ -30,7 +30,7 @@
 								${errorMessge}
 							</div>
 						</c:if>
-						<form name='login' method='POST'>
+						<form name='login' method='POST' autocomplete="off">
 							<div class="form-group row">
 								<input type='text' name='username' class="form-control" value=''
 									placeholder="P. R. N.">

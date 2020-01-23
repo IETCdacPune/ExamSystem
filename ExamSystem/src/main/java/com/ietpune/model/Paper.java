@@ -31,12 +31,12 @@ public class Paper {
 	private List<Question> questionList;
 	
 	@OneToMany(mappedBy = "paper",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private List<Student_Paper> paper_studentlist;;
+	private List<StudentPaper> paper_studentlist;
 	public Paper() {
 		super();
 	}
 	public Paper(int paperId, int paperCode, String paperTiming, boolean enabled, Subject subject,
-			List<Question> questionList, List<Student_Paper> student_Papers) {
+			List<Question> questionList, List<StudentPaper> student_Papers) {
 		super();
 		this.paperId = paperId;
 		this.paperCode = paperCode;
@@ -82,10 +82,10 @@ public class Paper {
 	public void setQuestionList(List<Question> questionList) {
 		this.questionList = questionList;
 	}
-	public List<Student_Paper> getPaper_studentlist() {
+	public List<StudentPaper> getPaper_studentlist() {
 		return paper_studentlist;
 	}
-	public void setPaper_studentlist(List<Student_Paper> paper_studentlist) {
+	public void setPaper_studentlist(List<StudentPaper> paper_studentlist) {
 		this.paper_studentlist = paper_studentlist;
 	}
 	@Override

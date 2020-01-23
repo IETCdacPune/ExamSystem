@@ -34,7 +34,7 @@
 								<em class="fas fa-user-plus"></em>
 							</h1>
 							<hr class="my-4">
-							<form:form method="post">
+							<form:form method="post" autocomplete="off">
 								<div class="form-group row">
 									<form:label path="firstName" class="col-sm-3 col-form-label">Name</form:label>
 									<div class="col-sm-9 row">
@@ -91,7 +91,7 @@
 											placeholder="Conform Password" />
 									</div>
 								</div>
-								<div class="form-group row">
+								<%-- <div class="form-group row">
 									<form:label path="securityQeustion"
 										class="col-sm-3 col-form-label">Security question</form:label>
 									<div class="col-sm-9">
@@ -110,7 +110,7 @@
 											class="form-control" placeholder="Security Answer" />
 										<form:errors path="securityAnswer" cssClass="text-danger"></form:errors>
 									</div>
-								</div>
+								</div> --%>
 								<div class="col-md-8 offset-md-2">
 									<button class="btn btn-lg btn-primary btn-block text-uppercase"
 										type="submit">Sign up</button>
