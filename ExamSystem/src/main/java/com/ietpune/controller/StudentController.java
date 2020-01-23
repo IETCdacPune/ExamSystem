@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,35 +40,37 @@ public class StudentController {
 	
 @GetMapping("student/newPapers")
 	public String forNewPaperGet(Model model,Authentication authentication){
-		//List<Subject> allSub=subjectService.getAllSubject();
+		
 		String prn=authentication.getName();
-		List<Subject> allSub=studentService.getAllSubjectList(prn);
+		
+		
+		List<Paper> allSub=studentService.getAllSubjectList(prn);
 	
-		log.debug("list.............."+allSub);
+
 		if (!allSub.isEmpty()) {
-			model.addAttribute("list", allSub);
+		model.addAttribute("list", allSub);
 		}
-		return "student/allPaper";
+		return "student/showPaper";
 	}
 
 
 @GetMapping("student/oldPapers")
 public String forOldPaperGet(Model model,Authentication authentication){
-	//List<Subject> allSub=subjectService.getAllSubject();
+	
 	String prn=authentication.getName();
-	List<Subject> allSub=studentService.getAllSubjectList(prn);
+	List<Paper> allSub=studentService.getAllSubjectListOldPaper(prn);
 
-	log.debug("list.............."+allSub);
+
 	if (!allSub.isEmpty()) {
 		model.addAttribute("list", allSub);
 	}
-	return "student/allPaper";
+	return "student/showPaper";
 }
 
 @GetMapping("/student/startExam")
 public String forStartExam(@ModelAttribute("command")Paper p)
 {
-	System.out.println("in..........................exam");
+	
 return "/student/startExam";	
 }
 }

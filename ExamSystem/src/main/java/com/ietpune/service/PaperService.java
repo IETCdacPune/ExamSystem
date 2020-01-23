@@ -15,7 +15,7 @@ public class PaperService {
 
 	@Autowired
 	private PaperDAO paperDAO;
-
+	@Autowired private QuestionService questionService; 
 	public Paper addPaper(Paper p) {
 		return paperDAO.save(p);
 	}
@@ -41,6 +41,18 @@ public class PaperService {
 		
 		return paperDAO.existsBypaperCode(paperCode);
 	}
+
+	public Paper getPaperWithQuestions(int paperId) {
+		Optional<Paper> optPaper=paperDAO.findById(paperId);
+		if(optPaper.isPresent()) {
+			Paper p=optPaper.get();
+			p.setQuestionList(questionService.getAllQuestionOfPaper(p));
+			return p;
+		}
+		return null;
+	}
+
+	
 
 
 

@@ -28,14 +28,17 @@ $(document).ready(function() {
 	<div class="container">
 	
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br>
+		<br> <br><div>
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<strong>Error!</strong> ${errmsg }
 			</div>
 		</c:if>
-		
+		<div class="row"><div class="col-2"></div>
+		<div class="col-6">
+<a href="/Admin/Paper/addMoreQuestion/${paperId}" class="btn btn-block  btn-info">Add More Question</a></div>
+</div>
 		<c:if test="${not empty list}">
 			<c:forEach items="${list}" var="question" varStatus="loop">
 				<div class="col-12 mt-1">
@@ -71,7 +74,7 @@ $(document).ready(function() {
 			<div class="col-3"></div>
 			<div class="col-6">
 				<c:if test="${!enableStatus}">
-				<a href="/Admin/Paper/enable/${paperId}" class="btn btn-block  btn-success">Enable</a>
+				<a href="/Admin/Paper/enable/${paperId}" class="btn btn-block   btn-primary">Enable</a>
 				</c:if>
 				<c:if test="${enableStatus}">
 				<a href="/Admin/Paper/disable/${paperId}" class="btn btn-block btn-danger">Disable</a>

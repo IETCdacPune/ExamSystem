@@ -43,4 +43,8 @@ public class QuestionService {
 	public List<SecurityQuestion> getAllSecurityQuestion(){
 		return securityQuestionDAO.findAll();
 	}
+
+	
+
+	
 }

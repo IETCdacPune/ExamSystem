@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.ietpune.dao.RoleDAO;
 import com.ietpune.dao.StudentDAO;
+import com.ietpune.model.Paper;
 import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 import com.ietpune.model.Student;
@@ -38,7 +39,7 @@ public class StudentService{
 		return opt.isPresent();
 	}
 
-	public List<Subject> getAllSubjectList(String prn) {
+	public List<Paper> getAllSubjectList(String prn) {
 		// TODO Auto-generated method stub
 		return studentDAO.findSubjectByPrn(prn);
 	}
@@ -46,6 +47,11 @@ public class StudentService{
 	public List<Student> getAllStudentList() {
 		// TODO Auto-generated method stub
 		return studentDAO.findAll();
+	}
+
+	public List<Paper> getAllSubjectListOldPaper(String prn) {
+		// TODO Auto-generated method stub
+		 return studentDAO.findSubjectByPrns(prn);
 	}
 
 	

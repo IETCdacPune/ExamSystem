@@ -1,7 +1,9 @@
 package com.ietpune.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -39,6 +41,7 @@ public class PaperController {
 	private static final String PAPER_ADD_PAPER = "paper/addPaper";
 	private static final String ERRMSG = "errmsg";
 	private static final String COMMAND = "command";
+	private static final String PAPER_ADD_MORE_QUESTION="paper/allMoreQuestion";
 	@Autowired
 	private SubjectService subjectService;
 	@Autowired
@@ -170,8 +173,7 @@ public class PaperController {
 	public String forQuestionEditPost(@PathVariable int id, Model model,
 			@Valid @ModelAttribute(COMMAND) QuestionDTO questionDTO, BindingResult result) {
 		
-		
-		System.out.println(".............................");
+
 		
 		if (result.hasErrors()) {
 			return PAPER_QUESTION_EDIT;
@@ -216,5 +218,42 @@ public class PaperController {
 		
 		return "redirect:/Admin/allPapers";
 	}
+	@GetMapping("/Admin/Paper/addMoreQuestion/{paperId}")
+	public String forAddMoreQuestion(@PathVariable("paperId")int paperId,Model model) throws IOException, ExcelFileException
+	{
+		
+		return "paper/addMoreQuestion";
+	}
+	@PostMapping("/Admin/Paper/addMoreQuestion/{paperId}")
+	public String forSaveMoreQuestion(@RequestParam("file") MultipartFile file,@PathVariable("paperId")int paperId,Model model) throws IOException, ExcelFileException
+	{
+		
+		Paper paper=paperService.getPaperWithQuestions(paperId);
+		log.info(paper+""+paper.getQuestionList());
+		if(paper==null)
+		{
+			
+			model.addAttribute(ERRMSG, "Thier is an error in reading File...");
+			return "PAPER_ADD_MORE_QUESTION";
+		}
+	
+		List<Question> questions = fileService.fileToList(file, paper);
+		
+		
+	
+		
+		if (questions == null || questions.isEmpty()) {
+			model.addAttribute(ERRMSG, "Thier is an error in reading File...");
+			return PAPER_ADD_MORE_QUESTION;
+		}
+		paper.setQuestionList(questions);
+		paper = paperService.addPaper(paper);
+		
+		
+		
+		return "redirect:/Admin/allQuestion/"+paperId;
+	}
+
+	
 	
 }

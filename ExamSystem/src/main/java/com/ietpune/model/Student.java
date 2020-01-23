@@ -28,7 +28,7 @@ public class Student extends User {
 	private SecurityQuestion securityQeustion;
 	private String securityAnswer;
 	@OneToMany
-	private List<Student_Paper> student_Paperslist; 
+	private List<Student_Paper> student_Paperslist;
 
 	public Student() {
 		super();
