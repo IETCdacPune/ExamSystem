@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class SecurityQuestion {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(unique = true)
 	private String question;

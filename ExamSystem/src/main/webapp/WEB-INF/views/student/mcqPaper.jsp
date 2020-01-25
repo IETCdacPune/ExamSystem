@@ -13,17 +13,17 @@
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body id="body" style="min-height: 100%;">
-	<div class="card h-100">
+	<div class="card d-flex align-items-stretch">
 		<div class="card-header h-25">
 			<div class="row">
 				<div class="col-sm-10">
 					<sec:authentication var="user" property="principal" />
-					<h3>PRN:- ${user.prn}</h3>
-					<h4>Subject:- ${sessionScope.subject}</h4>
+					<h4>PRN:- ${user.prn}</h4>
+					<h6>Subject:- ${sessionScope.subject}</h6>
 					<p>Readed:-${readed}; &nbsp;&nbsp;Marked for
 						Review:-${mReview}; &nbsp;&nbsp;Not visited:-${unReaded};</p>
 				</div>
-				<div class="col-sm-2 align-items-right"><h1>timmer</h1></div>
+				<div class="col-sm-2 align-items-right"><h1 id="timmer"></h1></div>
 			</div>
 		</div>
 		<div class="card-body h-75">
@@ -58,7 +58,7 @@
 						</div>
 						<div class="row h-25">
 							<div class="col-sm-6 align-self-center">
-								<a href="/student/exam/submit" class="btn btn-info">Submit</a>
+								<a href="/student/exam/submit" class="btn btn-info" id="submit">Submit</a>
 							</div>
 						</div>
 					</c:if>
@@ -99,5 +99,28 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	var inTwoDigit=function(valueTOconvert){
+		return valueTOconvert<10?"0"+valueTOconvert : valueTOconvert;
+	}
+	var displayTime=function(time){
+		var minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+		var seconds = Math.floor((time % (1000 * 60)) / 1000);
+		$("#timmer").text( inTwoDigit(minutes) + "m : " + inTwoDigit(seconds) + "s ");
+	}
+	$(document).ready(function(){
+			var time=${remainingTime};
+			displayTime(time);
+			var x = setInterval(()=>{
+					time-=1000;
+					if (time < 0) {
+					    clearInterval(x);
+					    $("#submit")[0].click();
+					}
+					displayTime(time);
+				},1000);
+			$("#timmer").html=time;
+		});
+	</script>
 </body>
 </html>

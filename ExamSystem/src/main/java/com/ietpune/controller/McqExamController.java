@@ -73,7 +73,9 @@ public class McqExamController {
 			return "redirect:/";
 		if(index==list.size())
 			return "redirect:/student/mcqExam/1";
-		if(((long)session.getAttribute("timeOver")) <= System.currentTimeMillis()) {
+		long timeOver =(long)session.getAttribute("timeOver");
+		long currentTime = System.currentTimeMillis();
+		if( timeOver <= currentTime) {
 		log.info("submit");
 			return "redirect:/student/exam/submit";
 		}
@@ -87,6 +89,7 @@ public class McqExamController {
 		model.addAttribute("list",list);
 		model.addAttribute("question", question);
 		model.addAttribute("index", index+1);
+		model.addAttribute("remainingTime", timeOver-currentTime);
 		return "student/mcqPaper";
 		
 	}
