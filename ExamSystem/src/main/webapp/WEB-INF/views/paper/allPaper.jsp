@@ -10,10 +10,12 @@
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
+
 </head>
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
+				
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -69,11 +71,18 @@
 																				<c:if test="${paper.enabled}">Enabled</c:if>
 																				<c:if test="${!paper.enabled}">disabled</c:if>
 																			</p>
-																			<a
+																		
+																		
+																
+																		<a class="btn btn-info <c:if test='${paper.correctAnsVisibility}'>disabled</c:if>" href="${pageContext.request.contextPath}/Admin/enabledForView/${paper.paperId}" onclick="return confirm('are you sure for visibile answer')" >GernaratedResult</a>
+																		
+																			
+																			<a  class="btn btn-info <c:if test='${paper.correctAnsVisibility}'>disabled</c:if>"
 																				href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}"
-																				class="text-white">List All Questions</a>
-																		</div>
-																	</div>
+																				class="text-white">Show Paper</a>
+																	
+																		
+																	</div></div>
 																</div>
 															</c:forEach>
 														</div>

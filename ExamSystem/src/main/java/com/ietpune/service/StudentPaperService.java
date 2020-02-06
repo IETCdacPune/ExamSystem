@@ -39,5 +39,9 @@ public class StudentPaperService {
 		}
 		return null;
 	}
+	public List<StudentPaper> getAllStudentMarks(Paper p) {
+		// TODO Auto-generated method stub
+		return studentPaperDAO.findAllByPaper(p);
+	}
 	
 }

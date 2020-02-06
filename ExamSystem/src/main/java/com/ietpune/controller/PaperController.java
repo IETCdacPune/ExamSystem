@@ -1,5 +1,6 @@
 package com.ietpune.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.ietpune.exception.ExcelFileException;
 import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
+import com.ietpune.model.StudentPaper;
 import com.ietpune.model.Subject;
 import com.ietpune.model.dto.PaperDTO;
 import com.ietpune.model.dto.QuestionDTO;
@@ -32,6 +34,7 @@ import com.ietpune.service.CourseService;
 import com.ietpune.service.FileService;
 import com.ietpune.service.PaperService;
 import com.ietpune.service.QuestionService;
+import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.SubjectService;
 
 @Controller
@@ -52,6 +55,8 @@ public class PaperController {
 	private PaperService paperService;
 	@Autowired
 	private FileService fileService;
+	@Autowired
+	private StudentPaperService studentPaperService;
 	private Logger log=Logger.getLogger(PaperController.class);
 	@GetMapping(value = "Admin/addPaper" )
 	public String forAddPaperGet(Model model) {
@@ -142,6 +147,11 @@ public class PaperController {
 			model.addAttribute(ERRMSG, "Please select valid paper");
 			
 		}
+		
+		  Paper p=paperService.getEnabled(id);
+		  
+		  model.addAttribute("p",p.isEnabled());
+		 
 		return "paper/allQuestion";
 	}
 
@@ -248,6 +258,54 @@ public class PaperController {
 		return "redirect:/Admin/allQuestion/"+paperId;
 	}
 
+	
+	
+	
+	@RequestMapping("/Admin/enabledForView/{paperId}")
+	String forOpenAllPaper(@PathVariable("paperId")int paperId,Model model)
+{	Paper paper=paperService.getPaperWithQuestions(paperId); paper.setCorrectAnsVisibility(true);
+paper.setEnabled(false);
+paper.setNewPaper(false);
+	  paper = paperService.addPaper(paper);
+	  
+	
+		
+		
+				return "redirect:/Admin/allPapers";
+	}
+	
+	
+	
+	@GetMapping("Admin/genratedResult")
+	public String forGenratedResult(Model model)
+	{
+		List<Course> courseList=courseService.getAllCoursesWithEagerLoad();
+		
+		
+		if(!courseList.isEmpty())
+		{
+			model.addAttribute("courseList",courseList);
+		}
+		
+		//List<Paper> plist=paperService.forGenerateResultPaper();
+		
+	
+		
+		return "admin/generatedResult";
+	}
+	
+	@RequestMapping("Admin/viewForResult/{paperId}")
+	public String forViewResult(@PathVariable("paperId")int paperId,MultipartFile file,Model model) throws FileNotFoundException, IOException
+	{
+		Paper p=new Paper();
+		p.setPaperId(paperId);
+		List<StudentPaper> spaper=studentPaperService.getAllStudentMarks(p);
+	log.info("....................."+spaper);
+	fileService.writeFile(spaper,file);
+	model.addAttribute("studentResultList",spaper);
+		return "admin/viewForResult";
+	}
+	
 	
 	
 }

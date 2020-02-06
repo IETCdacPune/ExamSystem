@@ -60,4 +60,15 @@ public class CourseService {
 	public Optional<Course> getCourseByCode(String courseCode) {
 		return courseDAO.findByCourseCode(courseCode);
 	}
+
+	public List<Course> getAllCoursesWithEagerLoad() {
+		List<Course> list=getAllCourses();
+		list.forEach(
+				
+				(course)->{
+					
+					course.setSubjectList(subjectDAO.findByCourse(course));
+				});
+		return list;
+	}
 }

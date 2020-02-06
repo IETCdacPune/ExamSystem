@@ -1,5 +1,8 @@
 package com.ietpune.service;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +11,10 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,6 +26,7 @@ import com.ietpune.exception.ExcelFileException;
 import com.ietpune.model.Options;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
+import com.ietpune.model.StudentPaper;
 
 @Service
 public class FileService {
@@ -106,5 +113,47 @@ public class FileService {
 			workbook = new HSSFWorkbook(file.getInputStream());
 		}
 		return workbook;
+	}
+
+	public void writeFile(List<StudentPaper> spaper, MultipartFile file) throws FileNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		Workbook workbook = new XSSFWorkbook();
+		Sheet studentsSheet = workbook.createSheet("Students");
+		studentsSheet.setDefaultColumnWidth(30);
+		CellStyle style = workbook.createCellStyle();
+        Font font = workbook.createFont();
+        font.setFontName("Arial");
+        style.setFillForegroundColor(HSSFColor.BLUE.index);
+        font.setColor(HSSFColor.BLUE.index);
+        style.setFont(font);
+        Row row = studentsSheet.createRow(0);
+        row.createCell(0).setCellValue("PRN");
+        row.createCell(1).setCellValue("Name of Student");
+        row.createCell(2).setCellValue("Marks");
+     
+        row.createCell(3).setCellValue("Result");
+      
+        row.createCell(3).setCellValue("Attendence");
+       
+ int  rowIndex=1;
+        for(StudentPaper student : spaper){
+            row = studentsSheet.createRow(rowIndex++);
+            int cellIndex = 0;
+            
+            row.createCell(cellIndex++).setCellValue(student.getStudent().getPrn());
+ 
+            row.createCell(cellIndex++).setCellValue(student.getStudent().getFirstName()+"  "+student.getStudent().getLastName());
+            row.createCell(cellIndex++).setCellValue(student.getMarks());
+ 
+     
+            row.createCell(cellIndex++).setCellValue(student.getResult());
+ 
+        
+          }
+       
+
+        try (FileOutputStream outputStream = new FileOutputStream("Result1.xlsx")) {
+  workbook.write(outputStream); }
+ 
 	}
 }

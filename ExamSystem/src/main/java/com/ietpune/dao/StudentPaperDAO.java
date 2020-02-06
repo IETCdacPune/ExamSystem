@@ -15,4 +15,6 @@ public interface StudentPaperDAO extends JpaRepository<StudentPaper, Integer>  {
 	List<StudentPaper> findByStudent(Student student);
 
 	List<StudentPaper> findTop5ByPaperAndResultOrderByMarksDesc(Paper paper,String result);
+
+	List<StudentPaper> findAllByPaper(Paper p);
 }

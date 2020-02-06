@@ -37,7 +37,7 @@ $(document).ready(function() {
 		</c:if>
 		<div class="row"><div class="col-2"></div>
 		<div class="col-6">
-<a href="/Admin/Paper/addMoreQuestion/${paperId}" class="btn btn-block  btn-info">Add More Question</a></div>
+<a href="/Admin/Paper/addMoreQuestion/${paperId}" class="btn btn-block  btn-info <c:if test='${p}'>disabled</c:if>" >Add More Question</a></div>
 </div>
 		<c:if test="${not empty list}">
 			<c:forEach items="${list}" var="question" varStatus="loop">

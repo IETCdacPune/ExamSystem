@@ -52,6 +52,11 @@ public class PaperService {
 		return null;
 	}
 
+	public Paper getEnabled(int paperId) {
+		// TODO Auto-generated method stub
+		return paperDAO.findById(paperId).get();
+	}
+
 	
 
 
