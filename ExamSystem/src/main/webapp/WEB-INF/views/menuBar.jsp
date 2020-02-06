@@ -44,7 +44,7 @@
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/addPaper">Add Paper</a> 
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/allPapers">Show All Paper</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
+							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/genratedResult">Result</a>
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"

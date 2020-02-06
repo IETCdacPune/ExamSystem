@@ -21,6 +21,13 @@
 						<h3>Paper Code</h3>
 					</div>
 					<div class="card-body">
+					<div class="jumbotron py-3">
+					<h5 class="my-3">1. Check your PRN and Module Name.</h5>
+					<h5>2. If you want  to submit your paper then click submit button.</h5>
+					<h5>3.If you answered any question button color is green. </h5>
+					<h5>4.If you mark for review any question button color is orange. </h5>
+					<h5>5.If you click on save and next button color is grey. </h5>
+					</div>
 						<form method="post" autocomplete="off">
 							<input type="hidden" name="paperId" value="${paperId}"> <input
 								type="hidden" name="paperCode" value="${paperCode}"> <input
