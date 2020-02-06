@@ -3,6 +3,7 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,26 +14,37 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
-		<div class="row">
-			<c:if test="${not empty list}">
-				<c:forEach items="${list}" var="subject" varStatus="loop">
-					<div class="col-md-4 mt-1">
-						<div class="card bg-info">
-							<div class="card-body">
-								<h5 class="card-title">${loop.index +1 }
-									${subject.name}<a class="close text-rigth"
-										href="${pageContext.request.contextPath}/Admin/subjectEdit/${subject.id}"><em
-										class="far fa-edit"></em></a>
-									<br>under ${subject.course.name} course...
-								</h5>
-							</div>
-						</div>
+		
+	<c:if test="${not empty courseList}">
+			<c:forEach items="${courseList}" var="course" varStatus="loop">
+				<div class="card mt-2">
+					<div class="card-header">
+						<a class="card-link" data-toggle="collapse"
+							href="#collapse${loop.index +1 }">Course:-${course.name} have
+							${fn:length(course.subjectList)} subjects. </a>
 					</div>
+
+	<div id="collapse${loop.index +1}" class="collapse">
+						<div class="card-body">
+							<c:if test="${not empty course.subjectList}">
+								<c:forEach items="${course.subjectList}" var="subject"
+									varStatus="loop1">
+									<div class="card mt-2">
+										<div class="card-header">
+											<a class="card-link" data-toggle="collapse"
+												href="#collapse">Subject:-${subject.name}</a>
+										</div>
+										</div>
+										</c:forEach>
+										</c:if>
+										</div>
+										</div>
+										</div>
 				</c:forEach>
 			</c:if>
 
-		</div>
-		<c:if test="${empty list }">
+		
+		<c:if test="${empty courseList }">
 			<div class="jumbotron text-center">
 				<h2>
 					There is not single subject entry in system.<br> <a

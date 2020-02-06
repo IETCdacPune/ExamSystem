@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ietpune.model.Course;
 import com.ietpune.model.Subject;
 import com.ietpune.model.dto.SubjectDTO;
 import com.ietpune.service.CourseService;
@@ -43,7 +44,15 @@ private Logger log =Logger.getLogger(SubjectController.class);
 
 	@GetMapping("/listOfSubject")
 	public String forListOfSubjectGet(Model model) {
-		model.addAttribute("list", subjectService.getAllSubject());
+		List<Course> allCourse=courseService.getAllCourses();
+		allCourse.forEach(
+				(course)->{
+					course.setSubjectList(subjectService.getAllSubjectByCourse(course));});
+
+		if (!allCourse.isEmpty()) {
+			model.addAttribute("courseList",allCourse);
+		}
+		
 		return "admin/listOfSubject";
 	}
 	@GetMapping(value = "/subjectByCourse",produces = "application/json")

@@ -27,7 +27,7 @@ public class Paper {
 	private boolean enabled;
 	private int numOfQuestion;
 	private boolean newPaper=true;
-	
+	private boolean correctAnsVisibility=false;
 	@ManyToOne
 	@JoinColumn
 	private Subject subject;
@@ -110,11 +110,25 @@ public class Paper {
 	public void setPaper_studentlist(List<StudentPaper> paper_studentlist) {
 		this.paper_studentlist = paper_studentlist;
 	}
+	
+	
+	
+	public boolean isCorrectAnsVisibility() {
+		return correctAnsVisibility;
+	}
+
+	public void setCorrectAnsVisibility(boolean correctAnsVisibility) {
+		this.correctAnsVisibility = correctAnsVisibility;
+	}
+
 	@Override
 	public String toString() {
 		return "Paper [paperId=" + paperId + ", paperCode=" + paperCode + ", paperTiming=" + paperTiming + ", enabled="
-				+ enabled + ", newPaper=" + newPaper + ", subject=" + subject + "]";
+				+ enabled + ", numOfQuestion=" + numOfQuestion + ", newPaper=" + newPaper + ", correctAnsVisibility="
+				+ correctAnsVisibility + "]";
 	}
+
+	
 	
 	
 	
