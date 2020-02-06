@@ -15,13 +15,13 @@
 		<%-- <jsp:include page="../menuBar.jsp" /> --%>
 		<br>
 		<div class="row justify-content-md-center">
-			<div class="col-sm-6">
+			<c:if test="${empty msg}"><div class="col-sm-6">
 				<div class="card text-center">
 					<div class="card-header bg-primary">
 						<h3>Paper Code</h3>
 					</div>
 					<div class="card-body">
-						<form method="post">
+						<form method="post" autocomplete="off">
 							<input type="hidden" name="paperId" value="${paperId}"> <input
 								type="hidden" name="paperCode" value="${paperCode}"> <input
 								type="text" class="form-control" name="code"
@@ -32,6 +32,13 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
+			<c:if test="${not empty msg}">
+				<div class="jumbotron justify-content-center">
+					<h1>${msg}</h1>
+					<a class="btn btn-outline-secondary" href="/">Get Out</a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 	<script type="text/javascript">   

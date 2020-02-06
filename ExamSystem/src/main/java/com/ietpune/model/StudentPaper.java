@@ -19,19 +19,22 @@ import javax.persistence.UniqueConstraint;
 	})
 public class StudentPaper {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private Date paperDate;
+	private int marks;
+	private String result;
+	private boolean present;
+	@Column( columnDefinition = "LONGVARBINARY")
+	private HashMap<Integer, Character> studentAnsMap;
+	
 	@ManyToOne
 	@JoinColumn(name = "paperId")
 	private Paper paper;
 	@ManyToOne
 	@JoinColumn(name = "sudentId")
 	private Student student;
-	private int marks;
-	private String result;
-	@Column( columnDefinition = "LONGVARBINARY")
-	private HashMap<Integer, Character> studentAnsMap;
+	
 	public StudentPaper() {
 		super();
 	}
@@ -69,6 +72,12 @@ public class StudentPaper {
 	}
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	public boolean isPresent() {
+		return present;
+	}
+	public void setPresent(boolean present) {
+		this.present = present;
 	}
 	public int getMarks() {
 		return marks;

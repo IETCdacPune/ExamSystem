@@ -25,6 +25,7 @@ public class StudentDTO {
 	private String password;
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{8,}$", message = "password must containt atleast 1 Upper case, 1 Lower case, 1 digit, 1 !@#$%^&")
 	private String conformPass;
+	private char gender;
 	private SecurityQuestion securityQeustion;
 	private String securityAnswer;
 
@@ -82,6 +83,14 @@ public class StudentDTO {
 
 	public void setConformPass(String conformPass) {
 		this.conformPass = conformPass;
+	}
+
+	public char getGender() {
+		return gender;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
 	}
 
 	public SecurityQuestion getSecurityQeustion() {

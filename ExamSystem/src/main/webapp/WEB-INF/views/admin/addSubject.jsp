@@ -41,7 +41,7 @@
 					<h3>Add Subject</h3>
 				</div>
 				<div class="card-body">
-					<form:form method="post">
+					<form:form method="post" autocomplete="off">
 						<div class="form-group row">
 							<form:label path="course" class="col-sm-2 col-form-label">Course Name</form:label>
 							<div class="col-sm-10">

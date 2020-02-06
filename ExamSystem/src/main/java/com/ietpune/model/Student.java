@@ -19,6 +19,8 @@ public class Student extends User {
 	private String firstName;
 	private String lastName;
 	private String emailId;
+	private boolean gender;
+	private String imgUrl;
 	@ManyToOne
 	@JoinColumn
 	@JsonIgnore
@@ -81,6 +83,22 @@ public class Student extends User {
 		this.course = course;
 	}
 
+	public boolean isGender() {
+		return gender;
+	}
+
+	public void setGender(boolean gender) {
+		this.gender = gender;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
 	public SecurityQuestion getSecurityQeustion() {
 		return securityQeustion;
 	}
@@ -107,9 +125,9 @@ public class Student extends User {
 
 	@Override
 	public String toString() {
-		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId + ", course="
-				+ course + ", securityQeustion=" + securityQeustion + ", securityAnswer=" + securityAnswer
-				+ ", student_Paperslist=" + studentPaperslist + "]";
+		return "Student [firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId + ", gender="
+				+ gender + ", course=" + course + ", securityQeustion=" + securityQeustion + ", securityAnswer="
+				+ securityAnswer + ", studentPaperslist=" + studentPaperslist + "]";
 	}
 
 }

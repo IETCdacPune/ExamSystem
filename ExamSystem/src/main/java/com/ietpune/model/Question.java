@@ -22,7 +22,7 @@ import com.ietpune.model.Options;;
 @Table
 public class Question {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int queId;
 	@Column(length = 1000)
 	private String fullQuestion;

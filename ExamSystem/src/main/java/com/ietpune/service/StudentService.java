@@ -16,7 +16,6 @@ import com.ietpune.model.Paper;
 import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 import com.ietpune.model.Student;
-import com.ietpune.model.Subject;
 @Service
 public class StudentService{
 @Autowired private StudentDAO studentDAO;
@@ -38,21 +37,18 @@ public class StudentService{
 		Optional<Student> opt = studentDAO.findByPrn(prn);
 		return opt.isPresent();
 	}
-
-	public List<Paper> getAllSubjectList(String prn) {
-
-		return studentDAO.findSubjectByPrn(prn);
+	public Optional<Student> getByPrn(String prn) {
+		 return studentDAO.findByPrn(prn);
+	}
+	public List<Paper> getAllNewPaperList(String prn) {
+		return studentDAO.findPaperByPrn(prn);
 	}
 
 
 	public List<Student> getAllStudentList() {
-		// TODO Auto-generated method stub
 		return studentDAO.findAll();
 	}
 
-	public List<Paper> getAllSubjectListOldPaper(String prn) {
-		 return studentDAO.findSubjectByPrns(prn);
-	}
 
 	public Optional<Student> getStudentByPrn(String prn) {
 		return studentDAO.findByPrn(prn);

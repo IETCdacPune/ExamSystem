@@ -6,32 +6,32 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
-<html lang="en" style="height: 100%;">
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
 </head>
-<body id="body" style="min-height: 100%;">
-	<div class="card d-flex align-items-stretch">
-		<div class="card-header h-25">
+<body id="body">
+	<div class="card">
+		<div class="card-header">
 			<div class="row">
-				<div class="col-sm-10">
+				<div class="col-10">
 					<sec:authentication var="user" property="principal" />
-					<h4>PRN:- ${user.prn}</h4>
-					<h6>Subject:- ${sessionScope.subject}</h6>
+					<h4>PRN:- ${user.prn}  &nbsp; &nbsp; &nbsp; &nbsp; Subject:- ${sessionScope.subject}</h4>
 					<p>Readed:-${readed}; &nbsp;&nbsp;Marked for
 						Review:-${mReview}; &nbsp;&nbsp;Not visited:-${unReaded};</p>
 				</div>
-				<div class="col-sm-2 align-items-right"><h1 id="timmer"></h1></div>
+				<div class="col-2">
+					<h4 id="timmer"></h4>
+				</div>
 			</div>
 		</div>
-		<div class="card-body h-75">
-		
+		<div class="card-body">
 			<div class="row">
-				<div class="col-sm-2">
+				<div class="col-2">
 					<c:if test="${not empty list}">
-						<div class="row">
+						<div class="row overflow-auto">
 							<c:forEach items="${list}" var="question" varStatus="loop">
 								<c:choose>
 									<c:when
@@ -52,20 +52,24 @@
 										<c:set value="btn-secondary" var="cssClass"></c:set>
 									</c:when>
 								</c:choose>
-								<a href="/student/mcqExam/${loop.index+1}"
-									class="col-sm-4 btn ${cssClass}" style="border-radius: 50%;"><h3>${loop.index+1}</h3></a>
+								<div class="col-3 m-1" style="height: 80%;">
+										<a href="/Student/mcqExam/${loop.index+1}"
+											class="btn ${cssClass}" style="border-radius: 30%;"><c:if
+												test="${loop.index<9 }">0${loop.index+1}</c:if><c:if
+												test="${loop.index>=9 }">${loop.index+1}</c:if></a>
+								</div>
 							</c:forEach>
 						</div>
-						<div class="row h-25">
+						<div class="row">
 							<div class="col-sm-6 align-self-center">
-								<a href="/student/exam/submit" class="btn btn-info" id="submit">Submit</a>
+								<a href="/Student/exam/submit" class="btn btn-info" id="submit">Submit</a>
 							</div>
 						</div>
 					</c:if>
 				</div>
-				<div class="col-sm-10">
+				<div class="col-10">
 					<form>
-						<div class="card border-info">
+						<div class="card border-info ">
 							<div class="card-head">
 								<h4>
 									<pre>Q${index}. ${question.fullQuestion}</pre>
@@ -78,19 +82,19 @@
 									varStatus="loop">
 									<div class="form-check">
 										<input class="form-check-input" type="radio" name="ans"
-											id="exampleRadios${loop.index+1}" value="${option.opt}" ${question.ans==option.opt?'checked':''}>
-											<label class="form-check-label"
-												for="exampleRadios${loop.index+1}"><pre>${option.answer}</pre></label>
+											id="exampleRadios${loop.index+1}" value="${option.opt}"
+											${question.ans==option.opt?'checked':''}> <label
+											class="form-check-label" for="exampleRadios${loop.index+1}"><pre>${option.answer}</pre></label>
 									</div>
 								</c:forEach>
 							</div>
 							<div class="card-footer ">
-								<button formaction="/student/mcqExamPost/markedReview"
+								<button formaction="/Student/mcqExamPost/previous" formmethod="post"
+									class="btn btn-light" type="submit">Previous Question</button>
+								<button formaction="/Student/mcqExamPost/markedReview"
 									formmethod="post" class="btn btn-warning" type="submit">Marked
 									for Review And Next</button>
-								<button formaction="/student/mcqExamPost/next" formmethod="post"
-									class="btn btn-info" type="submit">Next</button>
-								<button formaction="/student/mcqExamPost/save" formmethod="post"
+								<button formaction="/Student/mcqExamPost/save" formmethod="post"
 									class="btn btn-primary" type="submit">Save & Next</button>
 							</div>
 						</div>

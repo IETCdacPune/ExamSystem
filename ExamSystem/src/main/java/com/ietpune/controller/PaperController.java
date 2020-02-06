@@ -63,20 +63,14 @@ public class PaperController {
 	@PostMapping("Admin/addPaper")
 	public String forAddPaperPost(Model model, @ModelAttribute(COMMAND) PaperDTO paperDTO,
 			@RequestParam("file") MultipartFile file, BindingResult result) {
-		
-	
-	
+			
 	boolean paperCode=paperService.forExsits(paperDTO.getPaperCode());
-		
-
-		
+				
 		if (result.hasErrors()) {
 			model.addAttribute(COURSE_LIST, courseService.getAllCourses());
 			model.addAttribute(COMMAND, new PaperDTO());
 			return PAPER_ADD_PAPER;
-		}
-		
-		
+		}		
 		try {
 			
 			if(paperCode)
@@ -200,7 +194,7 @@ public class PaperController {
 	{
 		Paper paper=paperService.getPaper(paperId);
 		paper.setEnabled(true);
-		
+		paper.setNumOfQuestion(questionService.getMcqQuestion(paper).size());
 		paperService.addPaper(paper);
 		
 		

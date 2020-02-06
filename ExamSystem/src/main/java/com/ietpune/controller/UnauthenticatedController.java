@@ -1,5 +1,6 @@
 package com.ietpune.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ import com.ietpune.service.StudentService;
 public class UnauthenticatedController {
 	private static final String ERRMSG = "errmsg";
 	private static final String SIGNUP = "signup";
-	@Autowired	StudentService studetService;
+	@Autowired	StudentService studentService;
 	@Autowired	QuestionService questionService;
 	@Autowired CourseService courseService;
 
@@ -83,7 +84,7 @@ public class UnauthenticatedController {
 			model.addAttribute(ERRMSG, "Wrong course code not same...");
 			return SIGNUP;
 		}
-		if(studetService.findPrn(studentDTO.getPrn())) {
+		if(studentService.findPrn(studentDTO.getPrn())) {
 			model.addAttribute(ERRMSG, "This PRN already register...");
 			return SIGNUP;
 		}
@@ -94,9 +95,14 @@ public class UnauthenticatedController {
 		student.setPassword(studentDTO.getPassword());
 		student.setPrn(studentDTO.getPrn());
 		student.setCourse(optCourse.get());
+		student.setGender(studentDTO.getGender()=='m'?true:false);
+		if(studentDTO.getGender()=='m'?true:false)
+			student.setImgUrl("male.jpg");
+		else
+			student.setImgUrl("female.jpg");
 		student.setSecurityQeustion(studentDTO.getSecurityQeustion());
 		student.setSecurityAnswer(studentDTO.getSecurityAnswer());
-		student = studetService.save(student);
+		student = studentService.save(student);
 		if (student == null) {
 			model.addAttribute(ERRMSG, "Thier is an some error in registration...");
 			return "signup?error";
@@ -106,5 +112,15 @@ public class UnauthenticatedController {
 	
 		return SIGNUP;
 
+	}
+	@GetMapping("/Common/profile")
+	public String forProfile(Model model,Principal principal) {
+		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+		if(optStud.isPresent()) {
+			model.addAttribute("user", optStud.get());
+		}else {
+			return "redirect:/signout";
+		}
+		return "profile";
 	}
 }

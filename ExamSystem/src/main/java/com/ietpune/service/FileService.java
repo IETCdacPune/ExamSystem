@@ -65,7 +65,7 @@ public class FileService {
 		}
 		if (row.getCell(1) != null) {
 			if (row.getCell(1).getCellType() == Cell.CELL_TYPE_STRING) {
-				question.setCorrectOption(row.getCell(1).getStringCellValue().charAt(0));
+				question.setCorrectOption(row.getCell(1).getStringCellValue().toUpperCase().charAt(0));
 			}
 		} else {
 			throw new ExcelFileException("Question Correct Option not be empty.");

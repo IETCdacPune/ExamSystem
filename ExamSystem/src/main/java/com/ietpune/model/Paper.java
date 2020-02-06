@@ -20,12 +20,12 @@ import net.bytebuddy.implementation.bind.annotation.Default;
 public class Paper {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int paperId;
 	private int paperCode;
 	private String paperTiming;
 	private boolean enabled;
-	
+	private int numOfQuestion;
 	private boolean newPaper=true;
 	
 	@ManyToOne
@@ -56,17 +56,6 @@ public class Paper {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public int getPaperId() {
 		return paperId;
 	}
@@ -84,6 +73,12 @@ public class Paper {
 	}
 	public void setPaperTiming(String paperTiming) {
 		this.paperTiming = paperTiming;
+	}
+	public int getNumOfQuestion() {
+		return numOfQuestion;
+	}
+	public void setNumOfQuestion(int numOfQuestion) {
+		this.numOfQuestion = numOfQuestion;
 	}
 	public boolean isEnabled() {
 		return enabled;

@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,7 @@ import com.ietpune.service.QuestionService;
 import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
 @Controller
+@RequestMapping("/Student/")
 public class McqExamController {
 	@Autowired
 	public StudentService studentService;
@@ -41,14 +43,18 @@ public class McqExamController {
 	public McqExamController() {
 	}
 
-	@GetMapping("student/startExam/{id}")
-	public String forStartExam(Model model, @PathVariable int id) {
+	@GetMapping("startExam/{id}")
+	public String forStartExam(Model model, @PathVariable int id,Authentication auth) {
 		Paper paper = paperService.getPaperById(id);
+		
+		if(studentPaperService.existsPaperOfStudent(paper,studentService.getStudentByPrn(auth.getName()).get())) {
+			model.addAttribute("msg", "You have already appered for this exam.");
+		}
 		model.addAttribute("paperId", paper.getPaperId());
 		model.addAttribute("paperCode", paper.getPaperCode());
 		return "student/startExam";
 	}
-	@PostMapping("student/startExam/{id}")
+	@PostMapping("startExam/{id}")
 	public String postStartExam(Model model, HttpSession session, @PathVariable int id,@RequestParam("paperId") String paperId,@RequestParam("paperCode") String paperCode,@RequestParam("code") String code) {
 		if(paperCode.equals(code)) {
 			Paper paper=paperService.getPaperById(Integer.parseInt(paperId));
@@ -59,25 +65,27 @@ public class McqExamController {
 			session.setAttribute("subject", paper.getSubject().getName());
 			HashMap<Integer, Character> ansKey=new HashMap<>();
 			session.setAttribute("ansKey", ansKey);
-			return "redirect:/student/mcqExam/1";
+			return "redirect:/Student/mcqExam/1";
 		}
 		model.addAttribute("paperId", paperId);
 		model.addAttribute("paperCode", paperCode);
 		return "student/startExam";
 	}
-	@RequestMapping("student/mcqExam/{index}")
+	@RequestMapping("mcqExam/{index}")
 	public String getQuestionOfIndex(Model model,HttpSession session,@PathVariable int index){
 		index-=1;
 		List<McqQuestion> list=(List<McqQuestion>) session.getAttribute("qList");
 		if(list==null)
-			return "redirect:/";
+			return "redirect:/Student";
 		if(index==list.size())
-			return "redirect:/student/mcqExam/1";
+			return "redirect:/Student/mcqExam/1";
+		else if(index<0)
+			return "redirect:/Student/mcqExam/"+list.size();
 		long timeOver =(long)session.getAttribute("timeOver");
 		long currentTime = System.currentTimeMillis();
 		if( timeOver <= currentTime) {
 		log.info("submit");
-			return "redirect:/student/exam/submit";
+			return "redirect:/Student/exam/submit";
 		}
 		list.get(index).setRead(true);
 		long readed = list.stream().filter((que)->que.isRead()==true).count();
@@ -93,12 +101,12 @@ public class McqExamController {
 		return "student/mcqPaper";
 		
 	}
-	@PostMapping("student/mcqExamPost/next")
+	@PostMapping("mcqExamPost/previous")
 	public String postNextQue(Model model,HttpSession session,@RequestParam("index") String ind,@RequestParam("queId") String queId, @RequestParam("ans") Optional<String> ans ) {
 		int index=Integer.parseInt(ind);
-		return "redirect:/student/mcqExam/"+(index+1);
+		return "redirect:/Student/mcqExam/"+(index-1);
 	}
-	@PostMapping("student/mcqExamPost/save")
+	@PostMapping("mcqExamPost/save")
 	public String postSaveAns(Model model,HttpSession session,@RequestParam("index") String ind,@RequestParam("queId") String queId, @RequestParam("ans") Optional<String> ans ) {
 		int index=Integer.parseInt(ind);
 		List<McqQuestion> list=(List<McqQuestion>) session.getAttribute("qList");
@@ -106,9 +114,9 @@ public class McqExamController {
 			((HashMap<Integer, Character>)session.getAttribute("ansKey")).put(Integer.parseInt(queId), ans.get().charAt(0));
 			list.get(index-1).setAns(ans.get().charAt(0));
 		}
-		return "redirect:/student/mcqExam/"+(index+1);
+		return "redirect:/Student/mcqExam/"+(index+1);
 	}
-	@PostMapping("student/mcqExamPost/markedReview")
+	@PostMapping("mcqExamPost/markedReview")
 	public String postMarkedAns(Model model,HttpSession session,@RequestParam("index") String ind,@RequestParam("queId") String queId, @RequestParam("ans") Optional<String> ans ) {
 		int index=Integer.parseInt(ind);
 		List<McqQuestion> list=(List<McqQuestion>) session.getAttribute("qList");
@@ -117,9 +125,9 @@ public class McqExamController {
 			((HashMap<Integer, Character>)session.getAttribute("ansKey")).put(Integer.parseInt(queId), ans.get().charAt(0));
 			list.get(index-1).setAns(ans.get().charAt(0));
 		}
-		return "redirect:/student/mcqExam/"+(index+1);
+		return "redirect:/Student/mcqExam/"+(index+1);
 	}
-	@RequestMapping("student/exam/submit")
+	@RequestMapping("exam/submit")
 	public String getExamSubmit(Model model,HttpSession session,Principal principal) {
 		HashMap<Integer, Character> ansKey=(HashMap<Integer, Character>)session.getAttribute("ansKey");
 		if(ansKey==null)
@@ -134,10 +142,9 @@ public class McqExamController {
 			}
 		}
 		int numOfQuestion=ques.size();
-		double pers=(count/numOfQuestion)*100;
+		int pers=Math.round(((float)count/numOfQuestion)*100);
 		String result;
-		log.info("Marks %:- "+pers);
-		if(pers>40)
+		if(pers>=40)
 			result="Pass";
 		else
 			result="Failed";
@@ -146,8 +153,14 @@ public class McqExamController {
 		sp.setResult(result);
 		sp.setPaperDate(new java.sql.Date(new Date().getTime()));
 		sp.setPaper(paper);
+		sp.setPresent(true);
 		sp.setStudent(studentService.getStudentByPrn(principal.getName()).get());
 		sp.setStudentAnsMap(ansKey);
+		session.removeAttribute("qList");
+		session.removeAttribute("paperId");
+		session.removeAttribute("timeOver");
+		session.removeAttribute("subject");
+		session.removeAttribute("ansKey");
 		try {
 		studentPaperService.addStudentPaper(sp);
 		}catch (ConstraintViolationException e) {

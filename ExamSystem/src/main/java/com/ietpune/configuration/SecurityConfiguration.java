@@ -30,14 +30,14 @@ public class SecurityConfiguration extends  WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-		.antMatchers("/student/**").hasRole("STUDENT")
+		.antMatchers("/Student/**").hasRole("STUDENT")
 		.antMatchers("/Admin/**").hasRole("ADMIN")
+		.antMatchers("/Common/**").authenticated()
 		.anyRequest().permitAll()
 		.and()
 		.formLogin().loginPage("/signin").permitAll()
 		.and()
-		.logout()
-		.logoutUrl("/signout")
+		.logout().logoutUrl("/signout")
 		.invalidateHttpSession(true)
 		.deleteCookies("JSESSIONID")
         .logoutSuccessUrl("/");

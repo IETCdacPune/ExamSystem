@@ -2,8 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
-	<a class="navbar-brand" href="#">IET</a>
+<nav class="navbar navbar-expand-md navbar-light bg-info">
+	<a class="navbar-brand" href="/">IET</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -35,11 +35,7 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
 							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all student</a>
-						</div>
-						
-						
-						
-						</li>
+						</div></li>
 					<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -84,49 +80,30 @@
 			</sec:authorize>
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/STUDENT">Home</a></li>
+						href="${pageContext.request.contextPath}/Students">Home</a></li>
 					
-					<li class="nav-item"><a class="nav-link" href="#">Result</a></li>
-					
-					
-					
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> Exam </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							 <a class="dropdown-item"
-								href="${pageContext.request.contextPath}/student/newPapers">Show
-								new Papers</a>
-								<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/student/oldPapers">Show
-								old Papers</a>
-						
-						</div></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Student/result">Result</a></li>
+					<li class="nav-item"><a class="nav-link"
+								href="${pageContext.request.contextPath}/Student/newPapers">Exam</a></li>
 				</ul>
 			</sec:authorize>
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/signout">Logout</a></li>
+				<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"><i class="fas fa-users-cog"></i></a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/#">Change Password</a>
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Common/profile">Profile</a>
+							<div class="dropdown-divider"></div>
+							<a class="nav-link"
+					href="${pageContext.request.contextPath}/signout">Logout</a>
+						</div></li>
 			</ul>
 
 		</sec:authorize>
