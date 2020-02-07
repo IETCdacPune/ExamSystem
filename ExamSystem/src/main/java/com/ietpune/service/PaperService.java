@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.ietpune.dao.PaperDAO;
 import com.ietpune.model.Paper;
+import com.ietpune.model.StudentPaper;
 import com.ietpune.model.Subject;
 
 @Service
@@ -55,6 +56,11 @@ public class PaperService {
 	public Paper getEnabled(int paperId) {
 		// TODO Auto-generated method stub
 		return paperDAO.findById(paperId).get();
+	}
+
+	public Optional<Paper> getPapers(int paperId) {
+
+		return paperDAO.findById(paperId);
 	}
 
 	

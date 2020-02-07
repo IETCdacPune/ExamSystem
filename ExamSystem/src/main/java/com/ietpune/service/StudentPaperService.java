@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ietpune.dao.PaperDAO;
 import com.ietpune.dao.StudentPaperDAO;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Student;
@@ -15,6 +16,8 @@ import com.ietpune.model.StudentPaper;
 public class StudentPaperService {
 	@Autowired StudentPaperDAO studentPaperDAO;
 	@Autowired QuestionService questionService;
+	@Autowired PaperService paperService;
+	@Autowired PaperDAO paperDAO;
 	public StudentPaper addStudentPaper(StudentPaper studentPaper) {
 		return studentPaperDAO.save(studentPaper);
 	}
@@ -39,9 +42,10 @@ public class StudentPaperService {
 		}
 		return null;
 	}
-	public List<StudentPaper> getAllStudentMarks(Paper p) {
-		// TODO Auto-generated method stub
+	public List<StudentPaper> getStudentAllDetails(int paperId) {
+		Paper p=paperService.getPaper(paperId);
 		return studentPaperDAO.findAllByPaper(p);
 	}
+	
 	
 }

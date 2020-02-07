@@ -76,13 +76,14 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 		  <canvas class="w-100 h-90" id="avg"></canvas>
 		  </div>
 		 <div class="col-4">
+	
 		 Top Three Student
 	<ul class="list-group list-group-flush">
-	<li class="list-group-item">1st{}</li>
 	<li class="list-group-item">2sd</li>
 	<li class="list-group-item">3rd</li>
 	<li class="list-group-item">4th</li>
 	<li class="list-group-item">5th</li>
+
 	</ul>
   </div>
 		 </div>

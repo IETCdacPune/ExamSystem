@@ -14,20 +14,32 @@
 	<div class="container">
 		<%-- <jsp:include page="../menuBar.jsp" /> --%>
 		<br>
-		<div class="row justify-content-md-center">
-			<c:if test="${empty msg}"><div class="col-sm-6">
-				<div class="card text-center">
+		<div class="row justify-content-center">
+			<c:if test="${empty msg}"><div class="col">
+				<div class="card">
 					<div class="card-header bg-primary">
-						<h3>Paper Code</h3>
+						<h3>Paper Instruction</h3>
 					</div>
 					<div class="card-body">
-					<div class="jumbotron py-3">
-					<h5 class="my-3">1. Check your PRN and Module Name.</h5>
-					<h5>2. If you want  to submit your paper then click submit button.</h5>
-					<h5>3.If you answered any question button color is green. </h5>
-					<h5>4.If you mark for review any question button color is orange. </h5>
-					<h5>5.If you click on save and next button color is grey. </h5>
-					</div>
+						<ul class="list-group list-group-flush">
+						  <li class="list-group-item">Your name and module name is visible at top left during exam.</li>
+						  <li class="list-group-item">Timer is visible at right top after module name.</li>
+						  <li class="list-group-item">Number of question visited, marked for review, not visited shown just below the PRN.</li>
+						  <li class="list-group-item">In the right side you will get question and just below that you will get the options you can choose any one option from that.</li>
+						  <li class="list-group-item">To submit the answer you have two buttons <button class="btn btn-warning" type="submit">Marked
+									for Review And Next</button> and <button class="btn btn-primary" type="submit">Save & Next</button> you can click either of the button.</li>
+						<li class="list-group-item">If you want to go previous question then click on <button class="btn btn-light" type="submit">Previous Question</button> button.</li>
+						<li class="list-group-item">You can jump to any question by the clicking on any question number at left.</li>
+						  <li class="list-group-item">On the left hand said you will get question numbers with different color scheme. they are as follow
+						  	<ul class="list-group list-group-flush">
+						  		<li class="list-group-item"><a href="#" class="btn btn-secondary" style="border-radius: 30%;">01</a> unvisited question.</li>
+						  		<li class="list-group-item"><a href="#" class="btn btn-danger" style="border-radius: 30%;">01</a> visited question but answer not given.</li>
+						  		<li class="list-group-item"><a href="#" class="btn btn-success" style="border-radius: 30%;">01</a> visited and answer the question.</li>
+						  		<li class="list-group-item"><a href="#" class="btn btn-warning" style="border-radius: 30%;">01</a> visited and don't answer the question but mark it for review.</li>
+						  		<li class="list-group-item"><a href="#" class="btn btn-warning text-success" style="border-radius: 30%;">01</a> visited and answer the question as well as mark it for review.</li>
+						  	</ul>
+						  </li>
+						</ul>
 						<form method="post" autocomplete="off">
 							<input type="hidden" name="paperId" value="${paperId}"> <input
 								type="hidden" name="paperCode" value="${paperCode}"> <input

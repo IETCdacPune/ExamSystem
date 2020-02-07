@@ -55,8 +55,7 @@ public class PaperController {
 	private PaperService paperService;
 	@Autowired
 	private FileService fileService;
-	@Autowired
-	private StudentPaperService studentPaperService;
+	
 	private Logger log=Logger.getLogger(PaperController.class);
 	@GetMapping(value = "Admin/addPaper" )
 	public String forAddPaperGet(Model model) {
@@ -276,35 +275,6 @@ paper.setNewPaper(false);
 	
 	
 	
-	@GetMapping("Admin/genratedResult")
-	public String forGenratedResult(Model model)
-	{
-		List<Course> courseList=courseService.getAllCoursesWithEagerLoad();
-		
-		
-		if(!courseList.isEmpty())
-		{
-			model.addAttribute("courseList",courseList);
-		}
-		
-		//List<Paper> plist=paperService.forGenerateResultPaper();
-		
-	
-		
-		return "admin/generatedResult";
-	}
-	
-	@RequestMapping("Admin/viewForResult/{paperId}")
-	public String forViewResult(@PathVariable("paperId")int paperId,MultipartFile file,Model model) throws FileNotFoundException, IOException
-	{
-		Paper p=new Paper();
-		p.setPaperId(paperId);
-		List<StudentPaper> spaper=studentPaperService.getAllStudentMarks(p);
-	log.info("....................."+spaper);
-	fileService.writeFile(spaper,file);
-	model.addAttribute("studentResultList",spaper);
-		return "admin/viewForResult";
-	}
 	
 	
 	

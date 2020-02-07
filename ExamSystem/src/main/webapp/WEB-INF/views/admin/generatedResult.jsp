@@ -42,8 +42,7 @@
 									<div class="card mt-2">
 										<div class="card-header">
 											<a class="card-link" data-toggle="collapse"
-												href="#collapse${(loop.index+1)*100+loop1.index +1 }">Subject:-${subject.name}
-												have ${fn:length(subject.paperList)} papers.</a>
+												href="#collapse${(loop.index+1)*100+loop1.index +1 }">Subject:-${subject.name}</a>
 										</div>
 										<div id="collapse${(loop.index+1)*100+loop1.index +1 }"
 											class="collapse">
