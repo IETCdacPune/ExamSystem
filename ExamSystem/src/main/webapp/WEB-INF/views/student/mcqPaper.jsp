@@ -39,7 +39,7 @@
 										<c:set value="btn-warning text-success" var="cssClass"></c:set>
 									</c:when>
 									<c:when test="${question.read && question.markedReview}">
-										<c:set value="btn-warning" var="cssClass"></c:set>
+										<c:set value="btn-warning text-danger" var="cssClass"></c:set>
 									</c:when>
 									<c:when
 										test="${question.read && !question.markedReview && question.ans!=''}">

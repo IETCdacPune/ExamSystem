@@ -92,7 +92,7 @@ $(document).ready(function(){
 			</div>
 		</c:forEach>
 		<hr>
-		<a class="btn btn-light" href="/Student/AnswerSheet/${studPaper.id}">View Answer Sheet</a>
+		<c:if test="studPaper.paper.correctAnsVisibility"><a class="btn btn-light" href="/Student/AnswerSheet/${studPaper.id}">View Answer Sheet</a></c:if>
 		<jsp:include page="../footerLink.jsp" />
 	</div>
 </body>
