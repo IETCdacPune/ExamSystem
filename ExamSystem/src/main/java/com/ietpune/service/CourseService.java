@@ -42,9 +42,7 @@ public class CourseService {
 	}
 
 	public List<Course> getAllCourses() {
-		List<Course> list =courseDAO.findAll();
-		
-		return list;
+		return courseDAO.findAll();
 	}
 
 	public List<Course> getAllCoursesWithSubject() {
@@ -63,12 +61,7 @@ public class CourseService {
 
 	public List<Course> getAllCoursesWithEagerLoad() {
 		List<Course> list=getAllCourses();
-		list.forEach(
-				
-				(course)->{
-					
-					course.setSubjectList(subjectDAO.findByCourse(course));
-				});
+		list.forEach(course->course.setSubjectList(subjectDAO.findByCourse(course)));
 		return list;
 	}
 }

@@ -51,6 +51,7 @@ public class ExamSystemApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//System.out.println("abc@1234 :- "+passwordEcoder.encode("abc@1234"));
 		if (!roleDAO.findByRoleName(RoleName.ADMIN).isPresent()) {
 			roleDAO.save(new Role(RoleName.ADMIN));
 		}

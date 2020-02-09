@@ -37,63 +37,45 @@ public class AdminController {
 	private CourseService courseService;
 	@Autowired
 	private PaperService paperService;
-	Logger log= Logger.getLogger(AdminController.class);
-	
+	Logger log = Logger.getLogger(AdminController.class);
+
 	@GetMapping("Admin")
 	public String forAdminDashboard() {
 		return "admin/adminDashboard";
 	}
-	
+
 	@GetMapping("Admin/listOfStudent")
 	public String forListOfStudent(Model model) {
-		
-		System.out.println("welcomw.............");
-		
-		List<Student> studentAllList=studentService.getAllStudentList();
-		log.info("list............."+studentAllList);
-		
-		model.addAttribute("studentAllList",studentAllList);
+		List<Student> studentAllList = studentService.getAllStudentList();
+
+		model.addAttribute("studentAllList", studentAllList);
 		return "admin/listOfStudent";
 	}
+
 	@GetMapping("Admin/genratedResult")
-	public String forGenratedResult(Model model)
-	{
-		List<Course> courseList=courseService.getAllCoursesWithEagerLoad();
-		
-		if(!courseList.isEmpty())
-		{
-			model.addAttribute("courseList",courseList);
+	public String forGenratedResult(Model model) {
+		List<Course> courseList = courseService.getAllCoursesWithEagerLoad();
+
+		if (!courseList.isEmpty()) {
+			model.addAttribute("courseList", courseList);
 		}
-		
-		//List<Paper> plist=paperService.forGenerateResultPaper();
-		
-	
-		
 		return "admin/generatedResult";
 	}
-	
-	@RequestMapping("Admin/viewForResult/{paperId}")
-	public String forViewResult(@PathVariable("paperId")int paperId,MultipartFile file,Model model) throws FileNotFoundException, IOException
-	{
-	
 
-		
-		  List<StudentPaper> studPaperList=studentPaperService.getStudentAllDetails(paperId);
-		  Optional<StudentPaper>
-		  optStudPaper=studentPaperService.getStudentPaper(paperId);
-		  if(optStudPaper.isPresent()) { StudentPaper sp=optStudPaper.get();
-		  
-		  model.addAttribute("topFive",studentPaperService.getTopFiveStudentOfPaper(sp. getPaper()));
-		  
-		 }
-		 
-	
-	
-		 fileService. writeFile(studPaperList,file);
-	
-	model.addAttribute("studentResultList",studPaperList);
+	@RequestMapping("Admin/viewForResult/{paperId}")
+	public String forViewResult(@PathVariable("paperId") int paperId, MultipartFile file, Model model)
+			throws FileNotFoundException, IOException {
+
+		List<StudentPaper> studPaperList = studentPaperService.getStudentAllDetails(paperId);
+		Optional<StudentPaper> optStudPaper = studentPaperService.getStudentPaper(paperId);
+		if (optStudPaper.isPresent()) {
+			StudentPaper sp = optStudPaper.get();
+			model.addAttribute("topFive", studentPaperService.getTopFiveStudentOfPaper(sp.getPaper()));
+		}
+		fileService.writeFile(studPaperList, file);
+
+		model.addAttribute("studentResultList", studPaperList);
 		return "admin/viewForResult";
 	}
-	
-	
+
 }

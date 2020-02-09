@@ -40,14 +40,12 @@ public class McqExamController {
 	public QuestionService questionService;
 	@Autowired StudentPaperService studentPaperService;
 	private static final Logger log = LoggerFactory.getLogger(McqExamController.class);
-	public McqExamController() {
-	}
 
 	@GetMapping("startExam/{id}")
 	public String forStartExam(Model model, @PathVariable int id,Authentication auth) {
 		Paper paper = paperService.getPaperById(id);
 		
-		if(studentPaperService.existsPaperOfStudent(paper,studentService.getStudentByPrn(auth.getName()).get())) {
+		if(studentPaperService.existsPaperOfStudent(paper,studentService.getStudentByPrn(auth.getName()).orElse(null))) {
 			model.addAttribute("msg", "You have already appered for this exam.");
 		}
 		model.addAttribute("paperId", paper.getPaperId());
@@ -84,12 +82,11 @@ public class McqExamController {
 		long timeOver =(long)session.getAttribute("timeOver");
 		long currentTime = System.currentTimeMillis();
 		if( timeOver <= currentTime) {
-		log.info("submit");
 			return "redirect:/Student/exam/submit";
 		}
 		list.get(index).setRead(true);
-		long readed = list.stream().filter((que)->que.isRead()==true).count();
-		long mreview = list.stream().filter((que)->que.isMarkedReview()==true).count();
+		long readed = list.stream().filter(McqQuestion::isRead).count();
+		long mreview = list.stream().filter(McqQuestion::isMarkedReview).count();
 		McqQuestion question=list.get(index);
 		model.addAttribute("readed", readed);
 		model.addAttribute("mReview", mreview);
@@ -113,6 +110,7 @@ public class McqExamController {
 		if(ans.isPresent()) {
 			((HashMap<Integer, Character>)session.getAttribute("ansKey")).put(Integer.parseInt(queId), ans.get().charAt(0));
 			list.get(index-1).setAns(ans.get().charAt(0));
+			list.get(index-1).setMarkedReview(false);
 		}
 		return "redirect:/Student/mcqExam/"+(index+1);
 	}
@@ -124,6 +122,7 @@ public class McqExamController {
 		if(ans.isPresent()) {
 			((HashMap<Integer, Character>)session.getAttribute("ansKey")).put(Integer.parseInt(queId), ans.get().charAt(0));
 			list.get(index-1).setAns(ans.get().charAt(0));
+			
 		}
 		return "redirect:/Student/mcqExam/"+(index+1);
 	}
@@ -154,18 +153,14 @@ public class McqExamController {
 		sp.setPaperDate(new java.sql.Date(new Date().getTime()));
 		sp.setPaper(paper);
 		sp.setPresent(true);
-		sp.setStudent(studentService.getStudentByPrn(principal.getName()).get());
+		sp.setStudent(studentService.getStudentByPrn(principal.getName()).orElse(null));
 		sp.setStudentAnsMap(ansKey);
 		session.removeAttribute("qList");
 		session.removeAttribute("paperId");
 		session.removeAttribute("timeOver");
 		session.removeAttribute("subject");
 		session.removeAttribute("ansKey");
-		try {
 		studentPaperService.addStudentPaper(sp);
-		}catch (ConstraintViolationException e) {
-			log.info("Exception:- "+e.getMessage());
-		}
 		model.addAttribute("total", numOfQuestion);
 		model.addAttribute("marks", count);
 		model.addAttribute("result",result);

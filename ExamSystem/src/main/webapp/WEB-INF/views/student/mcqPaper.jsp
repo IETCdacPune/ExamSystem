@@ -12,8 +12,8 @@
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
 </head>
-<body id="body">
-	<div class="card">
+<body id="body" style="margin: 0">
+	<div class="card" style="height: 100vh;">
 		<div class="card-header">
 			<div class="row">
 				<div class="col-10">
@@ -78,15 +78,17 @@
 								<input type="hidden" name="index" value="${index}">
 							</div>
 							<div class="card-body">
+							<div class="btn-group-vertical" data-toggle="buttons">
 								<c:forEach items="${question.optionList}" var="option"
 									varStatus="loop">
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="ans"
+									<label class="btn btn-light">
+										<input type="radio" name="ans"
 											id="exampleRadios${loop.index+1}" value="${option.opt}"
-											${question.ans==option.opt?'checked':''}> <label
-											class="form-check-label" for="exampleRadios${loop.index+1}"><pre>${option.answer}</pre></label>
-									</div>
+											${question.ans==option.opt?'checked':''}>
+											class="form-check-label" for="exampleRadios${loop.index+1}"><pre>${option.answer}</pre>
+									</label>
 								</c:forEach>
+								</div>
 							</div>
 							<div class="card-footer ">
 								<button formaction="/Student/mcqExamPost/previous" formmethod="post"

@@ -1,13 +1,19 @@
 package com.ietpune.service;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.activation.MimetypesFileTypeMap;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -30,7 +36,7 @@ import com.ietpune.model.StudentPaper;
 
 @Service
 public class FileService {
-
+	private static String UPLOADED_FOLDER = "./src/main/resources/static/Common/avatar/";
 	public List<Question> fileToList(MultipartFile file, Paper p) throws IOException, ExcelFileException {
 		String extesion = FilenameUtils.getExtension(file.getOriginalFilename());
 		List<Question> questions = null;
@@ -116,7 +122,6 @@ public class FileService {
 	}
 
 	public void writeFile(List<StudentPaper> spaper, MultipartFile file) throws FileNotFoundException, IOException {
-		// TODO Auto-generated method stub
 		Workbook workbook = new XSSFWorkbook();
 		Sheet studentsSheet = workbook.createSheet("Students");
 		studentsSheet.setDefaultColumnWidth(30);
@@ -155,5 +160,19 @@ public class FileService {
         try (FileOutputStream outputStream = new FileOutputStream("Result1.xlsx")) {
   workbook.write(outputStream); }
  
+	}
+
+	public boolean isValidImg(MultipartFile multipart){
+		if(multipart.getContentType().split("/")[0].equals("image") && (multipart.getSize()/1024)<500)
+				return true;
+		return false;
+	}
+
+	public String saveImg(MultipartFile file, String prn) throws IOException {
+		byte[] bytes = file.getBytes();
+		String newName=prn+"."+FilenameUtils.getExtension(file.getOriginalFilename());;
+		Path path = Paths.get(UPLOADED_FOLDER + newName);
+		Files.write(path, bytes);
+		return newName;
 	}
 }

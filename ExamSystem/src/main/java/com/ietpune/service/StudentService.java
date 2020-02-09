@@ -54,6 +54,10 @@ public class StudentService{
 		return studentDAO.findByPrn(prn);
 	}
 
+	public Student update(Student stud) {
+		return studentDAO.save(stud);
+	}
+
 	
 
 

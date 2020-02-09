@@ -40,14 +40,14 @@
 						  	</ul>
 						  </li>
 						</ul>
-						<form method="post" autocomplete="off">
+						<form:form method="post" autocomplete="off">
 							<input type="hidden" name="paperId" value="${paperId}"> <input
 								type="hidden" name="paperCode" value="${paperCode}"> <input
 								type="text" class="form-control" name="code"
 								placeholder="Enter paper code" /> <br>
 							<button type="submit" class="btn btn-primary">Start Exam</button>
 							<button type="reset" class="btn btn-danger">Reset form</button>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>

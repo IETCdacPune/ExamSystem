@@ -1,25 +1,28 @@
 package com.ietpune.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ietpune.model.Paper;
 import com.ietpune.model.Student;
 import com.ietpune.model.StudentPaper;
 import com.ietpune.model.Subject;
+import com.ietpune.service.FileService;
 import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
 import com.ietpune.service.SubjectService;
@@ -27,14 +30,13 @@ import com.ietpune.service.SubjectService;
 @Controller
 @RequestMapping("/Student/")
 public class StudentController {
-	private static final Logger log = LoggerFactory.getLogger(StudentController.class);
 	@Autowired private StudentService studentService;
 	@Autowired private StudentPaperService studentPaperService;
 	@Autowired private SubjectService subjectService;
+	@Autowired private FileService fileService;
 	@GetMapping("")
 	public String forStudentDashboardGet() {
-
-		return "student/studentDashboard";
+		return "student/dashboard";
 	}
 
 	@GetMapping("newPapers")
@@ -92,5 +94,19 @@ public class StudentController {
 	 * (!allSub.isEmpty()) { model.addAttribute("list", allSub); } return
 	 * "student/showPaper"; }
 	 */
+	@PostMapping("uploadImg")
+	public String forUploadImg(Model model,Principal principal, @RequestParam("photo") MultipartFile file) throws IOException {
+		if(fileService.isValidImg(file)) {
+			Optional<Student> optStud=studentService.getByPrn(principal.getName());
+			if(optStud.isPresent()) {
+				Student stud=optStud.get();
+				stud.setImgUrl(fileService.saveImg(file,stud.getPrn()));
+				studentService.update(stud);
+			}
+			return "redirect:/Common/profile";
+		}
+		model.addAttribute("errmsg", "Select jpg img only with less than 500kb size...");
+		return "redirect:/Common/profile";
+	}
 
 }
