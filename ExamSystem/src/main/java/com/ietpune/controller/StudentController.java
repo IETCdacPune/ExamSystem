@@ -31,10 +31,10 @@ public class StudentController {
 	@Autowired private StudentService studentService;
 	@Autowired private StudentPaperService studentPaperService;
 	@Autowired private SubjectService subjectService;
-	@GetMapping("")
+	@GetMapping("/")
 	public String forStudentDashboardGet() {
 
-		return "student/studentDashboard";
+		return "student/dashboard";
 	}
 
 	@GetMapping("newPapers")

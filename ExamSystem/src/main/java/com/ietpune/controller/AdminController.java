@@ -25,7 +25,7 @@ import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
 
 @Controller
-
+@RequestMapping("/Admin/")
 public class AdminController {
 	@Autowired
 	private StudentService studentService;
@@ -39,12 +39,12 @@ public class AdminController {
 	private PaperService paperService;
 	Logger log= Logger.getLogger(AdminController.class);
 	
-	@GetMapping("Admin")
+	@GetMapping("/")
 	public String forAdminDashboard() {
-		return "admin/adminDashboard";
+		return "admin/dashboard";
 	}
 	
-	@GetMapping("Admin/listOfStudent")
+	@GetMapping("listOfStudent")
 	public String forListOfStudent(Model model) {
 		
 		System.out.println("welcomw.............");
@@ -55,7 +55,7 @@ public class AdminController {
 		model.addAttribute("studentAllList",studentAllList);
 		return "admin/listOfStudent";
 	}
-	@GetMapping("Admin/genratedResult")
+	@GetMapping("genratedResult")
 	public String forGenratedResult(Model model)
 	{
 		List<Course> courseList=courseService.getAllCoursesWithEagerLoad();
@@ -72,7 +72,7 @@ public class AdminController {
 		return "admin/generatedResult";
 	}
 	
-	@RequestMapping("Admin/viewForResult/{paperId}")
+	@RequestMapping("viewForResult/{paperId}")
 	public String forViewResult(@PathVariable("paperId")int paperId,MultipartFile file,Model model) throws FileNotFoundException, IOException
 	{
 	

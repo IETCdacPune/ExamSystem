@@ -37,7 +37,7 @@ var totalMarks=${studPaper.paper.numOfQuestion};
 var obtainedMarks=${studPaper.marks};
 var totalAttempt=${attempt};
 $(document).ready(function(){
-	alert('total:-'+totalMarks+' Obtain'+obtainedMarks+' Attempt'+totalAttempt);
+	
 	fillCanvas("canvasResult",["Correct","Wrong","Unattempted"],[obtainedMarks,totalAttempt-obtainedMarks,totalMarks-totalAttempt],["green","red","orange"],"Result");
 	fillCanvas("canvasAccuracy",["Accuracy","Unaccurate"],[Math.round(obtainedMarks*100/totalAttempt),Math.round((totalAttempt-obtainedMarks)*100/totalAttempt)],["green","red"],"Accuracy");
 });

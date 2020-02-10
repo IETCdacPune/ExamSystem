@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends  WebSecurityConfigurerAdapter {
@@ -25,7 +26,10 @@ public class SecurityConfiguration extends  WebSecurityConfigurerAdapter {
 		.passwordEncoder(passwordEncoder());
 		super.configure(auth);
 	}
-	
+	@Bean
+	public AuthenticationSuccessHandler mySuccessHandler() {
+		return new MySimpleUrlAuthenticationSuccessHandler();
+	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
@@ -35,11 +39,14 @@ public class SecurityConfiguration extends  WebSecurityConfigurerAdapter {
 		.anyRequest().permitAll()
 		.and()
 		.formLogin().loginPage("/signin").permitAll()
+		.successHandler(mySuccessHandler())
 		.and()
 		.logout().logoutUrl("/signout")
 		.invalidateHttpSession(true)
 		.deleteCookies("JSESSIONID")
-        .logoutSuccessUrl("/");
+        .logoutSuccessUrl("/")
+        .and()
+        .exceptionHandling().accessDeniedPage("/accessDenied");
 	}
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {

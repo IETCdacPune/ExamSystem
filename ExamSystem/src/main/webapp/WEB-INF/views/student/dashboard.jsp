@@ -10,6 +10,7 @@
 <body>
 	<div class="container">
 		<jsp:include page="../menuBar.jsp" />
+		<h3>Student Page</h3>
 	</div>
 	<jsp:include page="../footerLink.jsp" />
 </body>

@@ -64,9 +64,9 @@ public class MySimpleUrlAuthenticationSuccessHandler
         }
  
         if (isStudent) {
-            return "/Student";
+            return "/Student/";
         } else if (isAdmin) {
-            return "/Admin";
+            return "/Admin/";
         } else {
             throw new IllegalStateException();
         }

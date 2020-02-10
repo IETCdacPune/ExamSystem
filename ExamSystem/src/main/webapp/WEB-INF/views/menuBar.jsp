@@ -28,7 +28,7 @@
 			<sec:authorize access="hasRole('ADMIN')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/Admin">Home</a></li>
+						href="${pageContext.request.contextPath}/Admin/">Home</a></li>
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Student </a>
@@ -83,7 +83,7 @@
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/Students">Home</a></li>
+						href="${pageContext.request.contextPath}/Student/">Home</a></li>
 					
 					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Student/result">Result</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -95,7 +95,7 @@
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"><i class="fas fa-users-cog"></i></a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
 								href="${pageContext.request.contextPath}/#">Change Password</a>
 							<a class="dropdown-item"
