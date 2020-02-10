@@ -68,7 +68,7 @@
 					</c:if>
 				</div>
 				<div class="col-10">
-					<form>
+					<form:form>
 						<div class="card border-info ">
 							<div class="card-head">
 								<h4>
@@ -100,7 +100,7 @@
 									class="btn btn-primary" type="submit">Save & Next</button>
 							</div>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

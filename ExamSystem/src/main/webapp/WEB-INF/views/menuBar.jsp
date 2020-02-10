@@ -29,22 +29,28 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/Admin/">Home</a></li>
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Student </a>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Student </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
-							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all student</a>
+								href="${pageContext.request.contextPath}/Admin/listOfStudent">show
+								all student</a>
 						</div></li>
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Exam </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/addPaper">Add Paper</a> 
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/allPapers">Show All Paper</a>
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Admin/addPaper">Add
+								Paper</a> <a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Admin/allPapers">Show
+								All Paper</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="${pageContext.request.contextPath}/Admin/genratedResult">Result</a>
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Admin/genratedResult">Result</a>
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -78,35 +84,41 @@
 						</div></li>
 				</ul>
 			</sec:authorize>
-			
-			
+
+
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/Student/">Home</a></li>
-					
-					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Student/result">Result</a></li>
+
 					<li class="nav-item"><a class="nav-link"
-								href="${pageContext.request.contextPath}/Student/newPapers">Exam</a></li>
+						href="${pageContext.request.contextPath}/Student/result">Result</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="${pageContext.request.contextPath}/Student/newPapers">Exam</a></li>
 				</ul>
 			</sec:authorize>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><i class="fas fa-users-cog"></i></a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><i class="fas fa-users-cog"></i></a>
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="navbarDropdown">
+						<a class="dropdown-item"
+							href="${pageContext.request.contextPath}/#">Change Password</a>
+						<sec:authorize access="hasRole('STUDENT')">
 							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/#">Change Password</a>
-							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Common/profile"><i class="far fa-id-card"></i> Profile</a>
-							<div class="dropdown-divider"></div>
-							<a class="nav-link"
-					href="${pageContext.request.contextPath}/signout"><i class="fas fa-sign-out-alt"></i> Logout</a>
-						</div></li>
+								href="${pageContext.request.contextPath}/Common/profile"><i
+								class="far fa-id-card"></i> Profile</a>
+						</sec:authorize>
+						<div class="dropdown-divider"></div>
+						<a class="nav-link"
+							href="${pageContext.request.contextPath}/signout"><i
+							class="fas fa-sign-out-alt"></i> Logout</a>
+					</div></li>
 			</ul>
 
 		</sec:authorize>
 	</div>
 </nav>
-		<br>
+<br>
