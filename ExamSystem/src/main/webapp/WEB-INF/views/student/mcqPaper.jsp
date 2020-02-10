@@ -5,16 +5,27 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
+<script type="text/javascript">
+$(document).ready(function () {
+	$('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+});
+</script>
 </head>
 <body id="body" style="margin: 0">
 	<div class="card" style="height: 100vh;">
-		<div class="card-header">
+		<div class="card-header" style="height:15%;">
 			<div class="row">
 				<div class="col-10">
 					<sec:authentication var="user" property="principal" />
@@ -27,11 +38,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="card-body">
-			<div class="row">
-				<div class="col-2">
+		<div class="card-body" style="height:85%;">
+			<div class="row h-100">
+				<div class="col-3 h-100">
 					<c:if test="${not empty list}">
-						<div class="row overflow-auto">
+						<div class="bg-light" style="overflow-y: scroll;">
 							<c:forEach items="${list}" var="question" varStatus="loop">
 								<c:choose>
 									<c:when
@@ -52,12 +63,10 @@
 										<c:set value="btn-secondary" var="cssClass"></c:set>
 									</c:when>
 								</c:choose>
-								<div class="col-3 m-1" style="height: 80%;">
 										<a href="/Student/mcqExam/${loop.index+1}"
-											class="btn ${cssClass}" style="border-radius: 30%;"><c:if
+											class="btn ${cssClass} my-1" style="border-radius: 30%;"><c:if
 												test="${loop.index<9 }">0${loop.index+1}</c:if><c:if
 												test="${loop.index>=9 }">${loop.index+1}</c:if></a>
-								</div>
 							</c:forEach>
 						</div>
 						<div class="row">
@@ -67,40 +76,39 @@
 						</div>
 					</c:if>
 				</div>
-				<div class="col-10">
-					<form:form>
-						<div class="card border-info ">
-							<div class="card-head">
-								<h4>
-									<pre>Q${index}. ${question.fullQuestion}</pre>
-								</h4>
+				<div class="col-9 h-100">
+						<div class="card border-info h-100">
+						<form:form class="h-100">
+							<div class="card-head" style="height:30%;overflow-y: scroll; width: 100%;">
+								<h5>
+									<c:set var="newline" value="<%= \"\n\" %>" />
+									Q${index}. ${fn:replace(question.fullQuestion,newline, "<br />")}
+									
+								</h5>
 								<input type="hidden" name="queId" value="${question.queId}">
 								<input type="hidden" name="index" value="${index}">
 							</div>
-							<div class="card-body">
-							<div class="btn-group-vertical" data-toggle="buttons">
+							<div class="card-body" style="height:55%;overflow-y: scroll;"> 
+							<div data-spy="scroll" data-offset="0" class="btn-group btn-group-vertical btn-group-toggle w-100" data-toggle="buttons">
 								<c:forEach items="${question.optionList}" var="option"
 									varStatus="loop">
-									<label class="btn btn-light">
+									<label class="btn btn-light text-left w-100 ${question.ans==option.opt?'active':''}">
 										<input type="radio" name="ans"
 											id="exampleRadios${loop.index+1}" value="${option.opt}"
-											${question.ans==option.opt?'checked':''}>
-											class="form-check-label" for="exampleRadios${loop.index+1}"><pre>${option.answer}</pre>
+											${question.ans==option.opt?'checked':''}><pre>${option.answer}</pre>
 									</label>
 								</c:forEach>
 								</div>
 							</div>
-							<div class="card-footer ">
+							<div class="card-footer"  style="height:15%;">
 								<button formaction="/Student/mcqExamPost/previous" formmethod="post"
-									class="btn btn-light" type="submit">Previous Question</button>
-								<button formaction="/Student/mcqExamPost/markedReview"
+									class="btn btn-light" type="submit">Previous Question</button> <button formaction="/Student/mcqExamPost/markedReview"
 									formmethod="post" class="btn btn-warning" type="submit">Marked
-									for Review And Next</button>
-								<button formaction="/Student/mcqExamPost/save" formmethod="post"
+									for Review And Next</button> <button formaction="/Student/mcqExamPost/save" formmethod="post"
 									class="btn btn-primary" type="submit">Save & Next</button>
 							</div>
-						</div>
 					</form:form>
+						</div>
 				</div>
 			</div>
 		</div>

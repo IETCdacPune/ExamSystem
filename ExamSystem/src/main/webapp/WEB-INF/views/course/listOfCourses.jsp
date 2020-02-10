@@ -12,7 +12,7 @@
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		<c:if test="${not empty list}">
 			<c:forEach items="${list}" var="course" varStatus="loop">

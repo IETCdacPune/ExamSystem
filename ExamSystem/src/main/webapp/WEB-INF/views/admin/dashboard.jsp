@@ -41,7 +41,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
+<body><div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		<div class="row mx-1">
 			<div class="col">
@@ -96,5 +96,5 @@ $(document).ready(function(){
 			</div>
 		</div>
 	<jsp:include page="../footerLink.jsp" />
-</body>
+</div></body>
 </html>

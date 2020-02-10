@@ -8,7 +8,7 @@ public class CourseDTO {
 	@NotNull
 	@Size(min = 2, message = "Course name must be grater than two charector")
 	@Size(max = 20, message = "Course name must be less than twenty charector")
-	@Pattern(regexp = "[a-zA-Z]{2,20}",message = "only charectors are allowed")
+	@Pattern(regexp = "[a-zA-Z0-9_]{2,15}",message = "only charectors are allowed")
 	private String name;
 
 	public String getName() {

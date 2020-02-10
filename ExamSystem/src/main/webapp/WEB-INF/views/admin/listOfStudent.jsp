@@ -11,7 +11,7 @@
 </style>
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<div class="table-responsive">
 			<jsp:include page="../menuBar.jsp" />
 			<input class="form-control" id="myInput" type="text"

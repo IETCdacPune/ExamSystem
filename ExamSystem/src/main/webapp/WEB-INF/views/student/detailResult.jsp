@@ -44,7 +44,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		<div class="row">
 			<div class="col">

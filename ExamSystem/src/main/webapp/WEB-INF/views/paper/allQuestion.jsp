@@ -25,7 +25,7 @@ $(document).ready(function() {
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 	
 		<jsp:include page="../menuBar.jsp" />
 		<br> <br><div>
@@ -84,5 +84,6 @@ $(document).ready(function() {
 		</div>
 	
 	<jsp:include page="../footerLink.jsp" />
+	</div>
 </body>
 </html>

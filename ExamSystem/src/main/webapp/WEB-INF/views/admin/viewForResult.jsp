@@ -64,7 +64,7 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 	<div class="table-responsive">      
 		<jsp:include page="../menuBar.jsp" />
 		

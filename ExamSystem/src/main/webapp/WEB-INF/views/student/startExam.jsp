@@ -11,7 +11,7 @@
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body >
-	<div class="container">
+	<div class="m-1">
 		<%-- <jsp:include page="../menuBar.jsp" /> --%>
 		<br>
 		<div class="row justify-content-center">
@@ -21,7 +21,7 @@
 						<h3>Paper Instruction</h3>
 					</div>
 					<div class="card-body">
-						<ul class="list-group list-group-flush">
+						<ol class="list-group list-group-flush">
 						  <li class="list-group-item">Your name and module name is visible at top left during exam.</li>
 						  <li class="list-group-item">Timer is visible at right top after module name.</li>
 						  <li class="list-group-item">Number of question visited, marked for review, not visited shown just below the PRN.</li>
@@ -39,7 +39,7 @@
 						  		<li class="list-group-item"><a href="#" class="btn btn-warning text-success" style="border-radius: 30%;">01</a> visited and answer the question as well as mark it for review.</li>
 						  	</ul>
 						  </li>
-						</ul>
+						</ol>
 						<form:form method="post" autocomplete="off">
 							<input type="hidden" name="paperId" value="${paperId}"> <input
 								type="hidden" name="paperCode" value="${paperCode}"> <input

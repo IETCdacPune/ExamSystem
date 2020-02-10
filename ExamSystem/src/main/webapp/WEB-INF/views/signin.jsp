@@ -10,7 +10,7 @@
 <jsp:include page="./headerLink.jsp" />
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 	<jsp:include page="./menuBar.jsp" />
 		<div class="row">
 			<div class="col-sm-9 col-md-8 col-lg-7 mx-auto">
