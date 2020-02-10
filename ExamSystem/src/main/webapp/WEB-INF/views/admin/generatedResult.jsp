@@ -61,15 +61,8 @@
 																				<h5 class="card-title">${loop3.index +1 })
 																					Paper Code:- ${paper.paperCode}<br>Subject:-${subject.name}
 																				</h5>
-
-
-
 																				<a class="btn btn-info"
 																					href="${pageContext.request.contextPath}/Admin/viewForResult/${paper.paperId}">ViewResult</a>
-
-
-
-
 																			</div>
 																		</div>
 																	</div>

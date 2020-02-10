@@ -99,10 +99,10 @@
 							<a class="dropdown-item"
 								href="${pageContext.request.contextPath}/#">Change Password</a>
 							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Common/profile">Profile</a>
+								href="${pageContext.request.contextPath}/Common/profile"><i class="far fa-id-card"></i> Profile</a>
 							<div class="dropdown-divider"></div>
 							<a class="nav-link"
-					href="${pageContext.request.contextPath}/signout">Logout</a>
+					href="${pageContext.request.contextPath}/signout"><i class="fas fa-sign-out-alt"></i> Logout</a>
 						</div></li>
 			</ul>
 

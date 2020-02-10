@@ -77,22 +77,20 @@ $(document).ready(function(){
 					<c:set value="6th" var="rank"></c:set>
 				</c:when>
 			</c:choose>
-			<div class="media">
+			<div class="media my-1">
 			  <img class="mr-3" style="width: 50px;height: 50px" src="/Common/avatar/${studPaper.student.imgUrl}" alt="${studPaper.student.firstName} ${studPaper.student.lastName}">
 			  <div class="media-body">
-			    <h5 class="mt-0">${rank}
+			    <h5 class="mt-0">${rank} PRN:-${studPaper.student.prn}  Name:-${studPaper.student.firstName} ${studPaper.student.lastName}</h5>
 			    	<div class="progress">
 					  <div class="progress-bar progress-bar-striped" style="width:<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${ studPaper.marks*100/studPaper.paper.numOfQuestion}" />%">
 					  	${studPaper.marks}
 					  </div>
 					</div>
-			    </h5>
-			    <h6>PRN:-${studPaper.student.prn}  Name:-${studPaper.student.firstName} ${studPaper.student.lastName}</h6>
 			  </div>
 			</div>
 		</c:forEach>
 		<hr>
-		<c:if test="studPaper.paper.correctAnsVisibility"><a class="btn btn-light" href="/Student/AnswerSheet/${studPaper.id}">View Answer Sheet</a></c:if>
+		<c:if test="${studPaper.paper.correctAnsVisibility}"><a class="btn btn-light" href="/Student/AnswerSheet/${studPaper.id}">View Answer Sheet</a></c:if>
 		<jsp:include page="../footerLink.jsp" />
 	</div>
 </body>
