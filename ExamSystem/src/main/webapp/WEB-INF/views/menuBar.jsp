@@ -15,7 +15,7 @@
 		<sec:authorize access="!isAuthenticated()">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/">Home</a></li>
+					href="${pageContext.request.contextPath}/"><i class="fas fa-home"></i>Home</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/signup">Registration</a></li>
 			</ul>
@@ -28,7 +28,7 @@
 			<sec:authorize access="hasRole('ADMIN')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/Admin/">Home</a></li>
+						href="${pageContext.request.contextPath}/Admin/"><i class="fas fa-home"></i> Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -89,7 +89,7 @@
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/Student/">Home</a></li>
+						href="${pageContext.request.contextPath}/Student/"><i class="fas fa-home"></i> Home</a></li>
 
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/Student/result">Result</a></li>
