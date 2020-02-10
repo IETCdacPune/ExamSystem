@@ -77,14 +77,38 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 		  </div>
 		 <div class="col-4">
 	
-		 Top Three Student
-	<ul class="list-group list-group-flush">
-	<li class="list-group-item">2sd</li>
-	<li class="list-group-item">3rd</li>
-	<li class="list-group-item">4th</li>
-	<li class="list-group-item">5th</li>
+		<h3>Top Five Students</h3>
+		<c:forEach var="studPaper" items="${topFive}" varStatus="loop">
+			<c:choose>
+				<c:when test="${loop.index == 0}">
+					<c:set value="1st" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 1}">
+					<c:set value="2nd" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 2}">
+					<c:set value="3rd" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 3}">
+					<c:set value="4th" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 4}">
+					<c:set value="5th" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 5}">
+					<c:set value="6th" var="rank"></c:set>
+				</c:when>
+			</c:choose>
+			<ul class="list-group list-group-flush">
+			 <li class="list-group-item">
+			    ${rank} PRN:-${studPaper.student.prn}  Name:-${studPaper.student.firstName} ${studPaper.student.lastName}
+			    	</li>
+			    	</ul>
+			
+		</c:forEach>
+	
 
-	</ul>
+
   </div>
 		 </div>
 		  </div>
@@ -116,6 +140,7 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
     <td>${student.student.firstName}</td>
     <td>${student.marks}</td>
      <td>${student.result}</td>
+       <td><c:if test="${student.present}" >present</c:if><c:if test="${!student.present}" >absent</c:if></td>
   </tr>
     </c:forEach>
 </tbody>

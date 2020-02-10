@@ -66,15 +66,20 @@ public class AdminController {
 	public String forViewResult(@PathVariable("paperId") int paperId, MultipartFile file, Model model)
 			throws FileNotFoundException, IOException {
 
-		List<StudentPaper> studPaperList = studentPaperService.getStudentAllDetails(paperId);
-		Optional<StudentPaper> optStudPaper = studentPaperService.getStudentPaper(paperId);
-		if (optStudPaper.isPresent()) {
-			StudentPaper sp = optStudPaper.get();
-			model.addAttribute("topFive", studentPaperService.getTopFiveStudentOfPaper(sp.getPaper()));
-		}
-		fileService.writeFile(studPaperList, file);
-
-		model.addAttribute("studentResultList", studPaperList);
+		
+		
+		List<StudentPaper> studentPaperList=studentPaperService.forGernaratedResult(paperId);
+		
+		
+		
+		List<StudentPaper>topFive=studentPaperService.getTopFiveStudentOfPaper(paperId);
+		 
+		 
+		log.info("mes,,,,,,,,,,,"+studentPaperList);
+		log.info("mes,,,,,,,,,,,"+topFive);
+		fileService.writeFile(studentPaperList, file);
+		 model.addAttribute("topFive",topFive); 
+		model.addAttribute("studentResultList", studentPaperList);
 		return "admin/viewForResult";
 	}
 

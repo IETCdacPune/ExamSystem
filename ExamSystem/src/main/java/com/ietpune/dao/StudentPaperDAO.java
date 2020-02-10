@@ -1,6 +1,7 @@
 package com.ietpune.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,9 @@ public interface StudentPaperDAO extends JpaRepository<StudentPaper, Integer>  {
 	List<StudentPaper> findTop5ByPaperAndResultOrderByMarksDesc(Paper paper,String result);
 
 	List<StudentPaper> findAllByPaper(Paper p);
+
+
 }
+
+
+	

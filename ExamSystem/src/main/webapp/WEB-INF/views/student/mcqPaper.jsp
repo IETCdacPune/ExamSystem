@@ -68,7 +68,7 @@
 					</c:if>
 				</div>
 				<div class="col-10">
-					<form>
+					<form:form>
 						<div class="card border-info ">
 							<div class="card-head">
 								<h4>
@@ -78,14 +78,14 @@
 								<input type="hidden" name="index" value="${index}">
 							</div>
 							<div class="card-body">
-							<div class="btn-group-vertical" data-toggle="buttons">
+							<div class="btn-group-vertical button-group-toggle" data-toggle="buttons">
 								<c:forEach items="${question.optionList}" var="option"
 									varStatus="loop">
 									<label class="btn btn-light">
 										<input type="radio" name="ans"
 											id="exampleRadios${loop.index+1}" value="${option.opt}"
-											${question.ans==option.opt?'checked':''}>
-											class="form-check-label" for="exampleRadios${loop.index+1}"><pre>${option.answer}</pre>
+											${question.ans==option.opt?'checked':''}
+											 ><pre>${option.answer}</pre>
 									</label>
 								</c:forEach>
 								</div>
@@ -100,7 +100,7 @@
 									class="btn btn-primary" type="submit">Save & Next</button>
 							</div>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

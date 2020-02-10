@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.ietpune.dao.RoleDAO;
 import com.ietpune.dao.StudentDAO;
+import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 import com.ietpune.model.Student;
+import com.ietpune.model.StudentPaper;
 @Service
 public class StudentService{
 @Autowired private StudentDAO studentDAO;
@@ -58,6 +60,19 @@ public class StudentService{
 		return studentDAO.save(stud);
 	}
 
+	
+	
+	  public List<Student> getAllStudentCourseWise(Course course) { 
+	  return studentDAO.findAllByCourse(course); }
+
+	public List<Student> getAllStudentCourseWise(Course course, List<String> studentPrnList) {
+		// TODO Auto-generated method stub
+		return studentDAO.findByCourseAndPrnNotIn(course,studentPrnList);
+	}
+	 
+
+	
+	
 	
 
 
