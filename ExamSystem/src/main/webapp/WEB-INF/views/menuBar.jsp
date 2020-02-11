@@ -34,7 +34,9 @@
 					aria-expanded="false"> Student </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
-							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all student</a>
+							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all DAC student</a>
+							<a class="dropdown-item"
+							href="${pageContext.request.contextPath}/Admin/listOfPredacStudent">show all PERDAC student</a>
 						</div></li>
 					<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"

@@ -48,9 +48,17 @@ public class AdminController {
 	public String forListOfStudent(Model model) {
 		List<Student> studentAllList = studentService.getAllStudentList();
 
+
 		model.addAttribute("studentAllList", studentAllList);
 		return "admin/listOfStudent";
 	}
+	@GetMapping("Admin/listOfPredacStudent")
+		public String forListOfPredacStudent(Model model)
+		{
+		List<Student> studentAllPredacList = studentService.getAllPredacStudentList();
+		model.addAttribute("studentAllList",studentAllPredacList);
+			return "admin/listOfStudent";
+		}
 
 	@GetMapping("Admin/genratedResult")
 	public String forGenratedResult(Model model) {

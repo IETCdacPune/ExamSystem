@@ -24,6 +24,10 @@ public interface StudentDAO extends JpaRepository<Student, Integer> {
 
 	List<Student> findByCourseAndPrnNotIn(Course course, List<String> studentPrnList);
 
+
+
+	List<Student> findByCourse(Course course);
+
 	
 
 	

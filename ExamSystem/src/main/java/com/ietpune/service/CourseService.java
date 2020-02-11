@@ -64,4 +64,9 @@ public class CourseService {
 		list.forEach(course->course.setSubjectList(subjectDAO.findByCourse(course)));
 		return list;
 	}
+
+	public Optional<Course> findByName(String name) {
+		// TODO Auto-generated method stub
+		return courseDAO.findByName(name);
+	}
 }

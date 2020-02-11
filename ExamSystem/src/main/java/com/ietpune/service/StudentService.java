@@ -1,5 +1,6 @@
 package com.ietpune.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class StudentService{
 @Autowired private StudentDAO studentDAO;
 @Autowired private BCryptPasswordEncoder passwordEcoder;
 @Autowired private RoleDAO roleDAO;
+@Autowired private CourseService courseService;
 
 	public Student save(@Valid Student student) {
 		student.setPassword(passwordEcoder.encode(student.getPassword()));
@@ -48,7 +50,15 @@ public class StudentService{
 
 
 	public List<Student> getAllStudentList() {
-		return studentDAO.findAll();
+		Optional<Course> c=courseService.findByName("DAC");
+		List<Student> slist=new ArrayList<>();
+		if(c.isPresent())
+		{
+			
+			 slist=studentDAO.findByCourse(c.get());
+			
+		}
+		return slist;
 	}
 
 
@@ -68,6 +78,18 @@ public class StudentService{
 	public List<Student> getAllStudentCourseWise(Course course, List<String> studentPrnList) {
 		// TODO Auto-generated method stub
 		return studentDAO.findByCourseAndPrnNotIn(course,studentPrnList);
+	}
+
+	public List<Student> getAllPredacStudentList() {
+		Optional<Course> c=courseService.findByName("PREDAC");
+		List<Student> slist=new ArrayList<>();
+		if(c.isPresent())
+		{
+			
+			 slist=studentDAO.findByCourse(c.get());
+			
+		}
+		return slist;
 	}
 	 
 
