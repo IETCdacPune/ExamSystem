@@ -56,8 +56,9 @@ legend:{
 $(document).ready(function(){
 		
 	
-
-fillCanvas("passfail",["pass","fail"],[50,60],["green","red"],"Result");
+var pass=${pass};
+var failed=${failed};
+fillCanvas("passfail",["pass","fail"],[pass,failed],["green","red"],"Result");
 fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 	
 	});
@@ -69,13 +70,13 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 		<jsp:include page="../menuBar.jsp" />
 		
 		<div class="row">
-		<div class="col-4">
+		<div class="col">
 		  <canvas class="w-100 h-90" id="passfail"></canvas>
 		  </div>
-		  <div class="col-4">
+		  <%-- <div class="col-4">
 		  <canvas class="w-100 h-90" id="avg"></canvas>
-		  </div>
-		 <div class="col-4">
+		  </div> --%>
+		 <div class="col">
 	
 		<h3>Top Five Students</h3>
 		<c:forEach var="studPaper" items="${topFive}" varStatus="loop">

@@ -94,4 +94,14 @@ public class StudentPaperService {
 		return studentPaperDAO.findTop5ByPaperAndResultOrderByMarksDesc(p, "Pass");
 	}
 
+	public int forPassStudent(int paperId) {
+		Paper p = paperService.getPaper(paperId);
+		return studentPaperDAO.countByPaperAndResult(p,"Pass");
+	}
+
+	public int forFailStudent(int paperId) {
+		Paper p = paperService.getPaper(paperId);
+		return studentPaperDAO.countByPaperAndResult(p,"Failed");
+	}
+
 }

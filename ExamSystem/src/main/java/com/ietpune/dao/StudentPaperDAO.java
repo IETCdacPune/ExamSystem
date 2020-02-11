@@ -19,6 +19,8 @@ public interface StudentPaperDAO extends JpaRepository<StudentPaper, Integer>  {
 
 	List<StudentPaper> findAllByPaper(Paper p);
 
+	int countByPaperAndResult(Paper p, String string);
+
 
 }
 

@@ -73,12 +73,13 @@ public class AdminController {
 		
 		
 		List<StudentPaper>topFive=studentPaperService.getTopFiveStudentOfPaper(paperId);
-		 
-		 
-		log.info("mes,,,,,,,,,,,"+studentPaperList);
-		log.info("mes,,,,,,,,,,,"+topFive);
+		 int pass=studentPaperService.forPassStudent(paperId);
+		 int failed=studentPaperService.forFailStudent(paperId);
+		
 		fileService.writeFile(studentPaperList, file);
 		 model.addAttribute("topFive",topFive); 
+		 model.addAttribute("pass",pass); 
+		 model.addAttribute("failed",failed); 
 		model.addAttribute("studentResultList", studentPaperList);
 		return "admin/viewForResult";
 	}
