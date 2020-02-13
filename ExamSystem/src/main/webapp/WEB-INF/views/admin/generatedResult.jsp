@@ -29,9 +29,7 @@
 		
 		
 		
-		
-		
-		<c:if test="${not empty courseList}">
+	<c:if test="${not empty courseList}">
 			<c:forEach items="${courseList}" var="course" varStatus="loop">
 				<div class="card mt-2">
 					<div class="card-header">

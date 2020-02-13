@@ -60,7 +60,7 @@
 								All Subject</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Admin"
+								href="${pageContext.request.contextPath}/Admin/removeSubject"
 								onclick="return confirm('Are you sure?')">Remove Subject</a>
 						</div></li>
 					<li class="nav-item dropdown"><a

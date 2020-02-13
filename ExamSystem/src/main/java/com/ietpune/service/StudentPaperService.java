@@ -1,20 +1,24 @@
 package com.ietpune.service;
 
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ietpune.dao.PaperDAO;
 import com.ietpune.dao.StudentPaperDAO;
-import com.ietpune.model.Course;
+
 import com.ietpune.model.Paper;
 import com.ietpune.model.Student;
 import com.ietpune.model.StudentPaper;
+
 
 @Service
 public class StudentPaperService {
@@ -103,5 +107,8 @@ public class StudentPaperService {
 		Paper p = paperService.getPaper(paperId);
 		return studentPaperDAO.countByPaperAndResult(p,"Failed");
 	}
+
+
+
 
 }
