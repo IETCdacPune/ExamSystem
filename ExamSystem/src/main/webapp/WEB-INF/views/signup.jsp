@@ -103,15 +103,18 @@
 											placeholder="Conform Password" />
 									</div>
 								</div>
-								<%-- <div class="form-group row">
-									<form:label path="securityQeustion"
+								<div class="form-group row">
+									<form:label path="sqId"
 										class="col-sm-3 col-form-label">Security question</form:label>
 									<div class="col-sm-9">
-										<form:select path="securityQeustion" class="form-control">
-											<form:option value="" label="Select security question" />
-											<form:options items="${qList}" itemLabel="question" />
+										<form:select path="sqId" class="form-control">
+											<form:option value="0" label="Select security question" />
+											<%-- <c:forEach items="${qList}" var="sQue">
+												<form:option value="${sQue.id}" label="${sQue.question}"></form:option>
+											</c:forEach> --%>
+											<form:options items="${qList}" itemValue="id" itemLabel="question" />
 										</form:select>
-										<form:errors path="securityQeustion" cssClass="text-danger"></form:errors>
+										<form:errors path="sqId" cssClass="text-danger"></form:errors>
 									</div>
 								</div>
 								<div class="form-group row">
@@ -122,7 +125,7 @@
 											class="form-control" placeholder="Security Answer" />
 										<form:errors path="securityAnswer" cssClass="text-danger"></form:errors>
 									</div>
-								</div> --%>
+								</div>
 								<div class="col-md-8 offset-md-2">
 									<button class="btn btn-lg btn-primary btn-block text-uppercase"
 										type="submit">Sign up</button>

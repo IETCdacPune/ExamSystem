@@ -33,5 +33,9 @@ public class SecurityQuestion {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+	@Override
+	public String toString() {
+		return "SecurityQuestion [id=" + id + ", question=" + question + "]";
+	}
 	
 }

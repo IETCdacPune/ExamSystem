@@ -20,6 +20,16 @@
 							<em class="fas fa-users"></em>
 						</h1>
 						<hr class="my-4">
+						<c:if test="${not empty successMessge}">
+							<div class="alert alert-success alert-dismissible fade show"
+								role="alert">
+								<button type="button" class="close" data-dismiss="alert"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								${successMessge}
+							</div>
+						</c:if>
 						<c:if test="${not empty errorMessge}">
 							<div class="alert alert-danger alert-dismissible fade show"
 								role="alert">
@@ -30,7 +40,7 @@
 								${errorMessge}
 							</div>
 						</c:if>
-						<form name='login' method='POST' autocomplete="off">
+						<form:form action="/signin" name='login' method='POST' autocomplete="off">
 							<div class="form-group row">
 								<input type='text' name='username' class="form-control" value=''
 									placeholder="P. R. N.">
@@ -45,7 +55,7 @@
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 
-						</form>
+						</form:form>
 						<%-- <hr class="my-4">
 						<a class="btn btn-lg btn-primary btn-block text-uppercase"
 							href="signup" type="submit">Sign up</a>--%>

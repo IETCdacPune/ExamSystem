@@ -3,9 +3,8 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +41,7 @@ $(document).ready(function () {
 			<div class="row h-100">
 				<div class="col-3 h-100">
 					<c:if test="${not empty list}">
-						<div class="bg-light" style="overflow-y: scroll;">
+						<div class="bg-light" style="overflow: auto;">
 							<c:forEach items="${list}" var="question" varStatus="loop">
 								<c:choose>
 									<c:when
@@ -71,7 +70,7 @@ $(document).ready(function () {
 						</div>
 						<div class="row">
 							<div class="col-sm-6 align-self-center">
-								<a href="/Student/exam/submit" class="btn btn-info" id="submit">Submit</a>
+								<a href="/Student/exam/submit" onclick="return confirm('Are you sure to sbumit the exam?');" class="btn btn-info" id="submit">Submit</a>
 							</div>
 						</div>
 					</c:if>
@@ -79,8 +78,8 @@ $(document).ready(function () {
 				<div class="col-9 h-100">
 						<div class="card border-info h-100">
 						<form:form class="h-100">
-							<div class="card-head" style="height:30%;overflow-y: scroll; width: 100%;">
-								<h5>
+							<div class="card-head" style="height:30%;overflow: auto; width: 100%;">
+								<h5 class="m-1">
 									<c:set var="newline" value="<%= \"\n\" %>" />
 									Q${index}. ${fn:replace(question.fullQuestion,newline, "<br />")}
 									
@@ -88,14 +87,14 @@ $(document).ready(function () {
 								<input type="hidden" name="queId" value="${question.queId}">
 								<input type="hidden" name="index" value="${index}">
 							</div>
-							<div class="card-body" style="height:55%;overflow-y: scroll;"> 
-							<div data-spy="scroll" data-offset="0" class="btn-group btn-group-vertical btn-group-toggle w-100" data-toggle="buttons">
+							<div class="card-body" style="height:55%;overflow: auto;"> 
+							<div data-spy="scroll" data-offset="0" class="btn-group btn-group-vertical w-100" data-toggle="buttons">
 								<c:forEach items="${question.optionList}" var="option"
 									varStatus="loop">
-									<label class="btn btn-light text-left w-100 ${question.ans==option.opt?'active':''}">
+									<label class="btn btn-light text-left m-1 p-1 w-100 ${question.ans==option.opt?'active':''}">
 										<input type="radio" name="ans"
 											id="exampleRadios${loop.index+1}" value="${option.opt}"
-											${question.ans==option.opt?'checked':''}><pre>${option.answer}</pre>
+											${question.ans==option.opt?'checked':''}>${fn:replace(option.answer,newline, "<br />")}
 									</label>
 								</c:forEach>
 								</div>

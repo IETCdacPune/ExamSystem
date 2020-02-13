@@ -24,6 +24,7 @@ public class User {
 	@Column(unique=true)
 	private String prn;
 	private String password;
+	private boolean enabled;
 	@ManyToMany(cascade=CascadeType.MERGE,fetch = FetchType.EAGER)
 	//@OneToMany(cascade = {CascadeType.MERGE,CascadeType.REFRESH},fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles",
@@ -40,12 +41,14 @@ public class User {
 		this.prn = user.prn;
 		this.password = user.password;
 		this.roles = user.roles;
+		this.enabled = user.enabled;
 	}
-	public User( String prn, String password, List<Role> roles) {
+	public User( String prn, String password,boolean enabled, List<Role> roles) {
 		super();
 		this.prn = prn;
 		this.password = password;
 		this.roles = roles;
+		this.enabled = enabled;
 	}
 	public User(int userId, String prn, String password, List<Role> roles) {
 		super();
@@ -87,6 +90,12 @@ public class User {
 		this.roles = roles;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", prn=" + prn + ", password=" + password + ", roles=" + roles + "]";

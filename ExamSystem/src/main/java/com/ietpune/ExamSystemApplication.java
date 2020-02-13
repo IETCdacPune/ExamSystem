@@ -12,7 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.ietpune.dao.RoleDAO;
 import com.ietpune.dao.SecurityQuestionDAO;
@@ -24,14 +26,10 @@ import com.ietpune.model.User;
 
 @SpringBootApplication
 public class ExamSystemApplication implements CommandLineRunner {
-	@Autowired
-	private RoleDAO roleDAO;
-	@Autowired
-	private UserDAO userDAO;
-	@Autowired
-	private BCryptPasswordEncoder passwordEcoder;
-	@Autowired
-	SecurityQuestionDAO securityQuestionDAO;
+	@Autowired private RoleDAO roleDAO;
+	@Autowired private UserDAO userDAO;
+	@Autowired private BCryptPasswordEncoder passwordEcoder;
+	@Autowired private SecurityQuestionDAO securityQuestionDAO;
 	@Value("${admin.username}")
 	private String adminName;
 	@Value("${admin.password}")
@@ -42,13 +40,18 @@ public class ExamSystemApplication implements CommandLineRunner {
 	}
 
 	@Bean
-	public Map<String, String> myMap() {
-		final Map<String, String> myMap = new HashMap<>();
-		myMap.put("isRegistrationAvailable", "false");
-		myMap.put("isAddAvailable", "false");
+	@Scope(value = WebApplicationContext.SCOPE_APPLICATION)
+	public Map<String, Boolean> myMap() {
+		final Map<String, Boolean> myMap = new HashMap<>();
+		myMap.put("isRegistrationAvailable", true);
+		myMap.put("isAddAvailable", false);
 		return myMap;
 	}
-
+	@Bean(name = "demo")
+	@Scope(value = WebApplicationContext.SCOPE_APPLICATION)
+	public String demo() {
+		return "kahipan";
+	}
 	@Override
 	public void run(String... args) throws Exception {
 		//System.out.println("abc@1234 :- "+passwordEcoder.encode("abc@1234"));
@@ -64,7 +67,7 @@ public class ExamSystemApplication implements CommandLineRunner {
 			if (optRole.isPresent()) {
 				roles.add(optRole.get());
 			}
-			userDAO.save(new User(adminName, passwordEcoder.encode(adminPass), roles));
+			userDAO.save(new User(adminName, passwordEcoder.encode(adminPass),true, roles));
 		}
 		if (securityQuestionDAO.findAll().isEmpty()) {
 			securityQuestionDAO.save(new SecurityQuestion("What is your nick name?"));

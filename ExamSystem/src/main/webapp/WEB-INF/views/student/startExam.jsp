@@ -40,14 +40,20 @@
 						  	</ul>
 						  </li>
 						</ol>
+						<div class="row">
+							<div class="col-3"></div>
+							<div class="col-6 m-1 justify-content-center">
 						<form:form method="post" autocomplete="off">
 							<input type="hidden" name="paperId" value="${paperId}"> <input
-								type="hidden" name="paperCode" value="${paperCode}"> <input
-								type="text" class="form-control" name="code"
-								placeholder="Enter paper code" /> <br>
-							<button type="submit" class="btn btn-primary">Start Exam</button>
-							<button type="reset" class="btn btn-danger">Reset form</button>
+								type="hidden" name="paperCode" value="${paperCode}">
+								<input type="text" class="form-control" name="code"
+								placeholder="Enter paper code" />
+								<br />
+							<button type="submit" class="btn btn-primary ">Start Exam</button>
+							<button type="reset" class="btn btn-danger ">Reset form</button>
 						</form:form>
+						</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -23,13 +23,14 @@ var subjectArr=[<c:forEach items="${list}" var="map" varStatus="loop">
 loadGraph=function(canvas,subject){
 	marks=[];
 	label=[];
-	status=[];
+	demoStatus=[];
 	statusSize=0;
+	
 	subjectArr.forEach((sub)=>{
 		if(sub.name===subject){
 			marks=sub.arrays.marks;
 			label=sub.arrays.paperCode;
-			status=sub.arrays.status;
+			demoStatus=sub.arrays.status;
 		}
 	});
 	if(marks.length<=4){
@@ -37,18 +38,20 @@ loadGraph=function(canvas,subject){
 		for(i=0;i<s;i++){
 			marks.push(0);
 			label.push('');
+			demoStatus.push('');
 		}
 	}
 	var colors = []
-	for(var i = 0; i < status.length; i++){
+	for(var i = 0; i < demoStatus.length; i++){
 	   var color;
-	   if(status[i]=='Pass'){
+	   if(demoStatus[i]=='Pass'){
 	           color = "green";
-	}else if(status[i]=='Failed'){
+	}else if(demoStatus[i]=='Failed'){
 	           color = "red";
 	   }
 	   colors[i] = color;
 	}
+	
 	var ctx = $('#'+canvas);
 	var myChart = new Chart(ctx, {
 	    type: 'bar',
