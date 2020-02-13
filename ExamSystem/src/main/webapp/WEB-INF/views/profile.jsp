@@ -10,7 +10,7 @@
 <jsp:include page="./headerLink.jsp" />
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="./menuBar.jsp" />
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">

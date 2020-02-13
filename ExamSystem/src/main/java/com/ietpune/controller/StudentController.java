@@ -34,8 +34,8 @@ public class StudentController {
 	@Autowired private StudentPaperService studentPaperService;
 	@Autowired private SubjectService subjectService;
 	@Autowired private FileService fileService;
-	@GetMapping("")
-	public String forStudentDashboardGet() {
+	@GetMapping("/")
+public String forStudentDashboardGet() {
 		return "student/dashboard";
 	}
 

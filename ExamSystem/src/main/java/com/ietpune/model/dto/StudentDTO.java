@@ -1,10 +1,9 @@
 package com.ietpune.model.dto;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
-import com.ietpune.model.SecurityQuestion;
 
 public class StudentDTO {
 
@@ -26,7 +25,8 @@ public class StudentDTO {
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{8,}$", message = "password must containt atleast 1 Upper case, 1 Lower case, 1 digit, 1 !@#$%^&")
 	private String conformPass;
 	private char gender;
-	private SecurityQuestion securityQeustion;
+	@Min(value = 1,message = "select security question")
+	private int sqId;
 	private String securityAnswer;
 
 	public String getFirstName() {
@@ -93,12 +93,12 @@ public class StudentDTO {
 		this.gender = gender;
 	}
 
-	public SecurityQuestion getSecurityQeustion() {
-		return securityQeustion;
+	public int getSqId() {
+		return sqId;
 	}
 
-	public void setSecurityQeustion(SecurityQuestion securityQeustion) {
-		this.securityQeustion = securityQeustion;
+	public void setSqId(int sqId) {
+		this.sqId = sqId;
 	}
 
 	public String getSecurityAnswer() {

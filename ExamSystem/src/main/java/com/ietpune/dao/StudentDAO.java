@@ -20,6 +20,7 @@ public interface StudentDAO extends JpaRepository<Student, Integer> {
 	@Query("select sub.paperList from Student s inner join Subject sub on s.course.courseId=sub.course.courseId inner join Paper p on sub.id=p.subject.id where s.prn=:prn and p.newPaper=true and p.enabled=true")
 	List<Paper> findPaperByPrn(@Param("prn") String prn);
 
+
 	List<Student> findAllByCourse(Course course);
 
 	List<Student> findByCourseAndPrnNotIn(Course course, List<String> studentPrnList);
@@ -28,8 +29,6 @@ public interface StudentDAO extends JpaRepository<Student, Integer> {
 
 	List<Student> findByCourse(Course course);
 
-	
-
-	
+	Optional<Student> findByEmailId(String emailId);
 
 }

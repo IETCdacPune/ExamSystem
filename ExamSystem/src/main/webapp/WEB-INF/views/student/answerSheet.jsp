@@ -11,9 +11,19 @@
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
 <jsp:include page="../headerLink.jsp" />
+<script type="text/javascript">
+$(document).ready(function () {
+	$('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+    $("body").on("contextmenu",function(e){
+        return false;
+    });
+});
+</script>
 </head>
 <body id="body">
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		<c:if test="${not empty studPaper.paper.questionList}">
 			<div class="row" style="height: 80vh;">

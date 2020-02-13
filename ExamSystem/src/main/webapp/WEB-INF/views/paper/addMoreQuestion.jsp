@@ -32,14 +32,14 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		
 		
 			<div class="card text-center">
 				
 				<div class="card-body">
-					<form method="post" enctype="multipart/form-data">
+					<form:form method="post" enctype="multipart/form-data">
 						
 						
 						
@@ -58,7 +58,7 @@ $(document).ready(function() {
 						
 						<button type="submit" class="btn btn-primary">Add Question</button>
 						
-					</form>
+					</form:form>
 				</div>
 			</div>
 		

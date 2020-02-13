@@ -13,7 +13,7 @@
 
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		<c:if test="${empty courseList}">
 			<div class="jumbotron text-center">

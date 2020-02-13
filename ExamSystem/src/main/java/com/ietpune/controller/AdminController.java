@@ -23,47 +23,49 @@ import com.ietpune.service.FileService;
 import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
 @Controller
+@RequestMapping("/Admin/")
 public class AdminController {
-	@Autowired private StudentService studentService;
-	@Autowired  private FileService fileService;
-	@Autowired private StudentPaperService studentPaperService;
-	@Autowired private CourseService courseService;
+
+	@Autowired
+	private StudentService studentService;
+	@Autowired
+	private FileService fileService;
+	@Autowired
+	private StudentPaperService studentPaperService;
+	@Autowired
+	private CourseService courseService;
 	@Autowired private ServletContext servletContext;
-	Logger log = Logger.getLogger(AdminController.class);
-
-	@GetMapping("Admin")
-	public String forAdminDashboard() {
-		return "admin/adminDashboard";
+	
+	Logger log= Logger.getLogger(AdminController.class);
+	
+	@GetMapping("/")
+public String forAdminDashboard() {
+		return "admin/dashboard";
 	}
-
-	@GetMapping("Admin/listOfStudent")
-	public String forListOfStudent(Model model) {
+	
+	@GetMapping("listOfStudent")
+public String forListOfStudent(Model model) {
 		List<Student> studentAllList = studentService.getAllStudentList();
 
 		model.addAttribute("studentAllList", studentAllList);
 		return "admin/listOfStudent";
 	}
-
-	@GetMapping("Admin/listOfPredacStudent")
-	public String forListOfPredacStudent(Model model) {
-		List<Student> studentAllPredacList = studentService.getAllPredacStudentList();
-		model.addAttribute("studentAllList", studentAllPredacList);
-		return "admin/listOfStudent";
+	@GetMapping("genratedResult")
+	public String forGenratedResult(Model model)
+	{
+		List<Course> courseList=courseService.getAllCoursesWithEagerLoad();
+		
+		if(!courseList.isEmpty())
+		{
+			model.addAttribute("courseList",courseList);
 	}
 
-	@GetMapping("Admin/genratedResult")
-	public String forGenratedResult(Model model) {
-		List<Course> courseList = courseService.getAllCoursesWithEagerLoad();
-
-		if (!courseList.isEmpty()) {
-			model.addAttribute("courseList", courseList);
-		}
 		return "admin/generatedResult";
 	}
-
-	@RequestMapping("Admin/viewForResult/{paperId}")
-	public String forViewResult(@PathVariable("paperId") int paperId, MultipartFile file, Model model)
-			throws FileNotFoundException, IOException {
+	
+	@RequestMapping("viewForResult/{paperId}")
+	public String forViewResult(@PathVariable("paperId")int paperId,MultipartFile file,Model model) throws FileNotFoundException, IOException
+	{
 
 		List<StudentPaper> studentPaperList = studentPaperService.forGernaratedResult(paperId);
 
@@ -78,7 +80,7 @@ public class AdminController {
 		return "admin/viewForResult";
 	}
 
-	@GetMapping("/Admin/downloadExcelResult/{paperId}")
+	@GetMapping("downloadExcelResult/{paperId}")
 	public void forDownloadExcel(@PathVariable("paperId") int paperId, HttpServletRequest request,
 			HttpServletResponse response) {
 		List<StudentPaper> studentPaperList = studentPaperService.forGernaratedResult(paperId);
@@ -96,7 +98,7 @@ public class AdminController {
 
 	}
 
-	@GetMapping("/Admin/downloadPdfResult/{paperId}")
+	@GetMapping("downloadPdfResult/{paperId}")
 	public void forDownloadPdf(@PathVariable("paperId") int paperId, HttpServletRequest request,
 			HttpServletResponse response) {
 		List<StudentPaper> studentPaperList = studentPaperService.forGernaratedResult(paperId);

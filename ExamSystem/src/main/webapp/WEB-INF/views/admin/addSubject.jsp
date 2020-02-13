@@ -11,7 +11,7 @@
 <jsp:include page="../headerLink.jsp" />
 </head>
 <body>
-	<div class="container">
+	<div class="m-1">
 		<jsp:include page="../menuBar.jsp" />
 		<c:if test="${not empty msg}">
 			<div class="alert alert-success alert-dismissible">

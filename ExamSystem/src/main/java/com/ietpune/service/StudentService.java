@@ -70,6 +70,11 @@ public class StudentService{
 		return studentDAO.save(stud);
 	}
 
+	public boolean findEmail(String emailId) {
+		Optional<Student> opt = studentDAO.findByEmailId(emailId);
+		return opt.isPresent();
+	}
+
 	
 	
 	  public List<Student> getAllStudentCourseWise(Course course) { 
