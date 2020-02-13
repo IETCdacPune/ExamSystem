@@ -1,13 +1,9 @@
 package com.ietpune.controller;
 
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import javax.validation.Valid;
-
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,22 +15,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.ietpune.exception.ExcelFileException;
 import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Question;
-import com.ietpune.model.StudentPaper;
-import com.ietpune.model.Subject;
 import com.ietpune.model.dto.PaperDTO;
 import com.ietpune.model.dto.QuestionDTO;
 import com.ietpune.service.CourseService;
 import com.ietpune.service.FileService;
 import com.ietpune.service.PaperService;
 import com.ietpune.service.QuestionService;
-import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.SubjectService;
 
 @Controller

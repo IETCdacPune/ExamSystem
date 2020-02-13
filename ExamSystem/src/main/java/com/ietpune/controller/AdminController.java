@@ -1,17 +1,12 @@
 package com.ietpune.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,19 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.ietpune.model.Course;
-import com.ietpune.model.Paper;
 import com.ietpune.model.Student;
 import com.ietpune.model.StudentPaper;
 import com.ietpune.service.CourseService;
 import com.ietpune.service.FileService;
-import com.ietpune.service.PaperService;
 import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
-
 @Controller
-
 public class AdminController {
 	@Autowired private StudentService studentService;
 	@Autowired  private FileService fileService;
