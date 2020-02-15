@@ -63,6 +63,17 @@ public class StudentService{
 		return opt.isPresent();
 	}
 
+	public Optional<Student> getStudentByEmail(String email) {
+		return studentDAO.findByEmailId(email);
+		
+	}
+
+	public Student changePass(Student student) {
+		student.setPassword(passwordEcoder.encode(student.getPassword()));
+		return studentDAO.save(student);
+		
+	}
+
 	
 
 

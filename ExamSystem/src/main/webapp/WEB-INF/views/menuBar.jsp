@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<nav class="navbar navbar-expand-md navbar-light bg-info">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 	<a class="navbar-brand" href="/">IET</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -15,7 +16,8 @@
 		<sec:authorize access="!isAuthenticated()">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/"><i class="fas fa-home"></i>Home</a></li>
+					href="${pageContext.request.contextPath}/"><i
+						class="fas fa-home"></i>Home</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/signup">Registration</a></li>
 			</ul>
@@ -28,7 +30,8 @@
 			<sec:authorize access="hasRole('ADMIN')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/Admin/"><i class="fas fa-home"></i> Home</a></li>
+						href="${pageContext.request.contextPath}/Admin/"><i
+							class="fas fa-home"></i> Home</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -71,7 +74,8 @@
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Course </a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
 								href="${pageContext.request.contextPath}/Admin/addCourse">Add
 								Course</a> <a class="dropdown-item"
@@ -89,7 +93,8 @@
 			<sec:authorize access="hasRole('STUDENT')">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath}/Student/"><i class="fas fa-home"></i> Home</a></li>
+						href="${pageContext.request.contextPath}/Student/"><i
+							class="fas fa-home"></i> Home</a></li>
 
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath}/Student/result">Result</a></li>
@@ -104,15 +109,16 @@
 					aria-expanded="false"><i class="fas fa-users-cog"></i></a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item"
-							href="${pageContext.request.contextPath}/#">Change Password</a>
 						<sec:authorize access="hasRole('STUDENT')">
 							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Common/profile"><i
+								href="${pageContext.request.contextPath}/Student/changePassword">Change Password</a>
+
+							<a class="dropdown-item"
+								href="${pageContext.request.contextPath}/Student/profile"><i
 								class="far fa-id-card"></i> Profile</a>
 						</sec:authorize>
 						<div class="dropdown-divider"></div>
-						<a class="nav-link"
+						<a class="nav-link text-dark"
 							href="${pageContext.request.contextPath}/signout"><i
 							class="fas fa-sign-out-alt"></i> Logout</a>
 					</div></li>
@@ -121,8 +127,4 @@
 		</sec:authorize>
 	</div>
 </nav>
-<br>
-val1:-${myMap[isRegistrationAvailable]}
-<br>
-val2:-${applicationScope.demo}
 <br>

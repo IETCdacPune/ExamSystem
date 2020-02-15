@@ -8,10 +8,10 @@ import javax.validation.constraints.Pattern;
 public class StudentDTO {
 
 	@NotNull
-	@Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only charectors are allowed")
+	@Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only character are allowed")
 	private String firstName;
 	@NotNull
-	@Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only charectors are allowed")
+	@Pattern(regexp = "^[A-Z].[a-z]{2,20}", message = "only character are allowed")
 	private String lastName;
 	@NotNull
 	private String courseCode;
@@ -20,9 +20,9 @@ public class StudentDTO {
 	private String emailId;
 	@Pattern(regexp = "^[0-9]{8,15}", message = "only digits are allowed")
 	private String prn;
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{8,}$", message = "password must containt atleast 1 Upper case, 1 Lower case, 1 digit, 1 !@#$%^&")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{8,}$", message = "password min length is 8 must containt atleast 1 Upper case, 1 Lower case, 1 digit, 1 !@#$%^&")
 	private String password;
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{8,}$", message = "password must containt atleast 1 Upper case, 1 Lower case, 1 digit, 1 !@#$%^&")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{8,}$", message = "password min length is 8 must containt atleast 1 Upper case, 1 Lower case, 1 digit, 1 !@#$%^&")
 	private String conformPass;
 	private char gender;
 	@Min(value = 1,message = "select security question")

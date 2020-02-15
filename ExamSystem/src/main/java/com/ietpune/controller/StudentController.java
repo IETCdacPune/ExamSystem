@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,6 +95,72 @@ public String forStudentDashboardGet() {
 	 * (!allSub.isEmpty()) { model.addAttribute("list", allSub); } return
 	 * "student/showPaper"; }
 	 */
+	@GetMapping("profile")
+	public String forProfile(Model model,Principal principal) {
+		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+		if(optStud.isPresent()) {
+			model.addAttribute("user", optStud.get());
+		}else {
+			return "redirect:/signout";
+		}
+		return "student/profile";
+	}
+	@GetMapping("editProfile")
+	public String forEditProfile(Model model,Principal principal) {
+		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+		if(optStud.isPresent()) {
+			model.addAttribute("command", optStud.get());
+		}else {
+			return "redirect:/signout";
+		}
+		return "student/editProfile";
+	}
+	@GetMapping("changePassword")
+	public String forChangePassword(Model model,Principal principal) {
+		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+		if(optStud.isPresent()) {
+			model.addAttribute("question", optStud.get().getSecurityQeustion().getQuestion());
+		}
+		return "student/changePassword";
+	}
+	@PostMapping("changePassword")
+	public String forChangePasswordPost(Model model,@RequestParam("answer")String answer,@RequestParam("pass")String pass,@RequestParam("confPass")String confPass, Principal principal) {
+		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+		if(optStud.isPresent()) {
+			Student student=optStud.get();
+			if(student.getSecurityAnswer().equals(answer)) {
+				if(pass.equals(confPass)) {
+					student.setPassword(pass);
+					studentService.changePass(student);
+					model.addAttribute("msg","Password changed successfully...");
+				}else {
+					model.addAttribute("errmsg","Password and Conform password must same");
+				}
+			}else {
+				model.addAttribute("errmsg","Wrong Answer...");
+			}
+		}
+		return "student/changePassword";
+	}
+	@PostMapping("editProfile")
+	public String forEditProfilePost(Model model,@ModelAttribute("command")Student stud ,Principal principal) {
+		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+		if(optStud.isPresent()) {
+			Student student=optStud.get();
+			student.setPrn(stud.getPrn());
+			student.setFirstName(stud.getFirstName());
+			student.setLastName(stud.getLastName());
+			student=studentService.update(student);
+			if(student==null) {
+				model.addAttribute("errmsg","Error in updating information.");
+			}else {
+				model.addAttribute("msg","record updated.");
+			}
+		}else {
+			return "redirect:/signout";
+		}
+		return "student/editProfile";
+	}
 	@PostMapping("uploadImg")
 	public String forUploadImg(Model model,Principal principal, @RequestParam("photo") MultipartFile file) throws IOException {
 		if(fileService.isValidImg(file)) {
@@ -103,10 +170,9 @@ public String forStudentDashboardGet() {
 				stud.setImgUrl(fileService.saveImg(file,stud.getPrn()));
 				studentService.update(stud);
 			}
-			return "redirect:/Common/profile";
+			return "redirect:/Student/profile";
 		}
 		model.addAttribute("errmsg", "Select jpg img only with less than 500kb size...");
-		return "redirect:/Common/profile";
+		return "redirect:/Student/profile";
 	}
-
 }

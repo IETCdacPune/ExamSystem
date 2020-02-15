@@ -24,7 +24,7 @@
 						<ol class="list-group list-group-flush">
 						  <li class="list-group-item">Your name and module name is visible at top left during exam.</li>
 						  <li class="list-group-item">Timer is visible at right top after module name.</li>
-						  <li class="list-group-item">Number of question visited, marked for review, not visited shown just below the PRN.</li>
+						  <li class="list-group-item">Number of question attempted, marked for review, not attempted shown just below the PRN.</li>
 						  <li class="list-group-item">In the right side you will get question and just below that you will get the options you can choose any one option from that.</li>
 						  <li class="list-group-item">To submit the answer you have two buttons <button class="btn btn-warning" type="submit">Marked
 									for Review And Next</button> and <button class="btn btn-primary" type="submit">Save & Next</button> you can click either of the button.</li>

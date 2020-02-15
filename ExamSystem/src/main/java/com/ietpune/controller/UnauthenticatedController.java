@@ -1,7 +1,6 @@
 package com.ietpune.controller;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,18 +24,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ietpune.dao.ConfirmationTokenRepository;
 import com.ietpune.dao.UserDAO;
 import com.ietpune.model.ConfirmationToken;
 import com.ietpune.model.Course;
-import com.ietpune.model.SecurityQuestion;
 import com.ietpune.model.Student;
 import com.ietpune.model.User;
 import com.ietpune.model.dto.StudentDTO;
 import com.ietpune.service.CourseService;
 import com.ietpune.service.EmailSenderService;
+import com.ietpune.service.FileService;
 import com.ietpune.service.QuestionService;
 import com.ietpune.service.SecurityQuestionService;
 import com.ietpune.service.StudentService;
@@ -51,6 +48,7 @@ public class UnauthenticatedController {
 	@Autowired private CourseService courseService;
 	@Autowired private EmailSenderService emailSenderService;
 	@Autowired private UserDAO userDAO;
+	@Autowired private FileService fileService;
 	@Autowired private SecurityQuestionService securityQuestionService;
 	@Autowired private ConfirmationTokenRepository confirmationTokenRepository;
 	@Value("${examSystem.URL}")
@@ -178,14 +176,47 @@ public class UnauthenticatedController {
 		
 		return "/signin";
 	}
-	@GetMapping("/Common/profile")
-	public String forProfile(Model model,Principal principal) {
-		Optional<Student> optStud=studentService.getStudentByPrn(principal.getName());
+	
+	@GetMapping("/emailForPasswordReset")
+	public String foremailPasswordReset(Model model) {
+		return "emailForPassReset";
+	}
+	@PostMapping("/emailForPasswordReset")
+	public String foremailPasswordResetPost(Model model,@RequestParam("email")String email) {
+		Optional<Student> optStud = studentService.getStudentByEmail(email);
 		if(optStud.isPresent()) {
-			model.addAttribute("user", optStud.get());
-		}else {
-			return "redirect:/signout";
+			model.addAttribute("question",optStud.get().getSecurityQeustion().getQuestion());
+			model.addAttribute("email",optStud.get().getEmailId());
+			return "securityQuesPassReset";
 		}
-		return "profile";
+		model.addAttribute("errorMessge","Please Enter valid email<br>This email is not register.");
+		return "emailForPassReset";
+	}
+	@PostMapping("/resetPassword")
+	public String forResetPassword(Model model,@RequestParam("answer")String ans,@RequestParam("email")String email) {
+		Optional<Student> optStud = studentService.getStudentByEmail(email);
+		if(optStud.isPresent()) {
+			if(ans.equals(optStud.get().getSecurityAnswer())) {
+				Student stud=optStud.get();
+				String pass=fileService.genrateRandomeCode(8);
+				stud.setPassword(pass);
+				studentService.changePass(stud);
+				SimpleMailMessage mailMessage = new SimpleMailMessage();
+				mailMessage.setTo(stud.getEmailId());
+				mailMessage.setSubject("Password reset for exam system");
+				mailMessage.setFrom("info@ietpune.com");
+				mailMessage.setText("Your password is reset.\n "+pass+" is your new password");
+				
+				emailSenderService.sendEmail(mailMessage);
+				model.addAttribute("successMessge", "Password is reset.<br>Please check mail for new password");
+				return "redirect:/signin";
+			}
+			model.addAttribute("errorMessge", "Wrong answer...");
+			model.addAttribute("question",optStud.get().getSecurityQeustion().getQuestion());
+			model.addAttribute("email",email);
+			return "securityQuesPassReset";
+		}
+		model.addAttribute("errorMessge","Please Enter valid email<br>This email is not register.");
+		return "emailForPassReset";
 	}
 }

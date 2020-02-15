@@ -23,8 +23,8 @@ body {
 
 .demo {
 	margin: 0 auto;
-	top:20%;
-	left:0%;
+	top: 20%;
+	left: 0%;
 	width: 100%;
 	height: 80%;
 }
@@ -36,16 +36,25 @@ body {
 		<br>
 		<c:if test="${result eq 'Pass'}">
 			<div class="demo" style="height: 90vh;">
-			</c:if>
-		<div class="jumbotron h-75">
-			<h1>
-				You obtained <strong>${marks}</strong> marks out of ${total} in this
-				exam.
-			</h1>
-			<h4>Result:-${result}</h4>
-		</div>
-		<c:if test="${result eq 'Pass'}">
+				<div class="jumbotron h-75  text-center">
+					<h1>
+						You obtained <strong>${marks}</strong> marks out of ${total} in
+						this exam.
+					</h1>
+					<h4>Result:-${result}</h4>
+				</div>
 			</div>
+		</c:if>
+		<c:if test="${result ne 'Pass'}">
+				<div class="jumbotron h-75 text-center">
+					<h1>
+						You obtained <strong>${marks}</strong> marks out of ${total} in
+						this exam.
+					</h1>
+					<h4>Result:-${result}</h4>
+					<i class="far fa-sad-cry"></i> <i class="far fa-sad-cry"></i> <i
+			class="far fa-sad-cry"></i>
+				</div>
 		</c:if>
 	</div>
 	<script type="text/javascript">

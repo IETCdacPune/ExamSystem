@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="m-1">
-	<jsp:include page="./menuBar.jsp" />
+		<jsp:include page="./menuBar.jsp" />
 		<div class="row">
 			<div class="col-sm-8 col-md-6 col-lg-7 mx-auto">
 				<div class="card card-signin my-5">
@@ -40,27 +40,22 @@
 								${errorMessge}
 							</div>
 						</c:if>
-						<form:form action="/signin" name='login' method='POST' autocomplete="off">
+						<form:form action="/emailForPasswordReset" method='POST' autocomplete="off">
 							<div class="form-group row">
-								<input type='text' name='username' class="form-control" value=''
-									placeholder="P. R. N.">
+								<input type='text' name='email' class="form-control" value=''
+									placeholder="Enter your register email id">
 							</div>
-
-							<div class="form-group row">
-								<input type='password' name='password' class="form-control" placeholder="Password" />
-							</div>
-
 							<button class="btn btn-lg btn-primary btn-block text-uppercase"
-								type="submit">Sign in</button>
-
+								type="submit">Submit</button>
 						</form:form>
 						<hr class="my-4">
-						<a href="/emailForPasswordReset" type="submit">Forgot your password?</a>
+						<a href="/signin" type="submit">Sign In</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		</div>
+		<jsp:include page="./footerLink.jsp" />
 	</div>
-	<jsp:include page="./footerLink.jsp" />
 </body>
 </html>

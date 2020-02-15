@@ -12,7 +12,6 @@
 <body>
 	<div class="m-1">
 		<jsp:include page="./menuBar.jsp" />
-
 		<div class="container">
 			<c:if test="${not empty msg}">
 				<div class="alert alert-success alert-dismissible">
@@ -27,23 +26,23 @@
 				</div>
 			</c:if>
 			<div class="row">
-				<div class="col-sm-9 col-md-9 col-lg-9 mx-auto">
-					<div class="card card-signin my-5">
+				<div class="col-10 mx-auto">
+					<div class="card card-signin my-3">
 						<div class="card-body">
-							<h1 class="card-title text-primary text-center display-1">
-								<em class="fas fa-user-plus"></em>
+							<h1 class="card-title text-primary text-center m-1 p-1">
+								Registration
 							</h1>
 							<hr class="my-4">
 							<form:form method="post" autocomplete="off">
 								<div class="form-group row">
 									<form:label path="firstName" class="col-sm-3 col-form-label">Name</form:label>
-									<div class="col-sm-9 row">
-										<div class="col-sm-6">
+									<div class="col-sm-9 form-row">
+										<div class="col">
 											<form:input type="text" path="firstName" class="form-control"
 												placeholder="First Name" />
 											<form:errors path="firstName" cssClass="text-danger"></form:errors>
 										</div>
-										<div class="col-sm-6">
+										<div class="col">
 											<form:input type="text" path="lastName" class="form-control"
 												placeholder="Last Name" />
 											<form:errors path="lastName" cssClass="text-danger"></form:errors>
@@ -56,7 +55,7 @@
 										<div class="form-check-inline">
 											<label class="form-check-label"> <form:radiobutton
 													path="gender" class="form-check-input" value="m" /> Male
-											</label> <label class="form-check-label"> <form:radiobutton
+											</label> <label class="form-check-label"> &nbsp; &nbsp; &nbsp;<form:radiobutton
 													path="gender" class="form-check-input" value="f" /> Female
 											</label>
 										</div>

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.activation.MimetypesFileTypeMap;
 
@@ -36,6 +37,7 @@ import com.ietpune.model.StudentPaper;
 
 @Service
 public class FileService {
+	private Random rand = new Random();
 	private static String UPLOADED_FOLDER = "./src/main/resources/static/Common/avatar/";
 	public List<Question> fileToList(MultipartFile file, Paper p) throws IOException, ExcelFileException {
 		String extesion = FilenameUtils.getExtension(file.getOriginalFilename());
@@ -174,5 +176,13 @@ public class FileService {
 		Path path = Paths.get(UPLOADED_FOLDER + newName);
 		Files.write(path, bytes);
 		return newName;
+	}
+	public String genrateRandomeCode(int n) {
+		String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+		StringBuilder sb = new StringBuilder(n);
+		for (int i = 0; i < n; i++) {
+			sb.append(alphaNumericString.charAt(rand.nextInt(alphaNumericString.length())));
+		}
+		return sb.toString();
 	}
 }

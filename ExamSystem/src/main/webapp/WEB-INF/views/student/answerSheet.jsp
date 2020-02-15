@@ -3,8 +3,8 @@
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,9 +65,10 @@ $(document).ready(function () {
 								class="tab-pane h-100 fade <c:if test="${loop.first}">show active</c:if>"
 								id="question${loop.index+1}" role="tabpanel"
 								aria-labelledby="linkQuestion${loop.index+1}">
-								<div class="card h-100 pl-3">
+								<div class="card h-100 pl-3" style="overflow: auto;">
 									<div class="card-head">
-										<pre>${loop.index +1 }) ${question.fullQuestion}</pre>
+									<c:set var="newline" value="<%= \"\n\" %>" />
+										Q${index}. ${fn:replace(question.fullQuestion,newline, "<br />")}
 									</div>
 									<div class="card-body">
 										<c:forEach items="${question.optionList}" var="option"
@@ -84,8 +85,9 @@ $(document).ready(function () {
 													<c:set value="bg-light" var="cssClass"></c:set>
 												</c:when>
 											</c:choose>
-											<div class="alert ${cssClass}" role="alert">
-												<pre>${option.opt}. ${option.answer}</pre>
+											<div class="alert ${cssClass} m-1 p-1" role="alert">
+											${option.opt}. ${fn:replace(option.answer,newline, "<br />")}
+												
 											</div>
 										</c:forEach>
 										<button class="btn btn-light" data-toggle="collapse"
