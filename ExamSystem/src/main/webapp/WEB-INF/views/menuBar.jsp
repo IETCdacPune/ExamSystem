@@ -38,8 +38,11 @@
 						aria-expanded="false"> Student </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Admin/listOfStudent">show
-								all student</a>
+
+							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all student</a>
+							<%-- <a class="dropdown-item"
+							href="${pageContext.request.contextPath}/Admin/listOfPredacStudent">show all PERDAC student</a> --%>
+
 						</div></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -67,7 +70,7 @@
 								All Subject</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item"
-								href="${pageContext.request.contextPath}/Admin"
+								href="${pageContext.request.contextPath}/Admin/removeSubject"
 								onclick="return confirm('Are you sure?')">Remove Subject</a>
 						</div></li>
 					<li class="nav-item dropdown"><a

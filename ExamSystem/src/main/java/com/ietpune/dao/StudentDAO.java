@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Student;
 import com.ietpune.model.Subject;
@@ -19,6 +20,22 @@ public interface StudentDAO extends JpaRepository<Student, Integer> {
 	@Query("select sub.paperList from Student s inner join Subject sub on s.course.courseId=sub.course.courseId inner join Paper p on sub.id=p.subject.id where s.prn=:prn and p.newPaper=true and p.enabled=true")
 	List<Paper> findPaperByPrn(@Param("prn") String prn);
 
+
+	List<Student> findAllByCourse(Course course);
+
+	List<Student> findByCourseAndPrnNotIn(Course course, List<String> studentPrnList);
+
+
+
+	List<Student> findByCourse(Course course);
+
 	Optional<Student> findByEmailId(String emailId);
+
+
+
+
+	
+
+	int countByCourse(Course course);
 
 }

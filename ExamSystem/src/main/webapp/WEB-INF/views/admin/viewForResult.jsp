@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Exam System</title>
@@ -56,8 +56,9 @@ legend:{
 $(document).ready(function(){
 		
 	
-
-fillCanvas("passfail",["pass","fail"],[50,60],["green","red"],"Result");
+var pass=${pass};
+var failed=${failed};
+fillCanvas("passfail",["pass","fail"],[pass,failed],["green","red"],"Result");
 fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 	
 	});
@@ -69,27 +70,63 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 		<jsp:include page="../menuBar.jsp" />
 		
 		<div class="row">
-		<div class="col-4">
+		<div class="col">
 		  <canvas class="w-100 h-90" id="passfail"></canvas>
 		  </div>
-		  <div class="col-4">
+		  <%-- <div class="col-4">
 		  <canvas class="w-100 h-90" id="avg"></canvas>
-		  </div>
-		 <div class="col-4">
+		  </div> --%>
+		 <div class="col">
 	
-		 Top Three Student
-	<ul class="list-group list-group-flush">
-	<li class="list-group-item">2sd</li>
-	<li class="list-group-item">3rd</li>
-	<li class="list-group-item">4th</li>
-	<li class="list-group-item">5th</li>
+		<h3>Top Five Students</h3>
+		<c:forEach var="studPaper" items="${topFive}" varStatus="loop">
+			<c:choose>
+				<c:when test="${loop.index == 0}">
+					<c:set value="1st" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 1}">
+					<c:set value="2nd" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 2}">
+					<c:set value="3rd" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 3}">
+					<c:set value="4th" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 4}">
+					<c:set value="5th" var="rank"></c:set>
+				</c:when>
+				<c:when test="${loop.index == 5}">
+					<c:set value="6th" var="rank"></c:set>
+				</c:when>
+			</c:choose>
+			<ul class="list-group list-group-flush">
+			 <li class="list-group-item">
+			    ${rank} PRN:-${studPaper.student.prn}  Name:-${studPaper.student.firstName} ${studPaper.student.lastName}
+			    	</li>
+			    	</ul>
+			
+		</c:forEach>
+	
 
-	</ul>
+
   </div>
 		 </div>
-		  </div>
-		  
-		 <input class="form-control" id="myInput" type="text" placeholder="Search..">
+		 
+		
+		 </div>
+		 
+		   <div class="row my-3">
+		   <div class="col">
+		    <input class="form-control  w-50" id="myInput" type="text" placeholder="Search..">
+		   </div>
+		    <div class="col">
+		    <a href="${pageContext.request.contextPath}/Admin/downloadExcelResult/${paperId}" style="float:right;"><i class="far fa-file-excel fa-2x mr-3"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		 
+	 <%--  <a href="${pageContext.request.contextPath}/Admin/downloadPdfResult/${paperId}"  style="float:right"><i class="far fa-file-pdf fa-2x ml-3"></i></a> --%>
+		   </div>
+		</div>
   <br>
   
   
@@ -98,8 +135,8 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
   <thead>
   <tr>
   <th>PRN</th>
-    <th>Firstname</th>
-    <th>Lastname</th>
+    <th>First Name</th>
+    <th>Last Name</th>
     <th>Marks</th>
     <th>Result</th>
     <th>Attendence</th>
@@ -116,13 +153,14 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
     <td>${student.student.firstName}</td>
     <td>${student.marks}</td>
      <td>${student.result}</td>
+       <td><c:if test="${student.present}" >Present</c:if><c:if test="${!student.present}" >Absent</c:if></td>
   </tr>
     </c:forEach>
 </tbody>
 </table>
   
   
- <%--  <canvas class="w-100 h-100" id="result"></canvas> --%>
+
   
   
 </div>
@@ -137,7 +175,7 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
 						
 										
 						
-						<button type="button" class="btn btn-primary">download Generate Result</button>
+						
 						
 						
 <jsp:include page="../footerLink.jsp" />

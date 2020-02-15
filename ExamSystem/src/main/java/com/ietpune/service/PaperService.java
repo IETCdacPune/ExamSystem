@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ietpune.dao.PaperDAO;
+import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.StudentPaper;
 import com.ietpune.model.Subject;
@@ -17,6 +18,8 @@ public class PaperService {
 	@Autowired
 	private PaperDAO paperDAO;
 	@Autowired private QuestionService questionService; 
+	@Autowired private SubjectService subjectService;
+	@Autowired private CourseService courseService;
 	public Paper addPaper(Paper p) {
 		return paperDAO.save(p);
 	}
@@ -61,6 +64,24 @@ public class PaperService {
 	public Optional<Paper> getPapers(int paperId) {
 
 		return paperDAO.findById(paperId);
+	}
+
+	public int CountPapers() {
+		Optional<Course> optPaper=courseService.findByName("DAC");
+		List<Subject> subList=subjectService.getAllSubjectByCourse(optPaper.get());
+		
+		int paperCount=0;
+	for (int i = 0; i < subList.size(); i++) {
+		for(int j=0;j<subList.get(i).getPaperList().size();j++)
+		{
+			paperCount++;
+		}
+		
+	}
+	System.out.println("countccc"+paperCount);
+	
+		
+		return paperCount;
 	}
 
 	

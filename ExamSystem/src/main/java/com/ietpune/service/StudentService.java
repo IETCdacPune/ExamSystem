@@ -1,5 +1,6 @@
 package com.ietpune.service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -12,16 +13,19 @@ import org.springframework.stereotype.Service;
 
 import com.ietpune.dao.RoleDAO;
 import com.ietpune.dao.StudentDAO;
+import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
 import com.ietpune.model.Role;
 import com.ietpune.model.RoleName;
 import com.ietpune.model.Student;
+import com.ietpune.model.StudentPaper;
 @Service
 public class StudentService{
 @Autowired private StudentDAO studentDAO;
 @Autowired private BCryptPasswordEncoder passwordEcoder;
 @Autowired private RoleDAO roleDAO;
-
+@Autowired private CourseService courseService;
+@Autowired private PaperService paperService;
 	public Student save(@Valid Student student) {
 		student.setPassword(passwordEcoder.encode(student.getPassword()));
 		List<Role> roles= new LinkedList<>();
@@ -46,7 +50,15 @@ public class StudentService{
 
 
 	public List<Student> getAllStudentList() {
-		return studentDAO.findAll();
+		Optional<Course> c=courseService.findByName("DAC");
+		List<Student> slist=new ArrayList<>();
+		if(c.isPresent())
+		{
+			
+			 slist=studentDAO.findByCourse(c.get());
+			
+		}
+		return slist;
 	}
 
 
@@ -74,6 +86,58 @@ public class StudentService{
 		
 	}
 
+	
+	
+	  public List<Student> getAllStudentCourseWise(Course course) { 
+	  return studentDAO.findAllByCourse(course); }
+
+	public List<Student> getAllStudentCourseWise(Course course, List<String> studentPrnList) {
+		// TODO Auto-generated method stub
+		return studentDAO.findByCourseAndPrnNotIn(course,studentPrnList);
+	}
+
+	public List<Student> getAllPredacStudentList() {
+		Optional<Course> c=courseService.findByName("PREDAC");
+		List<Student> slist=new ArrayList<>();
+		if(c.isPresent())
+		{
+			
+			 slist=studentDAO.findByCourse(c.get());
+			
+		}
+		return slist;
+	}
+
+	public int getNoOfStudentDac() {
+		int count=0;
+		Optional<Course> c=courseService.findByName("DAC");
+if(c.isPresent())
+{
+	
+ count=studentDAO.countByCourse(c.get());
+}
+		return count;
+	}
+
+	public int getNoOfStudentPredac() {
+		int count=0;
+		Optional<Course> c=courseService.findByName("PREDAC");
+if(c.isPresent())
+{
+	
+ count=studentDAO.countByCourse(c.get());
+}
+		return count;
+	}
+
+	public int getNoOfPaper() {
+		int paperCount=paperService.CountPapers();
+		return paperCount;
+	}
+	 
+
+	
+	
 	
 
 

@@ -75,6 +75,7 @@ $(document).ready(function () {
 						</div>
 					</c:if>
 				</div>
+
 				<div class="col-9 h-100">
 						<div class="card border-info h-100">
 						<form:form class="h-100">
@@ -84,17 +85,22 @@ $(document).ready(function () {
 									Q${index}. ${fn:replace(question.fullQuestion,newline, "<br />")}
 									
 								</h5>
+
 								<input type="hidden" name="queId" value="${question.queId}">
 								<input type="hidden" name="index" value="${index}">
 							</div>
+
 							<div class="card-body" style="height:55%;overflow: auto;"> 
 							<div data-spy="scroll" data-offset="0" class="btn-group btn-group-vertical w-100" data-toggle="buttons">
+
 								<c:forEach items="${question.optionList}" var="option"
 									varStatus="loop">
 									<label class="btn btn-light text-left m-1 p-1 w-100 ${question.ans==option.opt?'active':''}">
 										<input type="radio" name="ans"
 											id="exampleRadios${loop.index+1}" value="${option.opt}"
+
 											${question.ans==option.opt?'checked':''}>${fn:replace(option.answer,newline, "<br />")}
+
 									</label>
 								</c:forEach>
 								</div>
@@ -108,6 +114,8 @@ $(document).ready(function () {
 							</div>
 					</form:form>
 						</div>
+
+
 				</div>
 			</div>
 		</div>
