@@ -31,4 +31,11 @@ public interface StudentDAO extends JpaRepository<Student, Integer> {
 
 	Optional<Student> findByEmailId(String emailId);
 
+
+
+
+	
+
+	int countByCourse(Course course);
+
 }

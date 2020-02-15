@@ -12,8 +12,8 @@ import com.ietpune.model.Subject;
 
 @Service
 public class SubjectService {
-	@Autowired
-	SubjectDAO subjectDAO;
+	@Autowired private SubjectDAO subjectDAO;
+	@Autowired private CourseService courseService;
 
 	public Subject addSubject(Subject s) {
 		return subjectDAO.save(s);
@@ -37,6 +37,18 @@ public class SubjectService {
 	public List<Subject> getAllSubjectByCourse(Course course) {
 		
 		return subjectDAO.findByCourse(course);
+	}
+
+	public int getSubjectCount() {
+		Optional<Course> c=courseService.findByName("DAC");
+		int subjectCount=0;
+		if(c.isPresent())
+		{
+			
+			subjectCount=subjectDAO.countByCourse(c.get());
+			
+		}
+		return subjectCount;
 	}
 	
 

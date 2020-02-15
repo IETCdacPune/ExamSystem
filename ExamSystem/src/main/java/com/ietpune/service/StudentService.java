@@ -25,7 +25,7 @@ public class StudentService{
 @Autowired private BCryptPasswordEncoder passwordEcoder;
 @Autowired private RoleDAO roleDAO;
 @Autowired private CourseService courseService;
-
+@Autowired private PaperService paperService;
 	public Student save(@Valid Student student) {
 		student.setPassword(passwordEcoder.encode(student.getPassword()));
 		List<Role> roles= new LinkedList<>();
@@ -95,6 +95,33 @@ public class StudentService{
 			
 		}
 		return slist;
+	}
+
+	public int getNoOfStudentDac() {
+		int count=0;
+		Optional<Course> c=courseService.findByName("DAC");
+if(c.isPresent())
+{
+	
+ count=studentDAO.countByCourse(c.get());
+}
+		return count;
+	}
+
+	public int getNoOfStudentPredac() {
+		int count=0;
+		Optional<Course> c=courseService.findByName("PREDAC");
+if(c.isPresent())
+{
+	
+ count=studentDAO.countByCourse(c.get());
+}
+		return count;
+	}
+
+	public int getNoOfPaper() {
+		int paperCount=paperService.CountPapers();
+		return paperCount;
 	}
 	 
 

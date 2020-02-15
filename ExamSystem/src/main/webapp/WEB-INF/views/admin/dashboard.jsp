@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,8 +50,8 @@ $(document).ready(function(){
 				<div class="card text-white bg-primary m-1"> <!-- style="max-width: 18rem;" -->
 				  <div class="card-header">Number Of Students</div>
 				  <div class="card-body">
-				    <h6 class="card-title">Under DAC:- 120</h6>
-				    <h6 class="card-title">Under PreDAC:- 10</h6>
+				    <h6 class="card-title">Under DAC:- ${studentDAC} </h6>
+				    <h6 class="card-title">Under PreDAC:- ${studentPredac} </h6>
 				  </div>
 				</div>
 			</div>
@@ -57,7 +59,7 @@ $(document).ready(function(){
 				<div class="card text-white bg-info m-1"> <!-- style="max-width: 18rem;" -->
 				  <div class="card-header">Number Of Paper</div>
 				  <div class="card-body">
-				    <h6 class="card-title">Under DAC:- 20</h6>
+				    <h6 class="card-title">Under DAC:-  ${noOfPaper} </h6>
 				    <h6 class="card-title">Under PreDAC:- 10</h6>
 				  </div>
 				</div>
@@ -66,17 +68,20 @@ $(document).ready(function(){
 				<div class="card text-white bg-secondary m-1"> <!-- style="max-width: 18rem;" -->
 				  <div class="card-header">Number Of Subjects</div>
 				  <div class="card-body">
-				    <h5 class="card-title">Under DAC:- 15</h5>
+				    <h5 class="card-title">Under DAC:-  ${noOfSubject} </h5>
 				    <h6 class="card-title">Under PreDAC:- 5</h6>
 				  </div>
 				</div>
 			</div>
 			<div class="col">
 				<div class="card text-white m-1" style="background-color: rgb(195, 155, 211);"> <!-- style="max-width: 18rem;" -->
-				  <div class="card-header">Number Of Subjects</div>
+				  <div class="card-header">Number Of Course</div>
 				  <div class="card-body">
-				    <h6 class="card-title">Under DAC:- 13</h6>
-				    <h6 class="card-title">Under PreDAC:- 5</h6>
+				  <h6 class="card-title">Course No:- ${fn:length(noOfCourse)} </h6>
+				  <c:forEach var="courseno" items="${noOfCourse}" varStatus="loop">
+				    <h6 class="card-title"> ${courseno.name} </h6>
+				    </c:forEach>
+				  
 				  </div>
 				</div>
 			</div>

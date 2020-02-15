@@ -22,6 +22,7 @@ import com.ietpune.service.CourseService;
 import com.ietpune.service.FileService;
 import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
+import com.ietpune.service.SubjectService;
 @Controller
 @RequestMapping("/Admin/")
 public class AdminController {
@@ -32,22 +33,40 @@ public class AdminController {
 	private FileService fileService;
 	@Autowired
 	private StudentPaperService studentPaperService;
-	@Autowired
-	private CourseService courseService;
+	@Autowired private CourseService courseService;
 	@Autowired private ServletContext servletContext;
+	@Autowired private SubjectService subjectService;
 	
 	Logger log= Logger.getLogger(AdminController.class);
 	
 	@GetMapping("/")
-public String forAdminDashboard() {
+public String forAdminDashboard(Model model) {
+		
+	List<Course>  noOfCourse=courseService.getAllCourses();
+	int  studentDAC = studentService.getNoOfStudentDac();
+		int noOfPaper=studentService.getNoOfPaper();
+		
+		int  studentPredac = studentService.getNoOfStudentPredac();
+		int noOfSubject=subjectService.getSubjectCount();
+		
+		
+		log.info("Paper count..."+noOfPaper);
+		model.addAttribute("studentDAC", studentDAC);
+		model.addAttribute("studentPredac",studentPredac);
+		model.addAttribute("noOfPaper",noOfPaper);
+		model.addAttribute("noOfSubject",noOfSubject);
+		model.addAttribute("noOfCourse",noOfCourse);
 		return "admin/dashboard";
 	}
 	
 	@GetMapping("listOfStudent")
 public String forListOfStudent(Model model) {
-		List<Student> studentAllList = studentService.getAllStudentList();
+		
+		List<Course>coursesList=courseService.getAllCourses();
+		
+	//	List<Student> studentAllList = studentService.getAllStudentList();
 
-		model.addAttribute("studentAllList", studentAllList);
+		model.addAttribute("coursesList",coursesList);
 		return "admin/listOfStudent";
 	}
 	@GetMapping("genratedResult")
@@ -96,6 +115,15 @@ public String forListOfStudent(Model model) {
 
 		}
 
+	}
+	@GetMapping("listOfPredacStudent")
+	public String listOfPredacStudent(Model model)
+	{
+		
+		List<Student> studentAllList = studentService.getAllPredacStudentList();
+
+		model.addAttribute("studentAllList", studentAllList);
+		return "admin/listOfStudent";
 	}
 
 	@GetMapping("downloadPdfResult/{paperId}")

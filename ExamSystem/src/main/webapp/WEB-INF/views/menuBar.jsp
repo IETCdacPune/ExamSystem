@@ -36,12 +36,9 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
 
-							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all DAC student</a>
-							<a class="dropdown-item"
-							href="${pageContext.request.contextPath}/Admin/listOfPredacStudent">show all PERDAC student</a>
-
-								href="${pageContext.request.contextPath}/Admin/listOfStudent">show
-								all student</a>
+							href="${pageContext.request.contextPath}/Admin/listOfStudent">show all student</a>
+							<%-- <a class="dropdown-item"
+							href="${pageContext.request.contextPath}/Admin/listOfPredacStudent">show all PERDAC student</a> --%>
 
 						</div></li>
 					<li class="nav-item dropdown"><a
@@ -127,8 +124,3 @@
 		</sec:authorize>
 	</div>
 </nav>
-<br>
-val1:-${myMap[isRegistrationAvailable]}
-<br>
-val2:-${applicationScope.demo}
-<br>
