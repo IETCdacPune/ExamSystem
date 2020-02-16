@@ -7,10 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.ConstraintViolationException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -39,7 +36,6 @@ public class McqExamController {
 	@Autowired
 	public QuestionService questionService;
 	@Autowired StudentPaperService studentPaperService;
-	private static final Logger log = LoggerFactory.getLogger(McqExamController.class);
 
 	@GetMapping("startExam/{id}")
 	public String forStartExam(Model model, @PathVariable int id,Authentication auth) {

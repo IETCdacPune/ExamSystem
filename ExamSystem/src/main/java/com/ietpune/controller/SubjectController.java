@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +33,6 @@ public class SubjectController {
 	SubjectService subjectService;
 	@Autowired
 	CourseService courseService;
-private Logger log =Logger.getLogger(SubjectController.class);
 	@GetMapping("/addSubject")
 	public String forAddSubjectGet(Model model) {
 		model.addAttribute("courseList", courseService.getAllCourses());

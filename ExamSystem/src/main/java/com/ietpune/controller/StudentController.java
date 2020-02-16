@@ -3,6 +3,7 @@ package com.ietpune.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,7 +59,7 @@ public String forStudentDashboardGet() {
 		else {
 			return "redirect:/signout";
 		}
-		HashMap<Subject, List<StudentPaper>> map=new HashMap<Subject, List<StudentPaper>>();
+		HashMap<Subject, List<StudentPaper>> map=new LinkedHashMap<Subject, List<StudentPaper>>();
 		for(Subject sub:subList) {
 			map.put(sub, list.stream()
 			.filter((studentPaper)->studentPaper.getPaper().getSubject().getName().equals(sub.getName()))

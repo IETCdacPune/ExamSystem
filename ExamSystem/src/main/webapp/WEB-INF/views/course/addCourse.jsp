@@ -25,7 +25,7 @@
 			<strong>Error!</strong> ${errmsg }
 		</div>
 		</c:if>
-		<div class="card text-center">
+		<div class="card text-center col-6 mx-auto">
 			<div class="card-header bg-primary">
 				<h3>Add Course Name</h3>
 			</div>

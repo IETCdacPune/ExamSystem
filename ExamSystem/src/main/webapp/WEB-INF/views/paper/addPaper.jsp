@@ -47,7 +47,7 @@ $(document).ready(function() {
 			</div>
 		</c:if>
 		<c:if test="${not empty courseList }">
-			<div class="card text-center">
+			<div class="card text-center col-8 mx-auto">
 				<div class="card-header bg-primary">
 					<h3>Add Paper</h3>
 				</div>

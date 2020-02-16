@@ -3,8 +3,9 @@ package com.ietpune.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.validation.Valid;
-import org.jboss.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.ietpune.exception.ExcelFileException;
 import com.ietpune.model.Course;
 import com.ietpune.model.Paper;
@@ -47,7 +49,6 @@ public class PaperController {
 	@Autowired
 	private FileService fileService;
 	
-	private Logger log=Logger.getLogger(PaperController.class);
 	@GetMapping(value = "Admin/addPaper" )
 	public String forAddPaperGet(Model model) {
 		model.addAttribute(COURSE_LIST, courseService.getAllCourses());
@@ -223,7 +224,6 @@ public class PaperController {
 	{
 		
 		Paper paper=paperService.getPaperWithQuestions(paperId);
-		log.info(paper+""+paper.getQuestionList());
 		if(paper==null)
 		{
 			

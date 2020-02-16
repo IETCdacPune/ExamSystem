@@ -36,7 +36,7 @@
 			</div>
 		</c:if>
 		<c:if test="${not empty courseList}">
-			<div class="card text-center">
+			<div class="card text-center col-6 mx-auto">
 				<div class="card-header bg-primary">
 					<h3>Add Subject</h3>
 				</div>

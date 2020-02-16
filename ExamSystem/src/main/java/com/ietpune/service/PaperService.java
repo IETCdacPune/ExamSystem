@@ -57,8 +57,7 @@ public class PaperService {
 	}
 
 	public Paper getEnabled(int paperId) {
-		// TODO Auto-generated method stub
-		return paperDAO.findById(paperId).get();
+		return paperDAO.findById(paperId).orElse(null);
 	}
 
 	public Optional<Paper> getPapers(int paperId) {
@@ -68,7 +67,7 @@ public class PaperService {
 
 	public int CountPapers() {
 		Optional<Course> optPaper=courseService.findByName("DAC");
-		List<Subject> subList=subjectService.getAllSubjectByCourse(optPaper.get());
+		List<Subject> subList=subjectService.getAllSubjectByCourse(optPaper.orElse(null));
 		
 		int paperCount=0;
 	for (int i = 0; i < subList.size(); i++) {

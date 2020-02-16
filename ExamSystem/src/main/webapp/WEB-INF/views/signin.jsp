@@ -14,7 +14,7 @@
 	<jsp:include page="./menuBar.jsp" />
 		<div class="row">
 			<div class="col-sm-8 col-md-6 col-lg-7 mx-auto">
-				<div class="card card-signin my-5">
+				<div class="card card-signin my-3">
 					<div class="card-body">
 						<h1 class="card-title text-primary text-center display-1">
 							<em class="fas fa-users"></em>
