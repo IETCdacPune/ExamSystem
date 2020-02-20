@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "Student")
 public class Student extends User {
 
 	private String firstName;
@@ -29,7 +31,7 @@ public class Student extends User {
 	@JoinColumn
 	private SecurityQuestion securityQeustion;
 	private String securityAnswer;
-	@OneToMany
+	@OneToMany(mappedBy = "student")
 	private List<StudentPaper> studentPaperslist; 
 
 	public Student() {

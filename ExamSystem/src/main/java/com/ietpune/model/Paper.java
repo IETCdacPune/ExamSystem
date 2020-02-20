@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import net.bytebuddy.implementation.bind.annotation.Default;
 
 @Entity
-@Table
+@Table(name = "Paper")
 public class Paper {
 
 	@Id

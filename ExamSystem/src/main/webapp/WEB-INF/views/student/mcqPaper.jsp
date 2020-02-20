@@ -79,7 +79,7 @@ $(document).ready(function () {
 				<div class="col-9 h-100">
 						<div class="card border-info h-100">
 						<form:form class="h-100">
-							<div class="card-head" style="height:30%;overflow: auto; width: 100%;">
+							<div class="card-head" style="height:45%;overflow: auto; width: 100%;">
 								<h5 class="m-1">
 									<c:set var="newline" value="<%= \"\n\" %>" />
 									Q${index}. ${fn:replace(question.fullQuestion,newline, "<br />")}
@@ -90,7 +90,7 @@ $(document).ready(function () {
 								<input type="hidden" name="index" value="${index}">
 							</div>
 
-							<div class="card-body" style="height:55%;overflow: auto;"> 
+							<div class="card-body" style="height:40%;overflow: auto;"> 
 							<div data-spy="scroll" data-offset="0" class="btn-group btn-group-vertical w-100" data-toggle="buttons">
 
 								<c:forEach items="${question.optionList}" var="option"

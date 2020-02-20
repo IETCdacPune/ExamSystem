@@ -37,48 +37,42 @@ $(document).ready(function(){
 </head>
 <body>
 	<jsp:include page="../menuBar.jsp" />
-	<div class="row">
-		<div class="col">
-			<div class="card text-white bg-primary m-1">
+	<div class="card-deck">
+			<div class="card text-white m-1">
+				<div class="card-header"><h5 class="card-title">Total</h5></div>
+				<div class="card-body">
+					<h5 class="card-title">26</h5>
+					<p class="card-text">C Programming</p>
+				</div>
+			</div>
+			<div class="card text-white m-1">
 				<div class="card-header">Top Score</div>
 				<div class="card-body">
 					<h5 class="card-title">26</h5>
 					<p class="card-text">C Programming</p>
 				</div>
 			</div>
-		</div>
-		<div class="col">
-			<div class="card text-white bg-primary m-1">
+			<div class="card text-white m-1">
 				<div class="card-header">Top Score</div>
 				<div class="card-body">
 					<h5 class="card-title">26</h5>
 					<p class="card-text">C Programming</p>
 				</div>
 			</div>
-		</div>
-		<div class="col">
-			<div class="card text-white bg-primary m-1">
+			<div class="card text-white m-1">
 				<div class="card-header">Top Score</div>
 				<div class="card-body">
 					<h5 class="card-title">26</h5>
 					<p class="card-text">C Programming</p>
 				</div>
 			</div>
-		</div>
-		<div class="col">
-			<div class="card text-white bg-primary m-1">
-				<div class="card-header">Top Score</div>
-				<div class="card-body">
-					<h5 class="card-title">26</h5>
-					<p class="card-text">C Programming</p>
-				</div>
-			</div>
-		</div>
 		
 	</div>
 	<div class="row m-1">
 		<div class="col-6">
-			<canvas class="w-100 h-100" id="canvasPapers"></canvas>
+			<div class="card">
+				<canvas class="w-100 h-100" id="canvasPapers"></canvas>
+			</div>
 		</div>
 		<div class="col-6"></div>
 		<div class="col-6"></div>

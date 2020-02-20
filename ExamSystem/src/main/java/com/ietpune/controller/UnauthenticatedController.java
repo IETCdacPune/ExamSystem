@@ -55,7 +55,6 @@ public class UnauthenticatedController {
 	@Autowired private Map<String, Boolean> myMap;
 	@GetMapping("/")
 	public String forIndex() {
-		System.out.println("Map value:"+myMap.get("isRegistrationAvailable"));
 		return "index1";
 	}
 	@GetMapping(value = "/signout")

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ietpune.model.Options;;
 
 @Entity
-@Table
+@Table(name = "Question")
 public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

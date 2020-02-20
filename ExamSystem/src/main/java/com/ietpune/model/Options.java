@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table
+@Table(name = "Options")
 public class Options {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

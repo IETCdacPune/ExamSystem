@@ -3,18 +3,22 @@ package com.ietpune.model;
 import java.sql.Date;
 import java.util.HashMap;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints={
+
+@Table(name = "Student_Paper",uniqueConstraints={
 	    @UniqueConstraint(columnNames = {"paperId", "sudentId"})
 	})
 public class StudentPaper {
@@ -25,7 +29,7 @@ public class StudentPaper {
 	private int marks;
 	private String result;
 	private boolean present;
-	@Column( columnDefinition = "LONGVARBINARY")
+	@Column( name = "stud_ans",columnDefinition="blob")
 	private HashMap<Integer, Character> studentAnsMap;
 	
 	@ManyToOne
