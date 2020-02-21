@@ -17,7 +17,11 @@ import com.ietpune.model.Subject;
 public interface StudentDAO extends JpaRepository<Student, Integer> {
 	Optional<Student> findByPrn(String prn);
 
-	@Query("select sub.paperList from Student s inner join Subject sub on s.course.courseId=sub.course.courseId inner join Paper p on sub.id=p.subject.id where s.prn=:prn and p.newPaper=true and p.enabled=true")
+	@Query("select sub.paperList from Student s "
+			+ "join Course cour "
+			+ "join cour.subjectList sub "
+			+ "join Paper p "
+			+ "where s.prn=:prn and p.newPaper=true and p.enabled=true")
 	List<Paper> findPaperByPrn(@Param("prn") String prn);
 
 

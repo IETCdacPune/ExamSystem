@@ -38,13 +38,33 @@ public class StudentController {
 	@Autowired private FileService fileService;
 	@GetMapping("/")
 public String forStudentDashboardGet() {
+		
 		return "student/dashboard";
 	}
 
 	@GetMapping("newPapers")
 	public String forNewPaperGet(Model model, Authentication authentication) {
-		List<Paper> allPaper = studentService.getAllNewPaperList(authentication.getName());
-			model.addAttribute("list", allPaper);
+		Optional<Student> optStud=studentService.getByPrn(authentication.getName());
+		List<Paper> list=null;
+		List<Subject> subList = null;
+		if(optStud.isPresent()) {
+			list = studentService.getAllNewPaperList(authentication.getName());
+			System.out.println(list);
+			subList = subjectService.getAllSubjectByCourse(optStud.get().getCourse());
+		}
+		else {
+			return "redirect:/signout";
+		}
+		HashMap<Subject, List<Paper>> map=new LinkedHashMap<Subject, List<Paper>>();
+		for(Subject sub:subList) {
+			List<Paper> plist=list.stream()
+					.filter((paper)->paper.getSubject().getName().equals(sub.getName()))
+					.collect(Collectors.toList());
+			if(plist.size()>0)
+				map.put(sub, plist);
+		}
+		model.addAttribute("list", map);
+			model.addAttribute("list", map);
 		return "student/showPaper";
 	}
 	@GetMapping("result")
@@ -61,9 +81,11 @@ public String forStudentDashboardGet() {
 		}
 		HashMap<Subject, List<StudentPaper>> map=new LinkedHashMap<Subject, List<StudentPaper>>();
 		for(Subject sub:subList) {
-			map.put(sub, list.stream()
-			.filter((studentPaper)->studentPaper.getPaper().getSubject().getName().equals(sub.getName()))
-			.collect(Collectors.toList()));
+			List<StudentPaper> splist=list.stream()
+					.filter((studentPaper)->studentPaper.getPaper().getSubject().getName().equals(sub.getName()))
+					.collect(Collectors.toList());
+			if(splist.size()>0)
+				map.put(sub, splist);
 		}
 		model.addAttribute("list", map);
 		return "student/result";

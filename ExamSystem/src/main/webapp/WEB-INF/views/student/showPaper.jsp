@@ -23,23 +23,23 @@
 		<c:if test="${empty list}">
 			<div class="jumbotron text-center">
 				<h2>
-					There is not single subject entry in system.<br>
+					There is no new Paper.<br>
 					
 				</h2>
 			</div>
 		</c:if>
 		<c:if test="${not empty list}">
-				<c:forEach items="${list}" var="paper" varStatus="loop">
+				<c:forEach items="${list}" var="map" varStatus="loop">
 					<div class="card mt-2">
 						<div class="card-header">
-							<a class="card-link" data-toggle="collapse" href="#collapse${loop.index +1 }">Subject:-${paper.subject.name} have ${fn:length(paper.subject.paperList)} papers.
-							</a>
+							<a class="card-link" data-toggle="collapse" href="#collapse${loop.index +1 }">Subject:-${map.key.name}
+							have ${fn:length(map.value)} new paper. </a>
 						</div>
 						<div id="collapse${loop.index +1}" class="collapse">
 							<div class="card-body">
-								<c:if test="${not empty paper}">
+								<c:if test="${not empty map.value}">
 								<div class="row">
-								<c:forEach items="${paper.subject.paperList}" var="paper" varStatus="loop">						
+								<c:forEach items="${map.value}" var="paper" varStatus="loop">						
 								<div class="col-md-4 mt-1">
 									<div class="card bg-info">
 										<div class="card-body">
@@ -61,7 +61,7 @@
 								<c:if test="${! empty paper.subject}">
 									<div class="jumbotron text-center">
 										<h2>
-											There is not single paper entry in ${paper.subject.name} subject.<br>
+											There is not single paper entry in ${map.key.name} subject.<br>
 										</h2>
 									</div>
 								</c:if>
