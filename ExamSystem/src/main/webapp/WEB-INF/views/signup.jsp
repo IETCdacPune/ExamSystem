@@ -118,7 +118,7 @@
 								</div>
 								<div class="form-group row">
 									<form:label path="securityAnswer"
-										class="col-sm-3 col-form-label">PRN</form:label>
+										class="col-sm-3 col-form-label">Security Answer</form:label>
 									<div class="col-sm-9">
 										<form:input type="text" path="securityAnswer"
 											class="form-control" placeholder="Security Answer" />

@@ -28,14 +28,14 @@ $(document).ready(function() {
 	<div class="m-1">
 	
 		<jsp:include page="../menuBar.jsp" />
-		<br> <br><div>
+		<div>
 		<c:if test="${not empty errmsg}">
 			<div class="alert alert-danger alert-dismissible">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<strong>Error!</strong> ${errmsg }
 			</div>
 		</c:if>
-		<div class="row"><div class="col-2"></div>
+		<div class="row"><div class="col-3"></div>
 		<div class="col-6">
 <a href="/Admin/Paper/addMoreQuestion/${paperId}" class="btn btn-block  btn-info <c:if test='${p}'>disabled</c:if>" >Add More Question</a></div>
 </div>

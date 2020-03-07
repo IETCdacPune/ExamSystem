@@ -47,6 +47,8 @@
 											Subject:-${paper.subject.name}
 											</h5>
 											<h6 class="card-subtitle mb-2">Paper
+												Code:-${paper.paperCode}</h6>
+											<h6 class="card-subtitle mb-2">Paper
 												Timing:-${paper.paperTiming}</h6>
 											
 											<a

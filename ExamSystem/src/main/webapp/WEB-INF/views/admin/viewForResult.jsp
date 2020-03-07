@@ -149,8 +149,8 @@ fillCanvas("avg",["pass","fail"],[40,60],["green","red"],"Avrage");
   
   <tr>
   <td>${student.student.prn} </td>
-    <td>${student.student.lastName}</td>
     <td>${student.student.firstName}</td>
+    <td>${student.student.lastName}</td>
     <td>${student.marks}</td>
      <td>${student.result}</td>
        <td><c:if test="${student.present}" >Present</c:if><c:if test="${!student.present}" >Absent</c:if></td>

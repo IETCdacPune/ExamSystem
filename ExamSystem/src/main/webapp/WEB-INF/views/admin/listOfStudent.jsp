@@ -4,10 +4,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+$(document).ready(function()
+		{
+	alert("mmmm");
+
+
+
+	});
+</script>
 	<script>
 		$(document)
 				.ready(
 						function() {
+							alert("mmmm");
 							$("#myInput")
 									.on(
 											"keyup",
@@ -41,21 +51,7 @@
 		<div class="table-responsive">
 			<jsp:include page="../menuBar.jsp" />
 			
-			<c:forEach var="c" items="2">
-			<div class="row mx-1">
 			
-			<div class="col">
-				<div class="card text-white bg-primary m-1"> <!-- style="max-width: 18rem;" -->
-				  <div class="card-header">Number Of Students</div>
-				  <div class="card-body">
-				    <h6 class="card-title">Under DAC:- ${studentDAC} </h6>
-				    <h6 class="card-title">Under PreDAC:- ${studentPredac} </h6>
-				  </div>
-				</div>
-			</div>
-			</div>
-		
-			</c:forEach>
 			
 			
 			
@@ -70,6 +66,7 @@
 						<th>Lastname</th>
 						<th>Email</th>
 						<th>Course</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
@@ -79,10 +76,11 @@
 
 						<tr>
 							<td>${student.prn}</td>
-							<td>${student.lastName}</td>
 							<td>${student.firstName}</td>
+							<td>${student.lastName}</td>
 							<td>${student.emailId}</td>
 							<td>${student.course.name}</td>
+							<td><a class="btn btn-danger" onclick="return confirm('are you sure for delete this student?')" href="${pageContext.request.contextPath}/Admin/removeStudent/${student.prn}"><i class="far fa-trash-alt"></i></a>
 						</tr>
 					</c:forEach>
 				</tbody>

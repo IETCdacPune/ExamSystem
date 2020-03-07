@@ -81,7 +81,7 @@
 																				href="${pageContext.request.contextPath}/Admin/allQuestion/${paper.paperId}"
 																				class="text-white">Show Paper</a>
 																	
-																		
+																		<a class="btn btn-danger <c:if test='${paper.correctAnsVisibility}'>disabled</c:if>" href="${pageContext.request.contextPath}/Admin/removePaper/${paper.paperId}" onclick="return confirm('are you sure for delete this paper?')" >Delete Paper</a>
 																	</div></div>
 																</div>
 															</c:forEach>
