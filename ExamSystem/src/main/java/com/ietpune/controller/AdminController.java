@@ -1,6 +1,5 @@
 package com.ietpune.controller;
 
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +22,7 @@ import com.ietpune.service.FileService;
 import com.ietpune.service.StudentPaperService;
 import com.ietpune.service.StudentService;
 import com.ietpune.service.SubjectService;
+
 @Controller
 @RequestMapping("/Admin/")
 public class AdminController {
@@ -33,58 +33,59 @@ public class AdminController {
 	private FileService fileService;
 	@Autowired
 	private StudentPaperService studentPaperService;
-	@Autowired private CourseService courseService;
-	@Autowired private ServletContext servletContext;
-	@Autowired private SubjectService subjectService;
-	
-	Logger log= Logger.getLogger(AdminController.class);
-	
+	@Autowired
+	private CourseService courseService;
+	@Autowired
+	private ServletContext servletContext;
+	@Autowired
+	private SubjectService subjectService;
+
+	Logger log = Logger.getLogger(AdminController.class);
+
 	@GetMapping("/")
-public String forAdminDashboard(Model model) {
-		
-	List<Course>  noOfCourse=courseService.getAllCourses();
-	int  studentDAC = studentService.getNoOfStudentDac();
-		int noOfPaper=studentService.getNoOfPaper();
-		
-		int  studentPredac = studentService.getNoOfStudentPredac();
-		int noOfSubject=subjectService.getSubjectCount();
-		
-		
-		log.info("Paper count..."+noOfPaper);
+	public String forAdminDashboard(Model model) {
+
+		List<Course> noOfCourse = courseService.getAllCourses();
+		int studentDAC = studentService.getNoOfStudentDac();
+		int noOfPaper = studentService.getNoOfPaper();
+
+		int studentPredac = studentService.getNoOfStudentPredac();
+		int noOfSubject = subjectService.getSubjectCount();
+
+		log.info("Paper count..." + noOfPaper);
 		model.addAttribute("studentDAC", studentDAC);
-		model.addAttribute("studentPredac",studentPredac);
-		model.addAttribute("noOfPaper",noOfPaper);
-		model.addAttribute("noOfSubject",noOfSubject);
-		model.addAttribute("noOfCourse",noOfCourse);
+		model.addAttribute("studentPredac", studentPredac);
+		model.addAttribute("noOfPaper", noOfPaper);
+		model.addAttribute("noOfSubject", noOfSubject);
+		model.addAttribute("noOfCourse", noOfCourse);
 		return "admin/dashboard";
 	}
-	
-	@GetMapping("listOfStudent")
-public String forListOfStudent(Model model) {
-		
-		List<Course>coursesList=courseService.getAllCourses();
-		
-	//	List<Student> studentAllList = studentService.getAllStudentList();
 
-		model.addAttribute("coursesList",coursesList);
+	@GetMapping("listOfStudent")
+	public String forListOfStudent(Model model) {
+
+		List<Course> coursesList = courseService.getAllCourses();
+
+		List<Student> studentAllList = studentService.getAllStudentList();
+
+		model.addAttribute("studentAllList", studentAllList);
 		return "admin/listOfStudent";
 	}
+
 	@GetMapping("genratedResult")
-	public String forGenratedResult(Model model)
-	{
-		List<Course> courseList=courseService.getAllCoursesWithEagerLoad();
-		
-		if(!courseList.isEmpty())
-		{
-			model.addAttribute("courseList",courseList);
-	}
+	public String forGenratedResult(Model model) {
+		List<Course> courseList = courseService.getAllCoursesWithEagerLoad();
+
+		if (!courseList.isEmpty()) {
+			model.addAttribute("courseList", courseList);
+		}
 
 		return "admin/generatedResult";
 	}
-	
+
 	@RequestMapping("viewForResult/{paperId}")
-	public String forViewResult(@PathVariable("paperId")int paperId,MultipartFile file,Model model) throws FileNotFoundException, IOException
-	{
+	public String forViewResult(@PathVariable("paperId") int paperId, MultipartFile file, Model model)
+			throws FileNotFoundException, IOException {
 
 		List<StudentPaper> studentPaperList = studentPaperService.forGernaratedResult(paperId);
 
@@ -106,7 +107,6 @@ public String forListOfStudent(Model model) {
 
 		boolean isFlag = fileService.createExcel(studentPaperList, servletContext, request, response);
 		String fileName = String.valueOf(studentPaperList.get(0).getPaper().getPaperCode());
-		
 
 		if (isFlag) {
 			String fullPath = request.getServletContext().getRealPath("/resources/paper/" + fileName + ".xls");
@@ -116,16 +116,20 @@ public String forListOfStudent(Model model) {
 		}
 
 	}
+
 	@GetMapping("listOfPredacStudent")
-	public String listOfPredacStudent(Model model)
-	{
-		
+	public String listOfPredacStudent(Model model) {
+
 		List<Student> studentAllList = studentService.getAllPredacStudentList();
 
 		model.addAttribute("studentAllList", studentAllList);
 		return "admin/listOfStudent";
 	}
-
+	@RequestMapping("removeStudent/{paperId}")
+	public String forRemovePaper(@PathVariable("paperId")String prn,Model model){
+		studentService.remove(prn);
+		return "redirect:/Admin/listOfStudent";
+	}
 	@GetMapping("downloadPdfResult/{paperId}")
 	public void forDownloadPdf(@PathVariable("paperId") int paperId, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -136,7 +140,7 @@ public String forListOfStudent(Model model) {
 		if (isFlag) {
 
 			String fullPath = request.getServletContext().getRealPath("/resources/paper/" + fileName + ".pdf");
-			fileService.fileDownload(fullPath, response, fileName +".pdf");
+			fileService.fileDownload(fullPath, response, fileName + ".pdf");
 		}
 
 	}

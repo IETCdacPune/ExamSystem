@@ -55,7 +55,11 @@ public class PaperController {
 		model.addAttribute(COMMAND, new PaperDTO());
 		return PAPER_ADD_PAPER;
 	}
-
+	@RequestMapping("/Admin/removePaper/{paperId}")
+	public String forRemovePaper(@PathVariable("paperId")int paperId,Model model){
+		paperService.remove(paperId);
+		return "redirect:/Admin/allPapers";
+	}
 	@PostMapping("Admin/addPaper")
 	public String forAddPaperPost(Model model, @ModelAttribute(COMMAND) PaperDTO paperDTO,
 			@RequestParam("file") MultipartFile file, BindingResult result) {
@@ -252,7 +256,7 @@ public class PaperController {
 	
 	
 	@RequestMapping("/Admin/enabledForView/{paperId}")
-	String forOpenAllPaper(@PathVariable("paperId")int paperId,Model model)
+	public String forOpenAllPaper(@PathVariable("paperId")int paperId,Model model)
 {	Paper paper=paperService.getPaperWithQuestions(paperId); paper.setCorrectAnsVisibility(true);
 paper.setEnabled(false);
 paper.setNewPaper(false);

@@ -83,6 +83,10 @@ public class PaperService {
 		return paperCount;
 	}
 
+	public void remove(int paperId) {
+		paperDAO.delete(paperDAO.getOne(paperId));
+	}
+
 	
 
 

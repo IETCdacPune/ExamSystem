@@ -134,6 +134,11 @@ if(c.isPresent())
 		int paperCount=paperService.CountPapers();
 		return paperCount;
 	}
+
+	public void remove(String prn) {
+		studentDAO.delete(studentDAO.findByPrn(prn).orElse(null));
+		
+	}
 	 
 
 	
