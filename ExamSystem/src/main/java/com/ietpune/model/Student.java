@@ -2,6 +2,7 @@ package com.ietpune.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,7 +32,7 @@ public class Student extends User {
 	@JoinColumn
 	private SecurityQuestion securityQeustion;
 	private String securityAnswer;
-	@OneToMany(mappedBy = "student")
+	@OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
 	private List<StudentPaper> studentPaperslist; 
 
 	public Student() {
